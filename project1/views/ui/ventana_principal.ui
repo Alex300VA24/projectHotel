@@ -205,7 +205,7 @@
     </size>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_6">
+  <widget class="QPushButton" name="btn_salir">
    <property name="geometry">
     <rect>
      <x>640</x>
