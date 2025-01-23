@@ -52,7 +52,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Historial de Reservaciones</string>
+    <string>Habitaciones Disponibles</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -79,26 +79,6 @@
    </column>
    <column>
     <property name="text">
-     <string>Cliente</string>
-    </property>
-    <property name="font">
-     <font>
-      <family>Inter Medium</family>
-     </font>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Fecha de Reserva</string>
-    </property>
-    <property name="font">
-     <font>
-      <family>Inter Medium</family>
-     </font>
-    </property>
-   </column>
-   <column>
-    <property name="text">
      <string>N° de Habitación</string>
     </property>
     <property name="font">
@@ -110,26 +90,6 @@
    <column>
     <property name="text">
      <string>Tipo de Habitación</string>
-    </property>
-    <property name="font">
-     <font>
-      <family>Inter Medium</family>
-     </font>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Estado</string>
-    </property>
-    <property name="font">
-     <font>
-      <family>Inter Medium</family>
-     </font>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Monto</string>
     </property>
     <property name="font">
      <font>
