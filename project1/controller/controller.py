@@ -1,5 +1,5 @@
 # controller.py
-from PyQt5.QtCore import pyqtSignal
+from PyQt6.QtCore import pyqtSignal
 from view import View
 from model import Model
 
@@ -13,6 +13,7 @@ class Controller:
         self.view.addButton.clicked.connect(self.on_add_item)
 
     def on_add_item(self):
-        new_item = Item("New Item", 100)  # Crear un nuevo item
-        self.model.add_item(new_item)     # Añadir el item al modelo
-        self.view.update_view()           # Actualizar la vista
+        '''new_item = Item("New Item", 100)  # Crear un nuevo ítem
+        self.model.add_item(new_item)     # Añadir el ítem al modelo
+        self.view.update_view() '''          # Actualizar la vista
+        pass
