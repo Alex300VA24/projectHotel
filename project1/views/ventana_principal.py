@@ -7,7 +7,8 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-
+from PyQt6.QtWidgets import QWidget
+from controllers.ventana_principal_controller import Ventana_Principal_Controller
 
 class Ui_Form_Ventana_Principal(object):
     def setupUi(self, Form):
@@ -108,6 +109,13 @@ class Ui_Form_Ventana_Principal(object):
 "   de Reservas"))
         self.pushButton_5.setText(_translate("Form", " Servicio\n"
 " a la Habitación"))
+
+class Form_Ventana_Principal(QWidget, Ui_Form_Ventana_Principal):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)  # Configura la UI generada
+
+        self.ventana_principal_controller = Ventana_Principal_Controller(self)
 
 
 if __name__ == "__main__":

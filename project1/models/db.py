@@ -1,5 +1,5 @@
 # model/db.py
-import mysql.connector  # type: ignore
+'''import mysql.connector  # type: ignore
 from mysql.connector import Error # type: ignore
 from config import config
 
@@ -40,3 +40,19 @@ class DBConnection:
         cursor = self.connection.cursor()
         cursor.execute(query, params)
         self.connection.commit()
+'''
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+# URL de conexión a la base de datos (ajústala según el sistema que uses)
+DATABASE_URL = "mysql+pymysql://root:@localhost/hotel"
+
+# Crear el motor de conexión
+engine = create_engine(DATABASE_URL, echo=True)
+
+# Crear la clase base para los modelos
+Base = declarative_base()
+
+# Crear una fábrica de sesiones para interactuar con la base de datos
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
