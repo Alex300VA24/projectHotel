@@ -128,7 +128,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_ingresar">
+  <widget class="QPushButton" name="btn_salir">
    <property name="geometry">
     <rect>
      <x>430</x>
@@ -143,10 +143,10 @@
     </font>
    </property>
    <property name="text">
-    <string>Ingresar</string>
+    <string>Salir</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_salir">
+  <widget class="QPushButton" name="btn_ingresar">
    <property name="geometry">
     <rect>
      <x>610</x>
@@ -161,7 +161,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Salir</string>
+    <string>Ingresar</string>
    </property>
   </widget>
  </widget>
