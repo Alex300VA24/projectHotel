@@ -1,4 +1,4 @@
-from views.login import Ui_MainWindow
+from views.login import Ui_Form
 from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox  # type: ignore
 import sys
 import warnings
@@ -8,7 +8,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 class MyApp(QMainWindow):
     def __init__(self):
         super(MyApp, self).__init__()
-        self.ui = Ui_MainWindow()
+        self.ui = Ui_Form()
         self.ui.setupUi(self)
 
         self.ui.btn_ingresar.clicked.connect(self.login)
