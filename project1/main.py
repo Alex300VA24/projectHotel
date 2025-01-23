@@ -1,4 +1,4 @@
-from login import Ui_MainWindow
+from views.login import Ui_MainWindow
 from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox  # type: ignore
 import sys
 import warnings

@@ -1,6 +1,6 @@
 # model/db.py
-import mysql.connector
-from mysql.connector import Error
+import mysql.connector  # type: ignore
+from mysql.connector import Error # type: ignore
 from config import config
 
 
@@ -15,10 +15,10 @@ class DBConnection:
     def connect(self):
         try:
             self.connection = mysql.connector.connect(
-                host="localhost",
-                user="root",
-                password="your_password",
-                database="your_database"
+                host=self.host,
+                user=self.user,
+                password=self.password,
+                database=self.database
             )
             if self.connection.is_connected():
                 print("Conexión exitosa a la base de datos")

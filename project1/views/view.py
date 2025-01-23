@@ -1,7 +1,7 @@
 # view.py
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QListView, QPushButton, QAbstractListModel
 from PyQt6.QtCore import Qt
-from model import Model
+from model.model import Model
 
 
 class ItemListModel(QAbstractListModel):

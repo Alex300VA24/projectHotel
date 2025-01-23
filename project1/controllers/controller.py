@@ -1,7 +1,7 @@
 # controller.py
-from PyQt6.QtCore import pyqtSignal
-from view import View
-from model import Model
+from PyQt6.QtCore import pyqtSignal # type: ignore
+from view.view import View
+from model.model import Model, Item
 
 
 class Controller:
@@ -13,7 +13,7 @@ class Controller:
         self.view.addButton.clicked.connect(self.on_add_item)
 
     def on_add_item(self):
-        '''new_item = Item("New Item", 100)  # Crear un nuevo ítem
+        new_item = Item("New Item", 100)  # Crear un nuevo ítem
         self.model.add_item(new_item)     # Añadir el ítem al modelo
-        self.view.update_view() '''          # Actualizar la vista
-        pass
+        self.view.update_view()           # Actualizar la vista
+        
