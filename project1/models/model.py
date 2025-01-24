@@ -1,102 +1,191 @@
-from sqlalchemy import Column, BigInteger, String, Enum, DECIMAL, CHAR, ForeignKey, TEXT, Date #type: ignore
-from sqlalchemy.orm import relationship #type: ignore
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
-from werkzeug.security import check_password_hash
-from werkzeug.security import generate_password_hash
-from .db import Base
+import mysql.connector
+from hashlib import sha256
 
-class Administrador(Base):
-    __tablename__ = 'administrador'
-    
-    idAdministrador = Column(BigInteger, primary_key=True, autoincrement=True)
-    nombres = Column(String(50))
-    apellidoPaterno = Column(String(30))
-    apellidoMaterno = Column(String(30))
-    correo = Column(String(100))
-    contrasenia = Column(String(100))
+# Función para establecer la conexión a la base de datos
+def conectar_bd():
+    try:
+        conexion = mysql.connector.connect(
+            host='localhost',  # Cambia esto por tu servidor de base de datos
+            database='nombre_base_datos',  # Cambia esto por tu base de datos
+            user='usuario',  # Cambia esto por tu usuario de MySQL
+            password='contraseña'  # Cambia esto por tu contraseña de MySQL
+        )
+        if conexion.is_connected():
+            return conexion
+    except mysql.connector.Error as e:
+        print(f"Error al conectar a la base de datos: {e}")
+        return None
+
+class Administrador:
+    def __init__(self, id_administrador=None, nombres=None, apellido_paterno=None, apellido_materno=None, correo=None, contrasenia=None):
+        self.id_administrador = id_administrador
+        self.nombres = nombres
+        self.apellido_paterno = apellido_paterno
+        self.apellido_materno = apellido_materno
+        self.correo = correo
+        self.contrasenia = contrasenia
 
     @classmethod
-    def crear_administrador(cls, session):
-        # Comprobar si ya existe un administrador
-        if not session.query(cls).first():  # Si no hay administrador, lo crea
-            correo = 'admin@ejemplo.com'
-            contrasenia = '12345'
-            hashed_password = generate_password_hash(contrasenia)
+    def crear_administrador(cls):
+        conexion = conectar_bd()
+        if conexion:
+            cursor = conexion.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM administrador LIMIT 1")
+            administrador = cursor.fetchone()
+            
+            if not administrador:  # Si no hay administrador, lo crea
+                correo = 'admin@ejemplo.com'
+                contrasenia = '12345'
+                contrasenia_hash = sha256(contrasenia.encode()).hexdigest()
 
-            # Crear el objeto Administrador
-            nuevo_administrador = cls(correo=correo, contrasenia=hashed_password)
-            session.add(nuevo_administrador)
-            session.commit()
-            print("Administrador creado con éxito.")
-        else:
-            print("Ya existe un administrador registrado.")
+                query = """
+                    INSERT INTO administrador (correo, contrasenia)
+                    VALUES (%s, %s)
+                """
+                cursor.execute(query, (correo, contrasenia_hash))
+                conexion.commit()
+                print("Administrador creado con éxito.")
+            else:
+                print("Ya existe un administrador registrado.")
+            cursor.close()
+            conexion.close()
 
     def verificar_contrasenia(self, password: str) -> bool:
         """Verifica si la contraseña proporcionada coincide con la almacenada"""
-        return check_password_hash(self.contrasenia, password)
+        contrasenia_hash = sha256(password.encode()).hexdigest()
+        return self.contrasenia == contrasenia_hash
 
 
-class Cliente(Base):
-    __tablename__ = 'cliente'
-    
-    idCliente = Column(BigInteger, primary_key=True, autoincrement=True)
-    nombres = Column(String(50), nullable=False)
-    apellidoPaterno = Column(String(30), nullable=False)
-    apellidoMaterno = Column(String(30), nullable=False)
-    telefono = Column(CHAR(9))
+class Cliente:
+    def __init__(self, id_cliente=None, nombres=None, apellido_paterno=None, apellido_materno=None, telefono=None):
+        self.id_cliente = id_cliente
+        self.nombres = nombres
+        self.apellido_paterno = apellido_paterno
+        self.apellido_materno = apellido_materno
+        self.telefono = telefono
+
+    @classmethod
+    def crear_cliente(cls, nombres, apellido_paterno, apellido_materno, telefono):
+        conexion = conectar_bd()
+        if conexion:
+            cursor = conexion.cursor(dictionary=True)
+            query = """
+                INSERT INTO cliente (nombres, apellidoPaterno, apellidoMaterno, telefono)
+                VALUES (%s, %s, %s, %s)
+            """
+            cursor.execute(query, (nombres, apellido_paterno, apellido_materno, telefono))
+            conexion.commit()
+            cursor.close()
+            conexion.close()
 
 
-class TipoHabitacion(Base):
-    __tablename__ = 'tipo_habitacion'
-    
-    idTipoHabitacion = Column(BigInteger, primary_key=True, autoincrement=True)
-    tipo = Column(Enum('simple', 'doble', 'matrimonial', 'suit'), unique=True, nullable=False)
-    precioNoche = Column(DECIMAL(10, 2), nullable=False)
+class TipoHabitacion:
+    def __init__(self, id_tipo_habitacion=None, tipo=None, precio_noche=None):
+        self.id_tipo_habitacion = id_tipo_habitacion
+        self.tipo = tipo
+        self.precio_noche = precio_noche
+
+    @classmethod
+    def crear_tipo_habitacion(cls, tipo, precio_noche):
+        conexion = conectar_bd()
+        if conexion:
+            cursor = conexion.cursor(dictionary=True)
+            query = """
+                INSERT INTO tipo_habitacion (tipo, precioNoche)
+                VALUES (%s, %s)
+            """
+            cursor.execute(query, (tipo, precio_noche))
+            conexion.commit()
+            cursor.close()
+            conexion.close()
 
 
-class Habitacion(Base):
-    __tablename__ = 'habitacion'
-    
-    idHabitacion = Column(BigInteger, primary_key=True, autoincrement=True)
-    numeroHabitacion = Column(CHAR(3), unique=True, nullable=False)
-    idTipo_Habitacion = Column(BigInteger, ForeignKey('tipo_habitacion.idTipoHabitacion'), nullable=False)
-    estado = Column(Enum('disponible', 'ocupada', 'pendiente', 'mantenimiento'), nullable=False)
+class Habitacion:
+    def __init__(self, id_habitacion=None, numero_habitacion=None, id_tipo_habitacion=None, estado=None):
+        self.id_habitacion = id_habitacion
+        self.numero_habitacion = numero_habitacion
+        self.id_tipo_habitacion = id_tipo_habitacion
+        self.estado = estado
 
-    tipo_habitacion = relationship("TipoHabitacion")
-
-
-class Reserva(Base):
-    __tablename__ = 'reserva'
-    
-    idReserva = Column(BigInteger, primary_key=True, autoincrement=True)
-    idCliente = Column(BigInteger, ForeignKey('cliente.idCliente'), nullable=False)
-    idHabitacion = Column(BigInteger, ForeignKey('habitacion.idHabitacion'), nullable=False)
-    fechaInicio = Column(Date, nullable=False)
-    fechaFin = Column(Date, nullable=False)
-    estado = Column(Enum('pagada', 'cancelada', 'pendiente'), nullable=False)
-
-    cliente = relationship("Cliente")
-    habitacion = relationship("Habitacion")
+    @classmethod
+    def crear_habitacion(cls, numero_habitacion, id_tipo_habitacion, estado):
+        conexion = conectar_bd()
+        if conexion:
+            cursor = conexion.cursor(dictionary=True)
+            query = """
+                INSERT INTO habitacion (numeroHabitacion, idTipo_Habitacion, estado)
+                VALUES (%s, %s, %s)
+            """
+            cursor.execute(query, (numero_habitacion, id_tipo_habitacion, estado))
+            conexion.commit()
+            cursor.close()
+            conexion.close()
 
 
-class Servicio(Base):
-    __tablename__ = 'servicio'
-    
-    idServicio = Column(BigInteger, primary_key=True, autoincrement=True)
-    concepto = Column(String(100), nullable=False)
-    descripcion = Column(TEXT)
-    costoServicio = Column(DECIMAL(10, 2), nullable=False)
-    fechaConsumo = Column(Date, nullable=False)
+class Reserva:
+    def __init__(self, id_reserva=None, id_cliente=None, id_habitacion=None, fecha_inicio=None, fecha_fin=None, estado=None):
+        self.id_reserva = id_reserva
+        self.id_cliente = id_cliente
+        self.id_habitacion = id_habitacion
+        self.fecha_inicio = fecha_inicio
+        self.fecha_fin = fecha_fin
+        self.estado = estado
+
+    @classmethod
+    def crear_reserva(cls, id_cliente, id_habitacion, fecha_inicio, fecha_fin, estado):
+        conexion = conectar_bd()
+        if conexion:
+            cursor = conexion.cursor(dictionary=True)
+            query = """
+                INSERT INTO reserva (idCliente, idHabitacion, fechaInicio, fechaFin, estado)
+                VALUES (%s, %s, %s, %s, %s)
+            """
+            cursor.execute(query, (id_cliente, id_habitacion, fecha_inicio, fecha_fin, estado))
+            conexion.commit()
+            cursor.close()
+            conexion.close()
 
 
-class ConsumoServicio(Base):
-    __tablename__ = 'consumo_servicio'
-    
-    idConsumoServicio = Column(BigInteger, primary_key=True, autoincrement=True)
-    idReserva = Column(BigInteger, ForeignKey('reserva.idReserva'), nullable=False)
-    idServicio = Column(BigInteger, ForeignKey('servicio.idServicio'), nullable=False)
-    costoConsumoServicio = Column(DECIMAL(10, 2), nullable=False)
+class Servicio:
+    def __init__(self, id_servicio=None, concepto=None, descripcion=None, costo_servicio=None, fecha_consumo=None):
+        self.id_servicio = id_servicio
+        self.concepto = concepto
+        self.descripcion = descripcion
+        self.costo_servicio = costo_servicio
+        self.fecha_consumo = fecha_consumo
 
-    reserva = relationship("Reserva")
-    servicio = relationship("Servicio")
+    @classmethod
+    def crear_servicio(cls, concepto, descripcion, costo_servicio, fecha_consumo):
+        conexion = conectar_bd()
+        if conexion:
+            cursor = conexion.cursor(dictionary=True)
+            query = """
+                INSERT INTO servicio (concepto, descripcion, costoServicio, fechaConsumo)
+                VALUES (%s, %s, %s, %s)
+            """
+            cursor.execute(query, (concepto, descripcion, costo_servicio, fecha_consumo))
+            conexion.commit()
+            cursor.close()
+            conexion.close()
+
+
+class ConsumoServicio:
+    def __init__(self, id_consumo_servicio=None, id_reserva=None, id_servicio=None, costo_consumo_servicio=None):
+        self.id_consumo_servicio = id_consumo_servicio
+        self.id_reserva = id_reserva
+        self.id_servicio = id_servicio
+        self.costo_consumo_servicio = costo_consumo_servicio
+
+    @classmethod
+    def crear_consumo_servicio(cls, id_reserva, id_servicio, costo_consumo_servicio):
+        conexion = conectar_bd()
+        if conexion:
+            cursor = conexion.cursor(dictionary=True)
+            query = """
+                INSERT INTO consumo_servicio (idReserva, idServicio, costoConsumoServicio)
+                VALUES (%s, %s, %s)
+            """
+            cursor.execute(query, (id_reserva, id_servicio, costo_consumo_servicio))
+            conexion.commit()
+            cursor.close()
+            conexion.close()

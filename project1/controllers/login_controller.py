@@ -1,28 +1,26 @@
 from PyQt6.QtWidgets import QMessageBox
 from views.ventana_principal import Form_Ventana_Principal as VentanaPrincipal
-from models.model import Administrador
-from sqlalchemy.orm import Session
 
 class Login_Controller:
     def __init__(self, ui_form_login):
         self.ui = ui_form_login  # Guardamos la instancia de la vista (login)
         self.ui.btn_ingresar.clicked.connect(self.login)  # Conectamos el botón de login
 
-    def login(self, session: Session):
+    def login(self):
         try:
+            # Obtenemos los datos de la interfaz
             usuario = self.ui.txt_correo.text()
             password = self.ui.txt_contrasena.text()
 
-            # Buscar al administrador en la base de datos usando el correo
-            administrador = session.query(Administrador).filter_by(correo=usuario).first()
-
-            if administrador and administrador.verificar_contrasenia(password):
-                self.mostrar_mensaje('Iniciaste sesión con éxito')
-                # Aquí puedes abrir la ventana principal u otra ventana
-                self.ui.close()  # Cierra la ventana de login
-                self.abrir_ventana_principal()
+            # Validación de los datos
+            if usuario == '' or password == '':
+                self.mostrar_error('Usuario o contraseña no pueden estar vacíos.')
             else:
-                self.mostrar_error('Usuario o contraseña incorrecta')
+                # Aquí iría la lógica de verificación real (como consulta a base de datos)
+                if usuario == 'admin' and password == '1234':  # Ejemplo simple
+                    self.mostrar_mensaje('Iniciaste sesión con éxito')
+                else:
+                    self.mostrar_error('Usuario o contraseña incorrecta')
 
         except Exception as e:
             self.mostrar_error(f"Ocurrió un error: {e}")
