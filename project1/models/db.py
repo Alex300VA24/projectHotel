@@ -11,6 +11,7 @@ class DBConnection:
         self.user = config.DATABASE_CONFIG["user"]
         self.password = config.DATABASE_CONFIG["password"]
         self.database = config.DATABASE_CONFIG["database"]
+        self.port = config.DATABASE_CONFIG["port"]
 
     def connect(self):
         try:
@@ -18,7 +19,8 @@ class DBConnection:
                 host=self.host,
                 user=self.user,
                 password=self.password,
-                database=self.database
+                database=self.database,
+                port = self.port
             )
             if self.connection.is_connected():
                 print("Conexión exitosa a la base de datos")
