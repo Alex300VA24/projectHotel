@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QMessageBox
 from views.ventana_principal import Form_Ventana_Principal as VentanaPrincipal
+from models.db import DBConnection
 
 class Login_Controller:
     def __init__(self, ui_form_login):
@@ -9,18 +10,31 @@ class Login_Controller:
     def login(self):
         try:
             # Obtenemos los datos de la interfaz
-            usuario = self.ui.txt_correo.text()
+            correo = self.ui.txt_correo.text()
             password = self.ui.txt_contrasena.text()
 
             # Validación de los datos
-            if usuario == '' or password == '':
+            if correo == '' or password == '':
                 self.mostrar_error('Usuario o contraseña no pueden estar vacíos.')
             else:
-                # Aquí iría la lógica de verificación real (como consulta a base de datos)
-                if usuario == 'admin' and password == '1234':  # Ejemplo simple
+                # Crear una instancia de DBConnection
+                db = DBConnection()
+
+                # Conectar a la base de datos
+                db.connect()
+
+                # Consulta para verificar si el usuario y la contraseña coinciden
+                query = "SELECT * FROM administrador WHERE correo = %s AND contrasenia = %s"
+                result = db.query(query, (correo, password))
+
+                # Si se encuentra el usuario
+                if result:
                     self.mostrar_mensaje('Iniciaste sesión con éxito')
                 else:
                     self.mostrar_error('Usuario o contraseña incorrecta')
+
+                # Desconectar después de la consulta
+                db.disconnect()
 
         except Exception as e:
             self.mostrar_error(f"Ocurrió un error: {e}")
