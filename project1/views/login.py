@@ -1,7 +1,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QWidget
+from PyQt6.QtWidgets import QWidget #type:ignore
 from controllers.login_controller import Login_Controller
 
 

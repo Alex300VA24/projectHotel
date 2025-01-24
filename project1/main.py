@@ -1,6 +1,6 @@
 
 import sys
-from PyQt6.QtWidgets import QApplication
+from PyQt6.QtWidgets import QApplication #type:ignore
 from views.login import Form_Login
 from controllers.login_controller import Login_Controller
 import warnings

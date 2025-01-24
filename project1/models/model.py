@@ -1,20 +1,5 @@
-import mysql.connector
+from db import DBConnection 
 from hashlib import sha256
-
-# Función para establecer la conexión a la base de datos
-def conectar_bd():
-    try:
-        conexion = mysql.connector.connect(
-            host='localhost',  # Cambia esto por tu servidor de base de datos
-            database='nombre_base_datos',  # Cambia esto por tu base de datos
-            user='usuario',  # Cambia esto por tu usuario de MySQL
-            password='contraseña'  # Cambia esto por tu contraseña de MySQL
-        )
-        if conexion.is_connected():
-            return conexion
-    except mysql.connector.Error as e:
-        print(f"Error al conectar a la base de datos: {e}")
-        return None
 
 class Administrador:
     def __init__(self, id_administrador=None, nombres=None, apellido_paterno=None, apellido_materno=None, correo=None, contrasenia=None):
@@ -27,7 +12,8 @@ class Administrador:
 
     @classmethod
     def crear_administrador(cls):
-        conexion = conectar_bd()
+        conexion = DBConnection()
+        conexion.connect()
         if conexion:
             cursor = conexion.cursor(dictionary=True)
             cursor.execute("SELECT * FROM administrador LIMIT 1")
@@ -66,7 +52,8 @@ class Cliente:
 
     @classmethod
     def crear_cliente(cls, nombres, apellido_paterno, apellido_materno, telefono):
-        conexion = conectar_bd()
+        conexion = DBConnection()
+        conexion.connect()
         if conexion:
             cursor = conexion.cursor(dictionary=True)
             query = """
@@ -87,7 +74,8 @@ class TipoHabitacion:
 
     @classmethod
     def crear_tipo_habitacion(cls, tipo, precio_noche):
-        conexion = conectar_bd()
+        conexion = DBConnection()
+        conexion.connect()
         if conexion:
             cursor = conexion.cursor(dictionary=True)
             query = """
@@ -109,7 +97,8 @@ class Habitacion:
 
     @classmethod
     def crear_habitacion(cls, numero_habitacion, id_tipo_habitacion, estado):
-        conexion = conectar_bd()
+        conexion = DBConnection()
+        conexion.connect()
         if conexion:
             cursor = conexion.cursor(dictionary=True)
             query = """
@@ -133,7 +122,8 @@ class Reserva:
 
     @classmethod
     def crear_reserva(cls, id_cliente, id_habitacion, fecha_inicio, fecha_fin, estado):
-        conexion = conectar_bd()
+        conexion = DBConnection()
+        conexion.connect()
         if conexion:
             cursor = conexion.cursor(dictionary=True)
             query = """
@@ -156,7 +146,8 @@ class Servicio:
 
     @classmethod
     def crear_servicio(cls, concepto, descripcion, costo_servicio, fecha_consumo):
-        conexion = conectar_bd()
+        conexion = DBConnection()
+        conexion.connect()
         if conexion:
             cursor = conexion.cursor(dictionary=True)
             query = """
@@ -178,7 +169,8 @@ class ConsumoServicio:
 
     @classmethod
     def crear_consumo_servicio(cls, id_reserva, id_servicio, costo_consumo_servicio):
-        conexion = conectar_bd()
+        conexion = DBConnection()
+        conexion.connect()
         if conexion:
             cursor = conexion.cursor(dictionary=True)
             query = """

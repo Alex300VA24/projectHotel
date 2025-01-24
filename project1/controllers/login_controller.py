@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QMessageBox #type:ignore
 from views.ventana_principal import Form_Ventana_Principal as VentanaPrincipal
 from models.db import DBConnection
 
