@@ -6,70 +6,61 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>722</width>
-    <height>532</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Tahoma</family>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
+  <property name="styleSheet">
+   <string notr="true">Qwidget{
+background-color: qlineargradient(spread:pad, x1:0.965909, y1:0.04, x2:0, y2:1, stop:0 rgba(242, 242, 242, 255), stop:1 rgba(255, 255, 255, 255));
+}
+</string>
+  </property>
+  <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>361</width>
-     <height>531</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap>../../resources/images/hotel_imagen.jpg</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>420</x>
-     <y>80</y>
-     <width>281</width>
-     <height>81</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Inter Medium</family>
-     <pointsize>30</pointsize>
-     <italic>false</italic>
-    </font>
-   </property>
-   <property name="text">
-    <string>ROARI HOTEL</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_reservar">
-   <property name="geometry">
-    <rect>
-     <x>550</x>
-     <y>180</y>
+     <x>610</x>
+     <y>230</y>
      <width>161</width>
      <height>61</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Inter Medium</family>
-     <pointsize>9</pointsize>
+     <family>Tahoma</family>
+     <pointsize>-1</pointsize>
      <italic>false</italic>
+     <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">QPushButton {
+    background-color: #FFFFFF; /* Fondo del botón */
+    color: #333333;           /* Texto del botón */
+    border: 2px solid #333333; /* Borde gris oscuro */
+    border-radius: 8px;       /* Bordes redondeados */
+    padding: 5px;             /* Espaciado interno */
+    font-size: 14px;          /* Tamaño del texto */
+    font-weight: bold;        /* Texto en negrita */
+}
+
+QPushButton:hover {
+    background-color: #F9F9F9; /* Fondo cuando el mouse pasa por encima */
+}
+
+QPushButton:pressed {
+    background-color: #D9D9D9; /* Fondo cuando se presiona */
+    color: #000000;           /* Cambia el texto a negro */
+}
+</string>
    </property>
    <property name="text">
     <string>     Reservar
@@ -89,16 +80,39 @@
   <widget class="QPushButton" name="btn_habitaciones">
    <property name="geometry">
     <rect>
-     <x>450</x>
-     <y>360</y>
-     <width>181</width>
+     <x>420</x>
+     <y>410</y>
+     <width>161</width>
      <height>61</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Inter Medium</family>
+     <family>Tahoma</family>
+     <pointsize>-1</pointsize>
+     <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #FFFFFF; /* Fondo del botón */
+    color: #333333;           /* Texto del botón */
+    border: 2px solid #333333; /* Borde gris oscuro */
+    border-radius: 8px;       /* Bordes redondeados */
+    padding: 5px;             /* Espaciado interno */
+    font-size: 14px;          /* Tamaño del texto */
+    font-weight: bold;        /* Texto en negrita */
+}
+
+QPushButton:hover {
+    background-color: #F9F9F9; /* Fondo cuando el mouse pasa por encima */
+}
+
+QPushButton:pressed {
+    background-color: #D9D9D9; /* Fondo cuando se presiona */
+    color: #000000;           /* Cambia el texto a negro */
+}
+</string>
    </property>
    <property name="text">
     <string>  Habitaciones 
@@ -118,16 +132,39 @@
   <widget class="QPushButton" name="btn_clientes">
    <property name="geometry">
     <rect>
-     <x>550</x>
-     <y>270</y>
+     <x>610</x>
+     <y>320</y>
      <width>161</width>
      <height>61</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Inter Medium</family>
+     <family>Tahoma</family>
+     <pointsize>-1</pointsize>
+     <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #FFFFFF; /* Fondo del botón */
+    color: #333333;           /* Texto del botón */
+    border: 2px solid #333333; /* Borde gris oscuro */
+    border-radius: 8px;       /* Bordes redondeados */
+    padding: 5px;             /* Espaciado interno */
+    font-size: 14px;          /* Tamaño del texto */
+    font-weight: bold;        /* Texto en negrita */
+}
+
+QPushButton:hover {
+    background-color: #F9F9F9; /* Fondo cuando el mouse pasa por encima */
+}
+
+QPushButton:pressed {
+    background-color: #D9D9D9; /* Fondo cuando se presiona */
+    color: #000000;           /* Cambia el texto a negro */
+}
+</string>
    </property>
    <property name="text">
     <string>  Clientes 
@@ -147,20 +184,43 @@
   <widget class="QPushButton" name="btn_historial">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>270</y>
+     <x>420</x>
+     <y>320</y>
      <width>161</width>
      <height>61</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Inter Medium</family>
+     <family>Tahoma</family>
+     <pointsize>-1</pointsize>
+     <bold>true</bold>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #FFFFFF; /* Fondo del botón */
+    color: #333333;           /* Texto del botón */
+    border: 2px solid #333333; /* Borde gris oscuro */
+    border-radius: 8px;       /* Bordes redondeados */
+    padding: 5px;             /* Espaciado interno */
+    font-size: 14px;          /* Tamaño del texto */
+    font-weight: bold;        /* Texto en negrita */
+}
+
+QPushButton:hover {
+    background-color: #F9F9F9; /* Fondo cuando el mouse pasa por encima */
+}
+
+QPushButton:pressed {
+    background-color: #D9D9D9; /* Fondo cuando se presiona */
+    color: #000000;           /* Cambia el texto a negro */
+}
+</string>
+   </property>
    <property name="text">
-    <string>   Historial 
-   de Reservas</string>
+    <string>   Historial de
+   Reservas</string>
    </property>
    <property name="icon">
     <iconset>
@@ -176,23 +236,43 @@
   <widget class="QPushButton" name="btn_servicio">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>180</y>
+     <x>420</x>
+     <y>230</y>
      <width>161</width>
      <height>61</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Inter Medium</family>
+     <family>Tahoma</family>
+     <pointsize>-1</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">QPushButton {
+    background-color: #FFFFFF; /* Fondo del botón */
+    color: #333333;           /* Texto del botón */
+    border: 2px solid #333333; /* Borde gris oscuro */
+    border-radius: 8px;       /* Bordes redondeados */
+    padding: 5px;             /* Espaciado interno */
+    font-size: 14px;          /* Tamaño del texto */
+    font-weight: bold;        /* Texto en negrita */
+}
+
+QPushButton:hover {
+    background-color: #F9F9F9; /* Fondo cuando el mouse pasa por encima */
+}
+
+QPushButton:pressed {
+    background-color: #D9D9D9; /* Fondo cuando se presiona */
+    color: #000000;           /* Cambia el texto a negro */
+}
+</string>
    </property>
    <property name="text">
-    <string> Servicio
- a la Habitación</string>
+    <string> Servicio a la
+ Habitación</string>
    </property>
    <property name="icon">
     <iconset>
@@ -208,10 +288,10 @@
   <widget class="QPushButton" name="btn_salir">
    <property name="geometry">
     <rect>
-     <x>640</x>
-     <y>480</y>
+     <x>710</x>
+     <y>510</y>
      <width>75</width>
-     <height>31</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="text">
@@ -231,6 +311,82 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>391</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../../resources/images/hotel_imagen.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>70</y>
+     <width>91</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../../resources/images/logo.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>0</y>
+     <width>411</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Inter Medium</family>
+     <pointsize>20</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="mouseTracking">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: qlineargradient(spread:pad, x1:0.514, y1:0.0343182, x2:0.500554, y2:0.727, stop:0 rgba(242, 242, 242, 255), stop:1 rgba(255, 255, 255, 255));</string>
+   </property>
+   <property name="text">
+    <string>BIENVENIDO(A)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+   </property>
+  </widget>
+  <zorder>label_3</zorder>
+  <zorder>pushButton</zorder>
+  <zorder>pushButton_2</zorder>
+  <zorder>pushButton_3</zorder>
+  <zorder>pushButton_4</zorder>
+  <zorder>pushButton_5</zorder>
+  <zorder>btn_salir</zorder>
+  <zorder>label</zorder>
+  <zorder>label_6</zorder>
  </widget>
  <resources/>
  <connections/>
