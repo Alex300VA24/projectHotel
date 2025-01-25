@@ -2,7 +2,7 @@
 import mysql.connector  # type: ignore
 from mysql.connector import Error # type: ignore
 from config import config
-import bcrypt
+#import bcrypt
 
 
 class DBConnection:

@@ -1,6 +1,6 @@
 # models/usuario.py
 from .db import DBConnection
-import bcrypt
+#import bcrypt
 
 class Administrador:
     @staticmethod

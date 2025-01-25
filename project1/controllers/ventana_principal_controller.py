@@ -28,6 +28,10 @@ class VentanaPrincipalController:
             self.abrir_ventana_reservar
         )  # Conectamos el botón de reservar
 
+        self.ui.btn_historial.clicked.connect(
+            self.abrir_ventana_historial
+        )  # Conectamos el botón de historial de reservas
+
     # Ventana Servicio
     def abrir_ventana_servicio(self):
         self.ventana_principal.hide()
@@ -46,6 +50,7 @@ class VentanaPrincipalController:
         if self.servicio_controller:
             self.servicio_controller.mostrar_ventana()
 
+
     # Ventana Clientes
     def abrir_ventana_clientes(self):
         self.ventana_principal.hide()
@@ -63,6 +68,18 @@ class VentanaPrincipalController:
     def abrir_reservar(self):
         if self.reservar_controller:
             self.reservar_controller.mostrar_ventana()
+
+
+
+
+            # Ventana Historial
+    def abrir_ventana_historial(self):
+        self.ventana_principal.hide()
+        self.abrir_historial()
+
+    def abrir_historial(self):
+        if self.historial_controller:
+            self.historial_controller.mostrar_ventana()
 
     # Cerrar sesion
     def regresar_login(self):
