@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'reservar_habitacion.ui'
+# Form implementation generated from reading ui file 'views/ui/reservar_habitacion.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -210,7 +210,7 @@ class Ui_Form(object):
         self.label_12 = QtWidgets.QLabel(parent=Form)
         self.label_12.setGeometry(QtCore.QRect(350, 10, 91, 91))
         self.label_12.setText("")
-        self.label_12.setPixmap(QtGui.QPixmap("../../resources/images/logo.jpg"))
+        self.label_12.setPixmap(QtGui.QPixmap("views/ui\\../../resources/images/logo.jpg"))
         self.label_12.setScaledContents(True)
         self.label_12.setObjectName("label_12")
         self.box_numero_habitacion = QtWidgets.QComboBox(parent=Form)

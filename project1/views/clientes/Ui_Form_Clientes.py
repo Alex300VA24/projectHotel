@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'clientes_registrados.ui'
+# Form implementation generated from reading ui file 'views/ui/clientes_registrados.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -75,14 +75,14 @@ class Ui_Form(object):
 "")
         self.btn_regresar.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../resources/images/icons/boton-volver.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("views/ui\\../../resources/images/icons/boton-volver.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btn_regresar.setIcon(icon)
         self.btn_regresar.setIconSize(QtCore.QSize(24, 24))
         self.btn_regresar.setObjectName("btn_regresar")
         self.label_6 = QtWidgets.QLabel(parent=Form)
         self.label_6.setGeometry(QtCore.QRect(350, 10, 91, 91))
         self.label_6.setText("")
-        self.label_6.setPixmap(QtGui.QPixmap("../../resources/images/logo.jpg"))
+        self.label_6.setPixmap(QtGui.QPixmap("views/ui\\../../resources/images/logo.jpg"))
         self.label_6.setScaledContents(True)
         self.label_6.setObjectName("label_6")
         self.label_3 = QtWidgets.QLabel(parent=Form)

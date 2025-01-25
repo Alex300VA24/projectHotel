@@ -68,13 +68,13 @@ background-color: qlineargradient(spread:pad, x1:0.965909, y1:0.04, x2:0, y2:1, 
     <number>1</number>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_salir">
+  <widget class="QPushButton" name="btn_ingresar">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
-     <x>480</x>
+     <x>620</x>
      <y>410</y>
      <width>101</width>
      <height>31</height>
@@ -260,10 +260,10 @@ border-bottom-color: rgb(51, 51, 51);</string>
     <string>Contraseña</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_ingresar">
+  <widget class="QPushButton" name="btn_salir">
    <property name="geometry">
     <rect>
-     <x>610</x>
+     <x>500</x>
      <y>410</y>
      <width>101</width>
      <height>31</height>
@@ -493,14 +493,14 @@ QPushButton:hover {
   </widget>
   <zorder>label_3</zorder>
   <zorder>label_6</zorder>
-  <zorder>btn_salir</zorder>
+  <zorder>btn_ingresar</zorder>
   <zorder>txt_contrasena</zorder>
   <zorder>frame_3</zorder>
   <zorder>txt_correo</zorder>
   <zorder>label_4</zorder>
   <zorder>label</zorder>
   <zorder>label_5</zorder>
-  <zorder>btn_ingresar</zorder>
+  <zorder>btn_salir</zorder>
   <zorder>frame_2</zorder>
  </widget>
  <resources/>
