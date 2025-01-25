@@ -7,9 +7,11 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import QWidget #type:ignore
+from controllers.servicio_controller import Servicio_Controller
 
 
-class Ui_Form(object):
+class Ui_Form_Servicio(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(722, 532)
@@ -94,12 +96,19 @@ class Ui_Form(object):
         self.btn_guardar.setText(_translate("Form", "Guardar"))
         self.btn_cancelar.setText(_translate("Form", "Cancelar"))
 
+class Form_Servicio(QWidget, Ui_Form_Servicio):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)  # Configura la UI generada
+
+        self.servicio_controller = Servicio_Controller(self)
+
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = Ui_Form_Servicio()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec())

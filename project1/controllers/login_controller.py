@@ -1,5 +1,7 @@
 from PyQt6.QtWidgets import QMessageBox #type:ignore
+from .ventana_principal_controller import Ventana_Principal_Controller
 from views.ventana_principal import Form_Ventana_Principal as VentanaPrincipal
+from views.servicio_habitacion import Form_Servicio as ServicioHabitacion
 from models.db import DBConnection
 
 class Login_Controller:
@@ -50,8 +52,10 @@ class Login_Controller:
     def abrir_ventana_principal(self):
         ventana_principal = VentanaPrincipal()
         self.ui_ventana_principal = ventana_principal
-        self.ui_ventana_principal.setupUi(self.ui_ventana_principal)
-        self.ui_ventana_principal.btn_salir.clicked.connect(self.regresar_login)
+        self.ui_ventana_principal_controller = Ventana_Principal_Controller(self.ui_ventana_principal)
+        #self.ui_ventana_principal.btn_salir.clicked.connect(self.regresar_login)
+        #self.ui_ventana_principal.btn_servicio.clicked.connect(self.abrir_ventana_servicio)
+        print('abriste la ventana principal')	
         self.ui_ventana_principal.show()
 
     def regresar_login(self):
@@ -59,3 +63,5 @@ class Login_Controller:
         # Esto puede implicar simplemente cerrar la ventana principal y abrir de nuevo la ventana de login
         self.ui_ventana_principal.close()
         self.ui.show()
+    
+
