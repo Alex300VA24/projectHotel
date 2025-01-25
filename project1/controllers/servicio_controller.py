@@ -1,8 +1,20 @@
-from PyQt6.QtWidgets import QMessageBox #type:ignore
+from PyQt6.QtWidgets import QWidget #type:ignore
+from views.Ui_Form_Servicio import Ui_Form_Servicio
 
+class ServicioController:
+    def __init__(self):
+        self.ventana_servicio = QWidget()
+        self.ui = Ui_Form_Servicio()
+        self.ui.setupUi(self.ventana_servicio)
+        self.ventana_principal_controller = None
 
-class Servicio_Controller:
-    def __init__(self, ui_form_ventana_principal):
-        self.ui = ui_form_ventana_principal  # Guardamos la instancia de la vista (login)
-        # self.ui.btn_ingresar_servicio.clicked.connect(self.abrir_servicio)
+        self.ui.btn_guardar.clicked.connect(self.regresar_ventana_prinicipal)
+    
+    def regresar_ventana_prinicipal(self):
+        self.ventana_servicio.hide()
+        if self.ventana_principal_controller:
+            self.ventana_principal_controller.mostrar_ventana()
+    
+    def mostrar_ventana(self):
+        self.ventana_servicio.show()
     

@@ -1,13 +1,16 @@
-from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QMessageBox, QWidget #type:ignore
 from models.administrador import Administrador #type:ignore
-from controllers.ventana_principal_controller import VentanaPrincipalController
-from views.ventana_principal.FormVentanaPrincipal import FormVentanaPrincipal
+
+from views.login.Ui_Form_Login import Ui_Form_Login
 from models.db import DBConnection
 
 class LoginController:
-    def __init__(self, login_view):
-        self.ui = login_view  # Guardamos la instancia de la vista (login)
-        self.ui.setupUi(self.ui)
+    def __init__(self):
+        self.ventana_login = QWidget()  # Guardamos la instancia de la vista (login)
+        self.ui = Ui_Form_Login()
+        self.ui.setupUi(self.ventana_login)
+        self.ventana_principal_controller = None
+
         self.ui.btn_ingresar.clicked.connect(self.login)  # Conectamos el botón de login
         
 
@@ -32,26 +35,21 @@ class LoginController:
 
         except Exception as e:
             self.mostrar_error(f"Ocurrió un error: {e}")
+    
+    def mostrar_ventana(self):
+        self.ventana_login.show()
 
     def mostrar_error(self, mensaje):
-        QMessageBox.critical(self.ui, "Error", mensaje)
+        QMessageBox.critical(self.ventana_login, "Error", mensaje)
 
     def mostrar_mensaje(self, mensaje):
-        QMessageBox.information(self.ui, 'Mensaje de Inicio de Sesión', mensaje)
-        self.ui.close()  # Cerramos la ventana de login
+        QMessageBox.information(self.ventana_login, 'Mensaje de Inicio de Sesión', mensaje)
+        self.ventana_login.hide()  # Cerramos la ventana de login
         self.abrir_ventana_principal()  # Abrimos la ventana principal
 
     def abrir_ventana_principal(self):
-        ventana_principal = FormVentanaPrincipal()
-        self.ventana_principal_view = ventana_principal
-        #self.ventana_principal_view.setupUi(self.ventana_principal_view)
-        ventana_principal_controller = VentanaPrincipalController(self.ventana_principal_view, self.ui)
-        self.ventana_principal_view.show()
+        if self.ventana_principal_controller:
+            self.ventana_principal_controller.mostrar_ventana()
 
-    '''def regresar_login(self):
-        # Aquí deberías manejar la lógica para regresar al login
-        # Esto puede implicar simplemente cerrar la ventana principal y abrir de nuevo la ventana de login
-        self.ui_ventana_principal.close()
-        self.ui.show()'''
     
 
