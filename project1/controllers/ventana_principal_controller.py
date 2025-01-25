@@ -21,6 +21,9 @@ class VentanaPrincipalController:
         self.ui.btn_habitaciones.clicked.connect(
             self.abrir_ventana_habitaciones
         )  # Conectamos el botón de habitaciones
+        self.ui.btn_clientes.clicked.connect(
+            self.abrir_ventana_clientes
+        )  # Conectamos el botón de clientes
 
     # Ventana Servicio
     def abrir_ventana_servicio(self):
@@ -39,6 +42,15 @@ class VentanaPrincipalController:
     def abrir_habitacion(self):
         if self.servicio_controller:
             self.servicio_controller.mostrar_ventana()
+
+    # Ventana Clientes
+    def abrir_ventana_clientes(self):
+        self.ventana_principal.hide()
+        self.abrir_clientes()
+
+    def abrir_clientes(self):
+        if self.clientes_controller:
+            self.clientes_controller.mostrar_ventana()
 
     # Cerrar sesion
     def regresar_login(self):

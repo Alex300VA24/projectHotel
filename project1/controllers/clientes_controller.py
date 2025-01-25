@@ -1,19 +1,20 @@
-# controller.py
-from PyQt6.QtCore import pyqtSignal # type: ignore
-from view.view import View
-from model.model import Model, Item
+from PyQt6.QtWidgets import QWidget  # type:ignore
+from views.clientes.Ui_Form_Clientes import Ui_Form_Clientes
 
 
-class Controller:
-    def __init__(self, model, view):
-        self.model = model
-        self.view = view
+class ClientesController:
+    def __init__(self):
+        self.ventana_clientes = QWidget()
+        self.ui = Ui_Form_Clientes()
+        self.ui.setupUi(self.ventana_clientes)
+        self.ventana_principal_controller = None
 
-        # Conectar la señal del botón a la función que maneja la adición de ítems
-        self.view.addButton.clicked.connect(self.on_add_item)
+        self.ui.btn_regresar.clicked.connect(self.regresar_ventana_prinicipal)
 
-    def on_add_item(self):
-        new_item = Item("New Item", 100)  # Crear un nuevo ítem
-        self.model.add_item(new_item)     # Añadir el ítem al modelo
-        self.view.update_view()           # Actualizar la vista
-        
+    def regresar_ventana_prinicipal(self):
+        self.ventana_clientes.hide()
+        if self.ventana_principal_controller:
+            self.ventana_principal_controller.mostrar_ventana()
+
+    def mostrar_ventana(self):
+        self.ventana_clientes.show()
