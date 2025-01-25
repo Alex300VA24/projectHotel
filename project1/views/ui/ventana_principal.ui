@@ -24,7 +24,7 @@ background-color: qlineargradient(spread:pad, x1:0.965909, y1:0.04, x2:0, y2:1, 
 }
 </string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="btn_reservar">
    <property name="geometry">
     <rect>
      <x>610</x>
@@ -378,12 +378,12 @@ QPushButton:pressed {
     <set>Qt::AlignBottom|Qt::AlignHCenter</set>
    </property>
   </widget>
+  <zorder>btn_habitaciones</zorder>
+  <zorder>btn_clientes</zorder>
+  <zorder>btn_historial</zorder>
+  <zorder>btn_servicio</zorder>
   <zorder>label_3</zorder>
-  <zorder>pushButton</zorder>
-  <zorder>pushButton_2</zorder>
-  <zorder>pushButton_3</zorder>
-  <zorder>pushButton_4</zorder>
-  <zorder>pushButton_5</zorder>
+  <zorder>btn_reservar</zorder>
   <zorder>btn_salir</zorder>
   <zorder>label</zorder>
   <zorder>label_6</zorder>

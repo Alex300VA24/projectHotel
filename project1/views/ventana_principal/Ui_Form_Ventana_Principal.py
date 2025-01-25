@@ -22,15 +22,15 @@ class Ui_Form_Ventana_Principal(object):
             "}\n"
             ""
         )
-        self.pushButton = QtWidgets.QPushButton(parent=Form)
-        self.pushButton.setGeometry(QtCore.QRect(610, 230, 161, 61))
+        self.btn_reservar = QtWidgets.QPushButton(parent=Form)
+        self.btn_reservar.setGeometry(QtCore.QRect(610, 230, 161, 61))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(-1)
         font.setBold(True)
         font.setItalic(False)
-        self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet(
+        self.btn_reservar.setFont(font)
+        self.btn_reservar.setStyleSheet(
             "QPushButton {\n"
             "    background-color: #FFFFFF; /* Fondo del botón */\n"
             "    color: #333333;           /* Texto del botón */\n"
@@ -57,9 +57,9 @@ class Ui_Form_Ventana_Principal(object):
             QtGui.QIcon.Mode.Normal,
             QtGui.QIcon.State.Off,
         )
-        self.pushButton.setIcon(icon)
-        self.pushButton.setIconSize(QtCore.QSize(50, 50))
-        self.pushButton.setObjectName("pushButton")
+        self.btn_reservar.setIcon(icon)
+        self.btn_reservar.setIconSize(QtCore.QSize(50, 50))
+        self.btn_reservar.setObjectName("btn_reservar")
         self.btn_habitaciones = QtWidgets.QPushButton(parent=Form)
         self.btn_habitaciones.setGeometry(QtCore.QRect(420, 410, 161, 61))
         font = QtGui.QFont()
@@ -252,8 +252,12 @@ class Ui_Form_Ventana_Principal(object):
             QtCore.Qt.AlignmentFlag.AlignBottom | QtCore.Qt.AlignmentFlag.AlignHCenter
         )
         self.label_3.setObjectName("label_3")
+        self.btn_habitaciones.raise_()
+        self.btn_clientes.raise_()
+        self.btn_historial.raise_()
+        self.btn_servicio.raise_()
         self.label_3.raise_()
-        self.pushButton.raise_()
+        self.btn_reservar.raise_()
         self.btn_salir.raise_()
         self.label.raise_()
         self.label_6.raise_()
@@ -264,7 +268,7 @@ class Ui_Form_Ventana_Principal(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.pushButton.setText(_translate("Form", "     Reservar\n     Habitación"))
+        self.btn_reservar.setText(_translate("Form", "     Reservar\n     Habitación"))
         self.btn_habitaciones.setText(
             _translate("Form", "  Habitaciones \n  Disponibles")
         )
