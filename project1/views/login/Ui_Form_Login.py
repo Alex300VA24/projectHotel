@@ -2,7 +2,6 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QWidget #type:ignore
-from controllers.login_controller import Login_Controller
 
 
 
@@ -75,15 +74,7 @@ class Ui_Form_Login(object):
         self.label_5.setText(_translate("Form", "Contraseña"))
         self.btn_salir.setText(_translate("Form", "Salir"))
         self.btn_ingresar.setText(_translate("Form", "Ingresar"))
-
-class Form_Login(QWidget, Ui_Form_Login):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)  # Configura la UI generada
-
-        self.login_controller = Login_Controller(self)
-
-    
+  
 
 
 if __name__ == "__main__":

@@ -1,20 +1,23 @@
-
 import sys
-from PyQt6.QtWidgets import QApplication #type:ignore
-from views.login import Form_Login
-from controllers.login_controller import Login_Controller
+from PyQt6.QtWidgets import QApplication  # type: ignore
+from views.login.FormLogin import FormLogin  # Importa solo la vista
+from controllers.login_controller import LoginController  # Importa el controlador
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 def main():
     app = QApplication(sys.argv)
     
-    # Cargar la ventana principal y pasar el controlador
-    main_window = Form_Login()
-    main_window.show()
+    # Crear instancia de la vista
+    login_view = FormLogin()
+    
+    # Pasar la vista al controlador
+    login_controller = LoginController(login_view)
+    
+    # Mostrar la vista (el controlador manejará los eventos)
+    login_view.show()
 
     sys.exit(app.exec())
 
 if __name__ == "__main__":
     main()
-

@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QMessageBox #type:ignore
 
 
 class Servicio_Controller:
