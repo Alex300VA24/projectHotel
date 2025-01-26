@@ -1,4 +1,4 @@
-from db import DBConnection 
+from .db import DBConnection 
 from hashlib import sha256
 
 class Administrador:
@@ -109,7 +109,18 @@ class Habitacion:
             conexion.commit()
             cursor.close()
             conexion.close()
-
+            
+    @classmethod
+    def estado_habitacion(cls):
+        conexion = DBConnection()
+        conexion.connect()
+        if conexion:
+            query = """
+                SELECT * FROM habitacion
+            """
+            resultado = conexion.query(query)
+            conexion.disconnect()
+            return resultado
 
 class Reserva:
     def __init__(self, id_reserva=None, id_cliente=None, id_habitacion=None, fecha_inicio=None, fecha_fin=None, estado=None):

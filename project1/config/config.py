@@ -2,7 +2,7 @@
 DATABASE_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "",
+    "password": "mysql",
     "database": "Hotel",
-    "port": 3306
+    "port": 3307
 }

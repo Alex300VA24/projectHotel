@@ -1,4 +1,5 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import QTableWidgetItem
 
 
 class Ui_Form_Habitaciones(object):
@@ -108,6 +109,29 @@ class Ui_Form_Habitaciones(object):
         item.setText(_translate("Form", "N° de Habitación"))
         item = self.table_historial_2.horizontalHeaderItem(2)
         item.setText(_translate("Form", "Tipo de habitación"))
+    
+    #Método para llenar la tabla con la información que le manda el controlador habitaciones_controller
+    def llenar_tabla(self, data):
+        habitaciones_disponibles = ()
+        for item in data:
+            if item[3] == 'disponible':
+                habitaciones_disponibles += (item,)
+        
+        fila = 0
+        self.table_historial_2.setRowCount(len(habitaciones_disponibles))
+        for item in habitaciones_disponibles:
+            self.table_historial_2.setItem(fila, 0, QTableWidgetItem(str(item[0])))
+            self.table_historial_2.setItem(fila, 1, QTableWidgetItem(str(item[1])))
+            if item[2] == 1:
+                tipo_habitacion = "Simple"
+            elif item[2] == 2:
+                tipo_habitacion = "Doble"
+            elif item[2] == 3:
+                tipo_habitacion = "Matrimonial"
+            else:
+                tipo_habitacion = "Suite"
+            self.table_historial_2.setItem(fila, 2, QTableWidgetItem(tipo_habitacion))
+            fila += 1
 
 
 if __name__ == "__main__":

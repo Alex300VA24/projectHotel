@@ -18,3 +18,11 @@ class HabitacionesController:
 
     def mostrar_ventana(self):
         self.ventana_habitaciones.show()
+        
+    #La informacion lo reenvia al Form
+    def habitaciones_disponibles(self, data):
+        self.ui.llenar_tabla(data)
+        
+        
+        
+                
