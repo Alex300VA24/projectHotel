@@ -2,6 +2,7 @@
 import mysql.connector  # type: ignore
 from mysql.connector import Error # type: ignore
 from config import config
+#import bcrypt
 
 
 class DBConnection:
@@ -42,5 +43,8 @@ class DBConnection:
         cursor = self.connection.cursor()
         cursor.execute(query, params)
         self.connection.commit()
+    
+    
+
 
 

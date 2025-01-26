@@ -1,61 +1,55 @@
-from PyQt6.QtWidgets import QMessageBox #type:ignore
-from views.ventana_principal import Form_Ventana_Principal as VentanaPrincipal
+from PyQt6.QtWidgets import QMessageBox, QWidget #type:ignore
+from models.administrador import Administrador #type:ignore
+
+from views.login.Ui_Form_Login import Ui_Form_Login
 from models.db import DBConnection
 
-class Login_Controller:
-    def __init__(self, ui_form_login):
-        self.ui = ui_form_login  # Guardamos la instancia de la vista (login)
+class LoginController:
+    def __init__(self):
+        self.ventana_login = QWidget()  # Guardamos la instancia de la vista (login)
+        self.ui = Ui_Form_Login()
+        self.ui.setupUi(self.ventana_login)
+        self.ventana_principal_controller = None
+
         self.ui.btn_ingresar.clicked.connect(self.login)  # Conectamos el botón de login
+        
 
     def login(self):
         try:
             # Obtenemos los datos de la interfaz
-            correo = self.ui.txt_correo.text()
-            password = self.ui.txt_contrasena.text()
+            correo = self.ui.txt_correo.text().strip()
+            password = self.ui.txt_contrasena.text().strip()
 
-            # Validación de los datos
-            if correo == '' or password == '':
+            if not correo or not password:
                 self.mostrar_error('Usuario o contraseña no pueden estar vacíos.')
+                return
+
+            if '@' not in correo or '.' not in correo:
+                self.mostrar_error('El correo electrónico no es válido.')
+                return
+
+            if Administrador.validar_usuario(correo, password):
+                self.mostrar_mensaje('Iniciaste sesión con éxito')
             else:
-                # Crear una instancia de DBConnection
-                db = DBConnection()
-
-                # Conectar a la base de datos
-                db.connect()
-
-                # Consulta para verificar si el usuario y la contraseña coinciden
-                query = "SELECT * FROM administrador WHERE correo = %s AND contrasenia = %s"
-                result = db.query(query, (correo, password))
-
-                # Si se encuentra el usuario
-                if result:
-                    self.mostrar_mensaje('Iniciaste sesión con éxito')
-                else:
-                    self.mostrar_error('Usuario o contraseña incorrecta')
-
-                # Desconectar después de la consulta
-                db.disconnect()
+                self.mostrar_error('Usuario o contraseña incorrecta')
 
         except Exception as e:
             self.mostrar_error(f"Ocurrió un error: {e}")
+    
+    def mostrar_ventana(self):
+        self.ventana_login.show()
 
     def mostrar_error(self, mensaje):
-        QMessageBox.critical(self.ui, "Error", mensaje)
+        QMessageBox.critical(self.ventana_login, "Error", mensaje)
 
     def mostrar_mensaje(self, mensaje):
-        QMessageBox.information(self.ui, 'Mensaje de Inicio de Sesión', mensaje)
-        self.ui.close()  # Cerramos la ventana de login
+        QMessageBox.information(self.ventana_login, 'Mensaje de Inicio de Sesión', mensaje)
+        self.ventana_login.hide()  # Cerramos la ventana de login
         self.abrir_ventana_principal()  # Abrimos la ventana principal
 
     def abrir_ventana_principal(self):
-        ventana_principal = VentanaPrincipal()
-        self.ui_ventana_principal = ventana_principal
-        self.ui_ventana_principal.setupUi(self.ui_ventana_principal)
-        self.ui_ventana_principal.btn_salir.clicked.connect(self.regresar_login)
-        self.ui_ventana_principal.show()
+        if self.ventana_principal_controller:
+            self.ventana_principal_controller.mostrar_ventana()
 
-    def regresar_login(self):
-        # Aquí deberías manejar la lógica para regresar al login
-        # Esto puede implicar simplemente cerrar la ventana principal y abrir de nuevo la ventana de login
-        self.ui_ventana_principal.close()
-        self.ui.show()
+    
+
