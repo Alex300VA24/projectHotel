@@ -30,30 +30,27 @@ def main():
     reservar_controller = ReservarController()
     historial_controller = HistorialController()
 
-
     # Configurar referencias cruzadas
     login_controller.ventana_principal_controller = ventana_principal_controller
+
     ventana_principal_controller.login_controller = login_controller
     ventana_principal_controller.servicio_controller = servicio_controller
     ventana_principal_controller.habitaciones_controller = habitaciones_controller
     ventana_principal_controller.clientes_controller = clientes_controller
     ventana_principal_controller.reservar_controller = reservar_controller
-    servicio_controller.ventana_principal_controller = ventana_principal_controller
-    habitaciones_controller.ventana_principal_controller = ventana_principal_controller
-    clientes_controller.ventana_principal_controller = ventana_principal_controller
-    reservar_controller.ventana_principal_controller = ventana_principal_controller
-
-
     ventana_principal_controller.historial_controller = historial_controller
 
     servicio_controller.ventana_principal_controller = ventana_principal_controller
     habitaciones_controller.ventana_principal_controller = ventana_principal_controller
-    historial_controller.ventana_principal_controller=ventana_principal_controller
+    clientes_controller.ventana_principal_controller = ventana_principal_controller
+    reservar_controller.ventana_principal_controller = ventana_principal_controller
+    historial_controller.ventana_principal_controller = ventana_principal_controller
 
     # Mostrar la ventana de login
     login_controller.mostrar_ventana()
 
     sys.exit(app.exec())
+
 
 if __name__ == "__main__":
     main()

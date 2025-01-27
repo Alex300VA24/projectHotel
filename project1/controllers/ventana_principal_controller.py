@@ -1,6 +1,6 @@
-from PyQt6.QtWidgets import QMessageBox, QWidget  # type:ignore
+from PyQt6.QtWidgets import QWidget  # type:ignore
 
-from models.model import Habitacion
+from models.habitacion import Habitacion
 from views.ventana_principal.Ui_Form_Ventana_Principal import Ui_Form_Ventana_Principal
 
 
@@ -49,10 +49,12 @@ class VentanaPrincipalController:
     def abrir_habitacion(self):
         if self.habitaciones_controller:
             self.habitaciones_controller.mostrar_ventana()
-            #Se llama al método estado_habitacion de la clase Habitación para que jale los registros
-            #únicamente cuando se le de el botón, y luego se envía la query al método habitaciones_disponibles
-            #del controlador habitaciones_controller
-            self.habitaciones_controller.habitaciones_disponibles(Habitacion.estado_habitacion())
+            # Se llama al método estado_habitacion de la clase Habitación para que jale los registros
+            # únicamente cuando se le de el botón, y luego se envía la query al método habitaciones_disponibles
+            # del controlador habitaciones_controller
+            self.habitaciones_controller.habitaciones_disponibles(
+                Habitacion.estado_habitacion()
+            )
 
     # Ventana Clientes
     def abrir_ventana_clientes(self):
@@ -72,7 +74,6 @@ class VentanaPrincipalController:
         if self.reservar_controller:
             self.reservar_controller.mostrar_ventana()
 
-    # Ventana Historial
     def abrir_ventana_historial(self):
         self.ventana_principal.hide()
         self.abrir_historial()

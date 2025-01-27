@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>652</height>
    </rect>
   </property>
   <property name="palette">
@@ -225,7 +225,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Fecha de Salida</string>
+    <string>Cantidad de noches</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="txt_celular">
@@ -244,42 +244,10 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txt_fecha_ingreso">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>350</y>
-     <width>291</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="txt_fecha_salida">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>420</y>
-     <width>291</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
   <widget class="QComboBox" name="box_tipo_habitacion">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>430</x>
      <y>180</y>
      <width>291</width>
      <height>31</height>
@@ -297,31 +265,11 @@
    <property name="frame">
     <bool>true</bool>
    </property>
-   <item>
-    <property name="text">
-     <string>Simple</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Doble</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Matrimonial</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Suite</string>
-    </property>
-   </item>
   </widget>
   <widget class="QLabel" name="label_7">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>430</x>
      <y>160</y>
      <width>161</width>
      <height>16</height>
@@ -340,7 +288,7 @@
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>430</x>
      <y>240</y>
      <width>151</width>
      <height>16</height>
@@ -356,67 +304,11 @@
     <string>Número de Habitación</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_9">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>320</y>
-     <width>171</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Tahoma</family>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Estado de la Reservación</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="box_estado_reservacion">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>340</y>
-     <width>291</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Tahoma</family>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="frame">
-    <bool>true</bool>
-   </property>
-   <item>
-    <property name="text">
-     <string>Pagada</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Cancelada</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Pendiente</string>
-    </property>
-   </item>
-  </widget>
   <widget class="QLabel" name="label_10">
    <property name="geometry">
     <rect>
-     <x>450</x>
-     <y>400</y>
+     <x>430</x>
+     <y>320</y>
      <width>101</width>
      <height>21</height>
     </rect>
@@ -431,26 +323,10 @@
     <string>Total a Pagar</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txt_total_pago">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>420</y>
-     <width>291</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background: transparent;</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
   <widget class="QPushButton" name="btn_guardar">
    <property name="geometry">
     <rect>
-     <x>480</x>
+     <x>460</x>
      <y>500</y>
      <width>101</width>
      <height>31</height>
@@ -482,7 +358,7 @@ QPushButton:hover {
   <widget class="QPushButton" name="btn_cancelar">
    <property name="geometry">
     <rect>
-     <x>610</x>
+     <x>590</x>
      <y>500</y>
      <width>101</width>
      <height>31</height>
@@ -562,7 +438,7 @@ QPushButton:hover {
   <widget class="QComboBox" name="box_numero_habitacion">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>430</x>
      <y>260</y>
      <width>291</width>
      <height>31</height>
@@ -580,26 +456,6 @@ QPushButton:hover {
    <property name="frame">
     <bool>true</bool>
    </property>
-   <item>
-    <property name="text">
-     <string>2</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>3</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>4</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>7</string>
-    </property>
-   </item>
   </widget>
   <widget class="QFrame" name="frame_2">
    <property name="geometry">
@@ -651,35 +507,73 @@ QPushButton:hover {
     <number>1</number>
    </property>
   </widget>
+  <widget class="QFrame" name="frame_6">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>360</y>
+     <width>291</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: transparent;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::HLine</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>1</number>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="txt_fecha_ingreso">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>350</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="frame">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txt_noches">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>420</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="frame">
+    <bool>false</bool>
+   </property>
+  </widget>
   <widget class="QFrame" name="frame_4">
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>370</y>
-     <width>291</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background: transparent;</string>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::HLine</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Plain</enum>
-   </property>
-   <property name="lineWidth">
-    <number>1</number>
-   </property>
-  </widget>
-  <widget class="QFrame" name="frame_5">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
      <y>440</y>
      <width>291</width>
      <height>16</height>
@@ -701,29 +595,24 @@ QPushButton:hover {
     <number>1</number>
    </property>
   </widget>
-  <widget class="QFrame" name="frame_6">
+  <widget class="QLabel" name="lbl_total">
    <property name="geometry">
     <rect>
-     <x>450</x>
-     <y>440</y>
-     <width>291</width>
-     <height>16</height>
+     <x>440</x>
+     <y>390</y>
+     <width>161</width>
+     <height>31</height>
     </rect>
    </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <pointsize>16</pointsize>
+     <bold>true</bold>
+    </font>
    </property>
-   <property name="styleSheet">
-    <string notr="true">background: transparent;</string>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::HLine</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Plain</enum>
-   </property>
-   <property name="lineWidth">
-    <number>1</number>
+   <property name="text">
+    <string>S/. 0.00</string>
    </property>
   </widget>
  </widget>
