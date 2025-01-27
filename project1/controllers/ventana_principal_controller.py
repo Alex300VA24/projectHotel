@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QWidget  # type:ignore
 
-from models.model import Habitacion
+from models.habitacion import Habitacion
 from views.ventana_principal.Ui_Form_Ventana_Principal import Ui_Form_Ventana_Principal
 
 
@@ -55,9 +55,6 @@ class VentanaPrincipalController:
             self.habitaciones_controller.habitaciones_disponibles(
                 Habitacion.estado_habitacion()
             )
-
-        if self.servicio_controller:
-            self.servicio_controller.mostrar_ventana()
 
     # Ventana Clientes
     def abrir_ventana_clientes(self):
