@@ -1,8 +1,7 @@
-
 from .db import DBConnection
 # import bcrypt
 
-'''
+"""
 La clas reserva se va basar de esta tabla:
 CREATE TABLE reserva (
   idReserva BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -14,11 +13,13 @@ CREATE TABLE reserva (
   FOREIGN KEY (idCliente) REFERENCES cliente(idCliente),
   FOREIGN KEY (idHabitacion) REFERENCES habitacion(idHabitacion)
 );
-'''
+"""
 
 
 class Reserva:
-    def __init__(self, idReserva, idCliente, idHabitacion, fechaInicio, fechaFin, estado):
+    def __init__(
+        self, idReserva, idCliente, idHabitacion, fechaInicio, fechaFin, estado
+    ):
         self.idReserva = idReserva
         self.idCliente = idCliente
         self.idHabitacion = idHabitacion
@@ -38,7 +39,9 @@ class Reserva:
     @staticmethod
     def find(idReserva):
         conn = DBConnection()
-        cursor = conn.execute("SELECT * FROM reserva WHERE idReserva = %s", (idReserva,))
+        cursor = conn.execute(
+            "SELECT * FROM reserva WHERE idReserva = %s", (idReserva,)
+        )
         row = cursor.fetchone()
         if row is None:
             return None
@@ -48,14 +51,30 @@ class Reserva:
         conn = DBConnection()
         cursor = conn.execute(
             "INSERT INTO reserva (idCliente, idHabitacion, fechaInicio, fechaFin, estado) VALUES (%s, %s, %s, %s, %s)",
-            (self.idCliente, self.idHabitacion, self.fechaInicio, self.fechaFin, self.estado))
+            (
+                self.idCliente,
+                self.idHabitacion,
+                self.fechaInicio,
+                self.fechaFin,
+                self.estado,
+            ),
+        )
         conn.commit()
         self.idReserva = cursor.lastrowid
 
     def update(self):
         conn = DBConnection()
-        conn.execute("UPDATE reserva SET idCliente = %s, idHabitacion = %s, fechaInicio = %s, fechaFin = %s, estado = %s WHERE idReserva = %s",
-                     (self.idCliente, self.idHabitacion, self.fechaInicio, self.fechaFin, self.estado, self.idReserva))
+        conn.execute(
+            "UPDATE reserva SET idCliente = %s, idHabitacion = %s, fechaInicio = %s, fechaFin = %s, estado = %s WHERE idReserva = %s",
+            (
+                self.idCliente,
+                self.idHabitacion,
+                self.fechaInicio,
+                self.fechaFin,
+                self.estado,
+                self.idReserva,
+            ),
+        )
         conn.commit()
 
     def delete(self):
@@ -65,8 +84,9 @@ class Reserva:
 
     def cliente(self):
         from .cliente import Cliente
+
         return Cliente.find(self.idCliente)
 
-    def habitacion(self):
+    """def habitacion(self):
         from .habitacion import Habitacion
-        return Habitacion.find(self.idHabitacion)
+        return Habitacion.find(self.idHabitacion)"""
