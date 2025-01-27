@@ -47,17 +47,17 @@ class VentanaPrincipalController:
         self.abrir_habitacion()
 
     def abrir_habitacion(self):
-<<<<<<< HEAD
         if self.habitaciones_controller:
             self.habitaciones_controller.mostrar_ventana()
-            #Se llama al método estado_habitacion de la clase Habitación para que jale los registros
-            #únicamente cuando se le de el botón, y luego se envía la query al método habitaciones_disponibles
-            #del controlador habitaciones_controller
-            self.habitaciones_controller.habitaciones_disponibles(Habitacion.estado_habitacion())
-=======
+            # Se llama al método estado_habitacion de la clase Habitación para que jale los registros
+            # únicamente cuando se le de el botón, y luego se envía la query al método habitaciones_disponibles
+            # del controlador habitaciones_controller
+            self.habitaciones_controller.habitaciones_disponibles(
+                Habitacion.estado_habitacion()
+            )
+
         if self.servicio_controller:
             self.servicio_controller.mostrar_ventana()
->>>>>>> 36a23c6 (Algo de cambios en los modelos)
 
     # Ventana Clientes
     def abrir_ventana_clientes(self):
@@ -77,12 +77,6 @@ class VentanaPrincipalController:
         if self.reservar_controller:
             self.reservar_controller.mostrar_ventana()
 
-<<<<<<< HEAD
-    # Ventana Historial
-=======
-            # Ventana Historial
-
->>>>>>> 36a23c6 (Algo de cambios en los modelos)
     def abrir_ventana_historial(self):
         self.ventana_principal.hide()
         self.abrir_historial()
