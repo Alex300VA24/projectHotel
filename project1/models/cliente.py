@@ -20,13 +20,16 @@ class Cliente:
         self.telefono = telefono
 
     @staticmethod
-    def all():
-        conn = DBConnection()
-        cursor = conn.execute("SELECT * FROM cliente")
-        clientes = []
-        for row in cursor.fetchall():
-            clientes.append(Cliente(row[0], row[1], row[2], row[3], row[4]))
-        return clientes
+    def conseguir_clientes():
+        conexion = DBConnection()
+        conexion.connect()
+        if conexion:
+            query = """
+                SELECT * FROM cliente
+            """
+            resultado = conexion.query(query)
+            conexion.disconnect()
+            return resultado
 
     @staticmethod
     def find(idCliente):

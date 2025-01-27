@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget  # type:ignore
 
 from models.habitacion import Habitacion
+from models.cliente import Cliente
 from views.ventana_principal.Ui_Form_Ventana_Principal import Ui_Form_Ventana_Principal
 
 
@@ -64,6 +65,12 @@ class VentanaPrincipalController:
     def abrir_clientes(self):
         if self.clientes_controller:
             self.clientes_controller.mostrar_ventana()
+            # Se llama al método conseguir_clientes de la clase Cliente para que jale los registros
+            # únicamente cuando se le de el botón, y luego se envía la query al método clientes_registrados
+            # del controlador clientes_controller
+            self.clientes_controller.clientes_registrados(
+                Cliente.conseguir_clientes()
+            )
 
     # Ventana Reservar
     def abrir_ventana_reservar(self):

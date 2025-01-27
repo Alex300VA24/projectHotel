@@ -1,5 +1,5 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-
+from PyQt6.QtWidgets import QTableWidgetItem
 
 class Ui_Form_Clientes(object):
     def setupUi(self, Form):
@@ -121,6 +121,21 @@ class Ui_Form_Clientes(object):
         self.table_historial.setSortingEnabled(False)
         self.table_historial.setSortingEnabled(__sortingEnabled)
         self.label_3.setText(_translate("Form", "Clientes Registrados"))
+    
+    #Método para llenar la tabla con la información que le manda el controlador clientes_controller
+    def llenar_tabla(self, data):
+        print(data)
+        
+        fila = 0
+        self.table_historial.setRowCount(len(data))
+        for item in data:
+            self.table_historial.setItem(fila, 0, QTableWidgetItem(str(item[0])))
+            nombre_completo = item[1] + ' '
+            nombre_completo += item[2] + ' '
+            nombre_completo += item[3]
+            self.table_historial.setItem(fila, 1, QTableWidgetItem(nombre_completo))            
+            self.table_historial.setItem(fila, 2, QTableWidgetItem(item[4]))
+            fila += 1
 
 
 if __name__ == "__main__":

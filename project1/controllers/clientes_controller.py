@@ -18,3 +18,7 @@ class ClientesController:
 
     def mostrar_ventana(self):
         self.ventana_clientes.show()
+        
+    #La informacion lo reenvia al Form
+    def clientes_registrados(self, data):
+        self.ui.llenar_tabla(data)

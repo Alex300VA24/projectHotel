@@ -50,7 +50,6 @@ class Administrador:
         contrasenia_hash = sha256(password.encode()).hexdigest()
         return self.contrasenia == contrasenia_hash
 
-
 class Cliente:
     def __init__(
         self,
@@ -82,8 +81,6 @@ class Cliente:
             conexion.commit()
             cursor.close()
             conexion.close()
-
-
 
 class Reserva:
     def __init__(
@@ -118,7 +115,6 @@ class Reserva:
             conexion.commit()
             cursor.close()
             conexion.close()
-
 
 class Servicio:
     def __init__(
