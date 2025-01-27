@@ -190,7 +190,7 @@ class Ui_Form_Servicio(object):
         self.label_8.setText(_translate("Form", "Costo"))
         self.btn_guardar.setText(_translate("Form", "Guardar"))
         self.btn_cancelar.setText(_translate("Form", "Cancelar"))
-        self.label_11.setText(_translate("Form", "Reservar Habitación"))
+        self.label_11.setText(_translate("Form", "Servicio a la Habitación"))
 
 
 if __name__ == "__main__":

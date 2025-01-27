@@ -376,7 +376,7 @@ QPushButton:hover {
     <string notr="true">background-color: qlineargradient(spread:pad, x1:0.514, y1:0.0343182, x2:0.500554, y2:0.727, stop:0 rgba(242, 242, 242, 255), stop:1 rgba(255, 255, 255, 255));</string>
    </property>
    <property name="text">
-    <string>Reservar Habitación</string>
+    <string>Servicio a la Habitación</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignBottom|Qt::AlignHCenter</set>
