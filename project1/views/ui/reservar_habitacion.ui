@@ -6,8 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>770</width>
     <height>600</height>
+=======
+    <width>800</width>
+    <height>652</height>
+>>>>>>> 36a23c6 (Algo de cambios en los modelos)
    </rect>
   </property>
   <property name="palette">

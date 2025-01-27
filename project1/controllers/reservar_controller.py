@@ -1,5 +1,7 @@
 from PyQt6.QtWidgets import QWidget  # type:ignore
 from views.reservar.Ui_Form_Reservar_Habitacion import Ui_Form_Reservar_Habitacion
+from models.cliente import Cliente
+from models.reserva import Reserva
 
 
 class ReservarController:
@@ -10,6 +12,7 @@ class ReservarController:
         self.ventana_principal_controller = None
 
         self.ui.btn_cancelar.clicked.connect(self.regresar_ventana_prinicipal)
+        self.ui.btn_guardar.clicked.connect(self.guardar_reserva)
 
     def regresar_ventana_prinicipal(self):
         self.ventana_reservar.hide()
@@ -18,3 +21,6 @@ class ReservarController:
 
     def mostrar_ventana(self):
         self.ventana_reservar.show()
+
+    def guardar_reserva(self):
+        pass
