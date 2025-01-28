@@ -71,7 +71,7 @@ class Habitacion:
     @staticmethod
     def consultar_idHabitacion(numero_habitacion):
         cursor = Cliente.connection.cursor()
-        query = "SELECT id_habitacion FROM Habitacion WHERE numero_habitacion = %s"
+        query = "SELECT idHabitacion FROM Habitacion WHERE numeroHabitacion = %s"
         cursor.execute(query, (numero_habitacion,))
         habitacion = cursor.fetchone()
         cursor.close()

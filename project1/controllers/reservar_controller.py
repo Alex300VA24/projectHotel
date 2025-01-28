@@ -56,54 +56,54 @@ class ReservarController:
             fecha_ingreso_str = self.ui.txt_fecha_ingreso.text().strip()
             noches = int(self.ui.txt_noches.text().strip())
 
-            # Iniciar transacción en el modelo
-            print("inicio transaccion")
-            Cliente.iniciar_transaccion()
-            print("Fin transaccion")
-            # Crear cliente
-            cliente = Cliente(
-                None,
-                nombres,
-                apellido_paterno,
-                apellido_materno,
-                tipo_documento,
-                numero_documento,
-                nacionalidad,
-                celular,
-            )
-            print("Guardar cliente")
-            cliente_id = cliente.save()
-            print("Cierre cliente")
-
-            # Verificar disponibilidad de la habitación
-
-            print("verificar estado inicio")
+            # Verificar disponibilidad de la habitacion
             estado_habitacion = Habitacion.estado_habitacion_numero(numero_habitacion)
-            if estado_habitacion in ["pendiente", "ocupada", "Mantenimiento"]:
-                raise Exception(f"La habitación está en estado '{estado_habitacion}'.")
-            print("termino verificacion")
+            if estado_habitacion in ["pendiente", "ocupada", "mantenimiento"]:
+                self.mostrar_error(f"La habitacion está en estado {estado_habitacion}")
+            else:
+                # Iniciar transacción en el modelo
+                print("inicio transaccion")
+                Cliente.iniciar_transaccion()
+                print("Fin transaccion")
+                # Crear cliente
+                cliente = Cliente(
+                    None,
+                    nombres,
+                    apellido_paterno,
+                    apellido_materno,
+                    tipo_documento,
+                    numero_documento,
+                    nacionalidad,
+                    celular,
+                )
+                print("Guardar cliente")
+                cliente_id = cliente.save()
+                print("Cierre cliente")
 
-            # Calcular fechas de ingreso y salida
-            fecha_ingreso_dt = datetime.strptime(fecha_ingreso_str, "%d/%m/%Y")
-            fecha_salida_dt = fecha_ingreso_dt + timedelta(days=noches)
+                # Calcular fechas de ingreso y salida
+                fecha_ingreso_dt = datetime.strptime(fecha_ingreso_str, "%d/%m/%Y")
+                fecha_salida_dt = fecha_ingreso_dt + timedelta(days=noches)
 
-            # Crear reserva
-            reserva = Reserva(
-                None,
-                cliente_id,
-                Habitacion.consultar_idHabitacion(numero_habitacion),
-                fecha_ingreso_str,
-                fecha_salida_dt.strftime("%Y-%m-%d"),
-                estado="pendiente",
-            )
-            print("empezar con la reserva")
-            reserva.save()
-            print("guardar en la base de datos")
+                print(cliente_id)
+                # Crear reserva
+                reserva = Reserva(
+                    None,
+                    int(cliente_id),
+                    Habitacion.consultar_idHabitacion(numero_habitacion),
+                    fecha_ingreso_str,
+                    fecha_salida_dt.strftime("%Y-%m-%d"),
+                    estado="pendiente",
+                )
+                print("empezar con la reserva")
+                reserva.save()
+                print("guardar en la base de datos")
 
-            # Confirmar transacción
-            Cliente.commit_transaccion()
-            print("se confirmo transaccion")
-            self.mostrar_mensaje("Reserva guardada correctamente.")
+                # Confirmar transacción
+                Cliente.commit_transaccion()
+                print("se confirmo transaccion")
+                self.mostrar_mensaje("Reserva guardada correctamente.")
+                self.ventana_reservar.hide()
+                self.regresar_ventana_prinicipal()
 
         except Exception as e:
             # Rollback en caso de error

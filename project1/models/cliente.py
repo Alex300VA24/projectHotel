@@ -27,7 +27,6 @@ class Cliente:
         self.pais = pais
         self.telefono = telefono
 
-
     @staticmethod
     def conseguir_clientes():
         conexion = DBConnection()
@@ -42,7 +41,6 @@ class Cliente:
 
     def get_idCliente(self):
         return self._idCliente
-
 
     @staticmethod
     def iniciar_transaccion():
@@ -98,14 +96,12 @@ class Cliente:
                         self.telefono,
                     ),
                 )
-                # Cliente.connection.commit()  # Confirmar los cambios en la base de datos
+                Cliente.connection.commit()  # Confirmar los cambios en la base de datos
                 self._idCliente = cursor.lastrowid  # Obtener el ID generado
+                print("id del cliente generado: {}".format(self.get_idCliente()))
         except Exception as e:
-            # Cliente.connection.rollback()  # Revertir los cambios en caso de error
+            Cliente.connection.rollback()  # Revertir los cambios en caso de error
             print(f"Error al guardar el cliente: {e}")
-            raise e
-        finally:
-            Cliente.connection.close()  # Cerrar la conexión correctamente
         return self._idCliente
 
     def update(self):

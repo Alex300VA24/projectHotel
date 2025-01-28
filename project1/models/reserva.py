@@ -2,20 +2,6 @@ from .db import DBConnection
 from .cliente import Cliente
 # import bcrypt
 
-"""
-La clas reserva se va basar de esta tabla:
-CREATE TABLE reserva (
-  idReserva BIGINT PRIMARY KEY AUTO_INCREMENT,
-  idCliente BIGINT NOT NULL,
-  idHabitacion BIGINT NOT NULL,
-  fechaInicio DATE NOT NULL,
-  fechaFin DATE NOT NULL,
-  estado ENUM('pagada', 'cancelada', 'pendiente') NOT NULL,
-  FOREIGN KEY (idCliente) REFERENCES cliente(idCliente),
-  FOREIGN KEY (idHabitacion) REFERENCES habitacion(idHabitacion)
-);
-"""
-
 
 class Reserva:
     def __init__(
@@ -65,14 +51,11 @@ class Reserva:
                         self.estado,
                     ),
                 )
-            # Cliente.connection.commit()
+            Cliente.connection.commit()
             self.idReserva = cursor.lastrowid
         except Exception as e:
-            # Cliente.connection.rollback()
+            Cliente.connection.rollback()
             print(f"Error al guardar la reserva: {e}")
-            raise e
-        finally:
-            Cliente.connection.close()
 
     def update(self):
         conn = DBConnection().connect()
