@@ -1,4 +1,4 @@
 /env/
-/project1/config/
+/project1/config/*
 __pycache__/
 *.pyc
