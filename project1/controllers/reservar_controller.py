@@ -1,5 +1,7 @@
+from unittest import case
 from PyQt6.QtWidgets import QWidget, QMessageBox  # type:ignore
 from PyQt6.QtCore import QCoreApplication  # type:ignore
+from datetime import datetime, timedelta
 
 # from project1.models import tipo_habitacion
 from views.reservar.Ui_Form_Reservar_Habitacion import Ui_Form_Reservar_Habitacion
@@ -15,6 +17,7 @@ class ReservarController:
         self.ui = Ui_Form_Reservar_Habitacion()
         self.ui.setupUi(self.ventana_reservar)
         self.ventana_principal_controller = None
+        self.cliente = None
 
         # Inicializar los precios de las habitaciones
         self.precio_habitacion = {}
@@ -34,7 +37,78 @@ class ReservarController:
         self.ui.txt_noches.textChanged.connect(self.calcular_precio_total)
 
         self.ui.btn_cancelar.clicked.connect(self.regresar_ventana_prinicipal)
-        self.ui.btn_guardar.clicked.connect(self.guardar_reserva)
+        self.ui.btn_guardar.clicked.connect(self.registrar_reserva)
+
+    def registrar_reserva(self):
+        try:
+            # Obtener los datos desde la Vista
+            nombre_completo = self.ui.txt_nombre_cliente.text().strip()
+            nombre_completo_separado = nombre_completo.split(" ")
+            nombres = " ".join(nombre_completo_separado[:-2])
+            apellido_paterno = nombre_completo_separado[-2]
+            apellido_materno = nombre_completo_separado[-1]
+
+            tipo_documento = self.ui.box_documento.currentText()
+            numero_documento = self.ui.txt_numero_documento.text().strip()
+            nacionalidad = self.ui.txt_nacionalidad.text().strip()
+            celular = self.ui.txt_celular.text().strip()
+            numero_habitacion = self.ui.box_numero_habitacion.currentText()
+            fecha_ingreso_str = self.ui.txt_fecha_ingreso.text().strip()
+            noches = int(self.ui.txt_noches.text().strip())
+
+            # Iniciar transacción en el modelo
+            print("inicio transaccion")
+            Cliente.iniciar_transaccion()
+            print("Fin transaccion")
+            # Crear cliente
+            cliente = Cliente(
+                None,
+                nombres,
+                apellido_paterno,
+                apellido_materno,
+                tipo_documento,
+                numero_documento,
+                nacionalidad,
+                celular,
+            )
+            print("Guardar cliente")
+            cliente_id = cliente.save()
+            print("Cierre cliente")
+
+            # Verificar disponibilidad de la habitación
+
+            print("verificar estado inicio")
+            estado_habitacion = Habitacion.estado_habitacion_numero(numero_habitacion)
+            if estado_habitacion in ["pendiente", "ocupada", "Mantenimiento"]:
+                raise Exception(f"La habitación está en estado '{estado_habitacion}'.")
+            print("termino verificacion")
+
+            # Calcular fechas de ingreso y salida
+            fecha_ingreso_dt = datetime.strptime(fecha_ingreso_str, "%d/%m/%Y")
+            fecha_salida_dt = fecha_ingreso_dt + timedelta(days=noches)
+
+            # Crear reserva
+            reserva = Reserva(
+                None,
+                cliente_id,
+                Habitacion.consultar_idHabitacion(numero_habitacion),
+                fecha_ingreso_str,
+                fecha_salida_dt.strftime("%Y-%m-%d"),
+                estado="pendiente",
+            )
+            print("empezar con la reserva")
+            reserva.save()
+            print("guardar en la base de datos")
+
+            # Confirmar transacción
+            Cliente.commit_transaccion()
+            print("se confirmo transaccion")
+            self.mostrar_mensaje("Reserva guardada correctamente.")
+
+        except Exception as e:
+            # Rollback en caso de error
+            Cliente.rollback_transaccion()
+            self.mostrar_error(f"Error al registrar la reserva: {e}")
 
     def cargar_tipo_habitaciones(self):
         """Llena el combo box con los tipos de habitaciones."""
@@ -104,30 +178,4 @@ class ReservarController:
         QMessageBox.critical(self.ventana_reservar, "Error", mensaje)
 
     def mostrar_mensaje(self, mensaje):
-        QMessageBox.information(
-            self.ventana_reservar, "Mensaje de reserva realizada", mensaje
-        )
-        self.ventana_reservar.hide()  # Cerramos la ventana de login
-        self.regresar_ventana_prinicipal()  # Abrimos la ventana principal
-
-    def guardar_reserva(self):
-        try:
-            # Obtener los datos de la interfaz
-            nombre = self.ui.txt_nombre_cliente.text().strip()
-            celular = self.ui.txt_celular.text().strip()
-            fecha_ingreso = self.ui.txt_fecha_ingreso.text().strip()
-            cantidad_noches = self.ui.txt_noches.text().strip()
-            tipo_habitacion = self.ui.box_tipo_habitacion.currentText()
-            numero_habitacion = self.ui.box_numero_habitacion.currentText()
-
-            print(
-                nombre,
-                celular,
-                fecha_ingreso,
-                cantidad_noches,
-                tipo_habitacion,
-                numero_habitacion,
-            )
-            self.mostrar_mensaje("Reserva guardada correctamente")
-        except Exception as e:
-            self.mostrar_error(f"Ocurrió un error: {e}")
+        QMessageBox.information(self.ventana_reservar, "Mensaje de reserva", mensaje)

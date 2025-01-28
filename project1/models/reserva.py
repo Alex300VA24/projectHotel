@@ -1,4 +1,5 @@
 from .db import DBConnection
+from .cliente import Cliente
 # import bcrypt
 
 """
@@ -48,34 +49,57 @@ class Reserva:
         return Reserva(row[0], row[1], row[2], row[3], row[4], row[5])
 
     def save(self):
-        conn = DBConnection()
-        cursor = conn.execute(
-            "INSERT INTO reserva (idCliente, idHabitacion, fechaInicio, fechaFin, estado) VALUES (%s, %s, %s, %s, %s)",
-            (
-                self.idCliente,
-                self.idHabitacion,
-                self.fechaInicio,
-                self.fechaFin,
-                self.estado,
-            ),
-        )
-        conn.commit()
-        self.idReserva = cursor.lastrowid
+        """conn = DBConnection().connect()
+        if not conn:
+            raise Exception("No se puede establacer conexion con la base de datos")
+        """
+        try:
+            with Cliente.connection.cursor() as cursor:
+                cursor.execute(
+                    "INSERT INTO reserva (idCliente, idHabitacion, fechaInicio, fechaFin, estado) VALUES (%s, %s, %s, %s, %s)",
+                    (
+                        self.idCliente,
+                        self.idHabitacion,
+                        self.fechaInicio,
+                        self.fechaFin,
+                        self.estado,
+                    ),
+                )
+            # Cliente.connection.commit()
+            self.idReserva = cursor.lastrowid
+        except Exception as e:
+            # Cliente.connection.rollback()
+            print(f"Error al guardar la reserva: {e}")
+            raise e
+        finally:
+            Cliente.connection.close()
 
     def update(self):
-        conn = DBConnection()
-        conn.execute(
-            "UPDATE reserva SET idCliente = %s, idHabitacion = %s, fechaInicio = %s, fechaFin = %s, estado = %s WHERE idReserva = %s",
-            (
-                self.idCliente,
-                self.idHabitacion,
-                self.fechaInicio,
-                self.fechaFin,
-                self.estado,
-                self.idReserva,
-            ),
-        )
-        conn.commit()
+        conn = DBConnection().connect()
+        if not conn:
+            raise Exception("No se puede establacer conexion con la base de datos")
+
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute(
+                    "UPDATE reserva SET idCliente = %s, idHabitacion = %s, fechaInicio = %s, fechaFin = %s, estado = %s WHERE idReserva = %s",
+                    (
+                        self.idCliente,
+                        self.idHabitacion,
+                        self.fechaInicio,
+                        self.fechaFin,
+                        self.estado,
+                        self.idReserva,
+                    ),
+                )
+            cursor.commit()
+            self.idReserva = cursor.lastrowid
+        except Exception as e:
+            conn.rollback()
+            print(f"Error al guardar al cliente: {e}")
+            raise e
+        finally:
+            conn.close()
 
     def delete(self):
         conn = DBConnection()

@@ -1,8 +1,8 @@
 # model/db.py
 import mysql.connector  # type: ignore
-from mysql.connector import Error # type: ignore
+from mysql.connector import Error  # type: ignore
 from config import config
-#import bcrypt
+# import bcrypt
 
 
 class DBConnection:
@@ -21,10 +21,11 @@ class DBConnection:
                 user=self.user,
                 password=self.password,
                 database=self.database,
-                port = self.port
+                port=self.port,
             )
             if self.connection.is_connected():
                 print("Conexión exitosa a la base de datos")
+                return self.connection
         except Error as e:
             print(f"Error al conectar a la base de datos: {e}")
             self.connection = None
@@ -43,8 +44,3 @@ class DBConnection:
         cursor = self.connection.cursor()
         cursor.execute(query, params)
         self.connection.commit()
-    
-    
-
-
-
