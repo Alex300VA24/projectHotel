@@ -16,7 +16,7 @@ class Habitacion:
         self.estado = estado
 
     @classmethod
-    def estado_habitacion(self):
+    def estado_habitacion(cls):
         conexion = DBConnection()
         conexion.connect()
         if conexion:
@@ -57,7 +57,7 @@ class Habitacion:
             raise Exception(f"Error al consultar el estado de la habitación: {e}")
 
     @classmethod
-    def obtener_por_tipo(self, id_tipo_habitacion):
+    def obtener_por_tipo(cls, id_tipo_habitacion):
         conexion = DBConnection()
         conexion.connect()
         if conexion:
@@ -79,3 +79,16 @@ class Habitacion:
             return habitacion[0]
         else:
             raise Exception("Habitación no encontrada.")
+
+    @staticmethod
+    def actualizar_estado(numero_habitacion):
+        try:
+            with Cliente.connection.cursor() as cursor:
+                cursor.execute(
+                    "UPDATE habitacion SET estado = %s WHERE numeroHabitacion = %s",
+                    ("pendiente", numero_habitacion),
+                )
+            Cliente.connection.commit()  # Confirma los cambios
+        except Exception as e:
+            Cliente.connection.rollback()  # Revierte los cambios en caso de error
+            raise  # Relanza la excepción sin modificarla

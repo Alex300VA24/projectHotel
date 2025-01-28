@@ -62,9 +62,8 @@ class ReservarController:
                 self.mostrar_error(f"La habitacion está en estado {estado_habitacion}")
             else:
                 # Iniciar transacción en el modelo
-                print("inicio transaccion")
                 Cliente.iniciar_transaccion()
-                print("Fin transaccion")
+
                 # Crear cliente
                 cliente = Cliente(
                     None,
@@ -76,15 +75,13 @@ class ReservarController:
                     nacionalidad,
                     celular,
                 )
-                print("Guardar cliente")
+
                 cliente_id = cliente.save()
-                print("Cierre cliente")
 
                 # Calcular fechas de ingreso y salida
                 fecha_ingreso_dt = datetime.strptime(fecha_ingreso_str, "%d/%m/%Y")
                 fecha_salida_dt = fecha_ingreso_dt + timedelta(days=noches)
 
-                print(cliente_id)
                 # Crear reserva
                 reserva = Reserva(
                     None,
@@ -94,13 +91,13 @@ class ReservarController:
                     fecha_salida_dt.strftime("%Y-%m-%d"),
                     estado="pendiente",
                 )
-                print("empezar con la reserva")
+                # Guardar reserva en la base de datos
                 reserva.save()
-                print("guardar en la base de datos")
+
+                Habitacion.actualizar_estado(numero_habitacion)
 
                 # Confirmar transacción
                 Cliente.commit_transaccion()
-                print("se confirmo transaccion")
                 self.mostrar_mensaje("Reserva guardada correctamente.")
                 self.ventana_reservar.hide()
                 self.regresar_ventana_prinicipal()
