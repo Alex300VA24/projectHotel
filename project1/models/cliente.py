@@ -96,7 +96,7 @@ class Cliente:
                         self.telefono,
                     ),
                 )
-                Cliente.connection.commit()  # Confirmar los cambios en la base de datos
+                # Cliente.connection.commit()  # Confirmar los cambios en la base de datos
                 self._idCliente = cursor.lastrowid  # Obtener el ID generado
                 print("id del cliente generado: {}".format(self.get_idCliente()))
         except Exception as e:

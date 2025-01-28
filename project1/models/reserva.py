@@ -51,7 +51,7 @@ class Reserva:
                         self.estado,
                     ),
                 )
-            Cliente.connection.commit()
+            # Cliente.connection.commit()
             self.idReserva = cursor.lastrowid
         except Exception as e:
             Cliente.connection.rollback()

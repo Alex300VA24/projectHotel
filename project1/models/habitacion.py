@@ -88,7 +88,7 @@ class Habitacion:
                     "UPDATE habitacion SET estado = %s WHERE numeroHabitacion = %s",
                     ("pendiente", numero_habitacion),
                 )
-            Cliente.connection.commit()  # Confirma los cambios
+            # Cliente.connection.commit()  # Confirma los cambios
         except Exception as e:
             Cliente.connection.rollback()  # Revierte los cambios en caso de error
             raise  # Relanza la excepción sin modificarla
