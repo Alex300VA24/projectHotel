@@ -24,7 +24,7 @@
      <x>20</x>
      <y>180</y>
      <width>761</width>
-     <height>401</height>
+     <height>371</height>
     </rect>
    </property>
    <property name="font">
@@ -200,10 +200,24 @@ QPushButton:pressed {
     <set>Qt::AlignBottom|Qt::AlignHCenter</set>
    </property>
   </widget>
+  <widget class="QPushButton" name="btn_consultar">
+   <property name="geometry">
+    <rect>
+     <x>684</x>
+     <y>560</y>
+     <width>101</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Consultar Cliente</string>
+   </property>
+  </widget>
   <zorder>label_3</zorder>
   <zorder>table_historial</zorder>
   <zorder>btn_regresar</zorder>
   <zorder>label_6</zorder>
+  <zorder>btn_consultar</zorder>
  </widget>
  <resources/>
  <connections/>

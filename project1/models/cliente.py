@@ -38,6 +38,44 @@ class Cliente:
             resultado = conexion.query(query)
             conexion.disconnect()
             return resultado
+        
+    @staticmethod
+    def conseguir_total_reserva(id):
+        conexion = DBConnection()
+        conexion.connect()
+        if conexion:
+            query = """
+                SELECT total FROM reserva WHERE idCliente = %s
+            """
+            resultado = conexion.query(query, (id,))
+            precio_reserva = resultado[0][0]
+            print(precio_reserva)
+            conexion.disconnect()
+            return precio_reserva
+        
+    @staticmethod
+    def conseguir_total_servicio(id):
+        conexion = DBConnection()
+        conexion.connect()
+        if conexion:
+            query = """
+                SELECT idServicio, concepto, descripcion, costoServicio FROM servicio WHERE idCliente = %s
+            """
+            resultado_servicio = conexion.query(query, (id,))
+            print(resultado_servicio)
+            return resultado_servicio
+        
+    @staticmethod
+    def conseguir_total_detalle_servicio(id):
+        conexion = DBConnection()
+        conexion.connect()
+        if conexion:
+            query = """
+                SELECT detalle, precio FROM detalle_servicio WHERE idServicio = %s
+            """
+            resultado_detalle_servicio = conexion.query(query, (id,))
+            print(resultado_detalle_servicio)
+            return resultado_detalle_servicio
 
     def get_idCliente(self):
         return self._idCliente
