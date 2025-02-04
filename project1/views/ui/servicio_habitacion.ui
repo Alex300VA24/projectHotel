@@ -63,7 +63,7 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>250</y>
+     <y>240</y>
      <width>71</width>
      <height>16</height>
     </rect>
@@ -76,28 +76,6 @@
    </property>
    <property name="text">
     <string>Concepto</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="txt_concepto">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>270</y>
-     <width>291</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Tahoma</family>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_7">
@@ -123,7 +101,7 @@
    <property name="geometry">
     <rect>
      <x>450</x>
-     <y>250</y>
+     <y>390</y>
      <width>131</width>
      <height>16</height>
     </rect>
@@ -138,33 +116,11 @@
     <string>Costo</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txt_costo">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>270</y>
-     <width>291</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Tahoma</family>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
   <widget class="QPushButton" name="btn_guardar">
    <property name="geometry">
     <rect>
-     <x>480</x>
-     <y>350</y>
+     <x>520</x>
+     <y>530</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -195,8 +151,8 @@ QPushButton:hover {
   <widget class="QPushButton" name="btn_cancelar">
    <property name="geometry">
     <rect>
-     <x>610</x>
-     <y>350</y>
+     <x>640</x>
+     <y>530</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -224,28 +180,6 @@ QPushButton:hover {
     <string>Cancelar</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txt_descripcion">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>190</y>
-     <width>291</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Tahoma</family>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
   <widget class="QFrame" name="frame_2">
    <property name="geometry">
     <rect>
@@ -268,56 +202,12 @@ QPushButton:hover {
     <number>1</number>
    </property>
   </widget>
-  <widget class="QFrame" name="frame_3">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>290</y>
-     <width>291</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background: transparent;</string>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::HLine</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Plain</enum>
-   </property>
-   <property name="lineWidth">
-    <number>1</number>
-   </property>
-  </widget>
-  <widget class="QFrame" name="frame_4">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>210</y>
-     <width>291</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background: transparent;</string>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::HLine</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Plain</enum>
-   </property>
-   <property name="lineWidth">
-    <number>1</number>
-   </property>
-  </widget>
   <widget class="QFrame" name="frame_5">
    <property name="geometry">
     <rect>
      <x>450</x>
-     <y>290</y>
-     <width>291</width>
+     <y>440</y>
+     <width>311</width>
      <height>16</height>
     </rect>
    </property>
@@ -382,22 +272,131 @@ QPushButton:hover {
     <set>Qt::AlignBottom|Qt::AlignHCenter</set>
    </property>
   </widget>
+  <widget class="QComboBox" name="box_concepto">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>260</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="frame">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_total">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>410</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <pointsize>16</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>S/. 0.00</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_lista">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>340</y>
+     <width>361</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QListWidget" name="listWidget_servicio">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>361</width>
+      <height>221</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPlainTextEdit" name="txt_descripcion">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>190</y>
+     <width>321</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="plainText">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>310</y>
+     <width>281</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Lista de Productos y Servicios Disponibles</string>
+   </property>
+  </widget>
   <zorder>label_11</zorder>
   <zorder>txt_nombre_cliente</zorder>
   <zorder>label_3</zorder>
   <zorder>label_4</zorder>
-  <zorder>txt_concepto</zorder>
   <zorder>label_7</zorder>
   <zorder>label_8</zorder>
-  <zorder>txt_costo</zorder>
   <zorder>btn_guardar</zorder>
   <zorder>btn_cancelar</zorder>
-  <zorder>txt_descripcion</zorder>
   <zorder>frame_2</zorder>
-  <zorder>frame_3</zorder>
-  <zorder>frame_4</zorder>
   <zorder>frame_5</zorder>
   <zorder>label_12</zorder>
+  <zorder>box_concepto</zorder>
+  <zorder>lbl_total</zorder>
+  <zorder>groupBox_lista</zorder>
+  <zorder>txt_descripcion</zorder>
+  <zorder>label_9</zorder>
  </widget>
  <resources/>
  <connections/>
