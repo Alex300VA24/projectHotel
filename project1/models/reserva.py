@@ -1,3 +1,4 @@
+import logging
 from .db import DBConnection
 from .cliente import Cliente
 # import bcrypt
@@ -14,88 +15,48 @@ class Reserva:
         self.fechaFin = fechaFin
         self.estado = estado
         self.costo = costo
+    
+    INSERT_SQL = """INSERT INTO reserva 
+                    (idCliente, idHabitacion, fechaInicio, fechaFin, estado, total) 
+                    VALUES (%s, %s, %s, %s, %s, %s)"""
 
-    @staticmethod
-    def all():
-        conn = DBConnection()
-        cursor = conn.execute("SELECT * FROM reserva")
-        reservas = []
-        for row in cursor.fetchall():
-            reservas.append(Reserva(row[0], row[1], row[2], row[3], row[4], row[5]))
-        return reservas
-
-    @staticmethod
-    def find(idReserva):
-        conn = DBConnection()
-        cursor = conn.execute(
-            "SELECT * FROM reserva WHERE idReserva = %s", (idReserva,)
-        )
-        row = cursor.fetchone()
-        if row is None:
-            return None
-        return Reserva(row[0], row[1], row[2], row[3], row[4], row[5])
+    UPDATE_SQL = """UPDATE reserva 
+                    SET idCliente = %s, idHabitacion = %s, fechaInicio = %s, fechaFin = %s, estado = %s 
+                    WHERE idReserva = %s"""
 
     def save(self):
-        """conn = DBConnection().connect()
-        if not conn:
-            raise Exception("No se puede establacer conexion con la base de datos")
-        """
         try:
             with Cliente.connection.cursor() as cursor:
                 cursor.execute(
-                    "INSERT INTO reserva (idCliente, idHabitacion, fechaInicio, fechaFin, estado, total) VALUES (%s, %s, %s, %s, %s, %s)",
-                    (
-                        self.idCliente,
-                        self.idHabitacion,
-                        self.fechaInicio,
-                        self.fechaFin,
-                        self.estado,
-                        self.costo,
-                    ),
+                    self.INSERT_SQL,
+                    (self.idCliente, self.idHabitacion, self.fechaInicio, self.fechaFin, self.estado, self.costo),
                 )
-            # Cliente.connection.commit()
-            self.idReserva = cursor.lastrowid
+                self.idReserva = cursor.lastrowid
+            Cliente.connection.commit()
         except Exception as e:
             Cliente.connection.rollback()
-            print(f"Error al guardar la reserva: {e}")
+            logging.error(f"Error al guardar la reserva: {e}")
+            raise
 
     def update(self):
         conn = DBConnection().connect()
         if not conn:
-            raise Exception("No se puede establacer conexion con la base de datos")
+            raise ConnectionError("No se puede establecer conexión con la base de datos")
 
         try:
             with conn.cursor() as cursor:
                 cursor.execute(
-                    "UPDATE reserva SET idCliente = %s, idHabitacion = %s, fechaInicio = %s, fechaFin = %s, estado = %s WHERE idReserva = %s",
-                    (
-                        self.idCliente,
-                        self.idHabitacion,
-                        self.fechaInicio,
-                        self.fechaFin,
-                        self.estado,
-                        self.idReserva,
-                    ),
+                    self.UPDATE_SQL,
+                    (self.idCliente, self.idHabitacion, self.fechaInicio, self.fechaFin, self.estado, self.idReserva),
                 )
-            cursor.commit()
-            self.idReserva = cursor.lastrowid
+            conn.commit()
         except Exception as e:
             conn.rollback()
-            print(f"Error al guardar al cliente: {e}")
-            raise e
+            logging.error(f"Error al actualizar la reserva: {e}")
+            raise
         finally:
             conn.close()
 
-    def delete(self):
-        conn = DBConnection()
-        conn.execute("DELETE FROM reserva WHERE idReserva = %s", (self.idReserva,))
-        conn.commit()
 
-    def cliente(self):
-        from .cliente import Cliente
 
-        return Cliente.find(self.idCliente)
 
-    """def habitacion(self):
-        from .habitacion import Habitacion
-        return Habitacion.find(self.idHabitacion)"""

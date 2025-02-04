@@ -1,9 +1,6 @@
-# model/db.py
-import mysql.connector  # type: ignore
-from mysql.connector import Error  # type: ignore
+import mysql.connector  
+from mysql.connector import Error 
 from config import config
-# import bcrypt
-
 
 class DBConnection:
     def __init__(self):
