@@ -110,11 +110,11 @@ VALUES
 
 
 -- Insertar registros en la tabla reserva
-INSERT INTO reserva (idCliente, idHabitacion, fechaInicio, fechaFin, estado)
+INSERT INTO reserva (idCliente, idHabitacion, fechaInicio, fechaFin, estado, total)
 VALUES 
-(1, 1, '2025-01-20', '2025-01-22', 'pagada'),
-(2, 3, '2025-01-21', '2025-01-24', 'pendiente'),
-(3, 7, '2025-01-19', '2025-01-25', 'cancelada');
+(1, 1, '2025-01-20', '2025-01-22', 'pagada', 100.00),
+(2, 3, '2025-01-21', '2025-01-24', 'pendiente', 200.00),
+(3, 7, '2025-01-19', '2025-01-25', 'cancelada', 150.00);
 
 -- Insertar registros en la tabla servicio
 INSERT INTO servicio (idCliente, concepto, descripcion, costoServicio, fechaConsumo)
@@ -193,5 +193,4 @@ INSERT INTO detalle_servicio (idServicio, detalle, precio) VALUES
 (8, 'Alquiler de Xbox', 90.00),
 (8, 'Sistema de karaoke con micrófonos inalámbricos', 80.00),
 (8, 'Mix de snacks gourmet', 35.00);
-
 

@@ -1,7 +1,7 @@
 from unittest import case
-from PyQt6.QtWidgets import QWidget, QMessageBox  # type:ignore
-from PyQt6.QtCore import QCoreApplication  # type:ignore
-from datetime import datetime, timedelta
+from PyQt6.QtWidgets import QWidget, QMessageBox 
+from PyQt6.QtCore import QCoreApplication
+from datetime import datetime, timedelta, date
 
 # from project1.models import tipo_habitacion
 from views.reservar.Ui_Form_Reservar_Habitacion import Ui_Form_Reservar_Habitacion
@@ -103,7 +103,7 @@ class ReservarController:
                     None,
                     int(cliente_id),
                     Habitacion.consultar_idHabitacion(numero_habitacion),
-                    fecha_ingreso_str,
+                    fecha_ingreso_dt.strftime("%Y-%m-%d"),
                     fecha_salida_dt.strftime("%Y-%m-%d"),
                     estado="pendiente",
                     costo=costo_total,
