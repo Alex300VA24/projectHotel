@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import (
     QVBoxLayout, QPushButton, QWidget, QMessageBox, QLabel
 )
 from models.cliente import Cliente
+from fpdf import FPDF
 
 
 class Ui_Form_Clientes(object):
@@ -167,11 +168,11 @@ class Ui_Form_Clientes(object):
         for data in resumen_servicio:
             id_servicio.append(data[0])            
         
-        name = self.table_historial.item(fila_seleccionada, 1).text()
+        nombre = self.table_historial.item(fila_seleccionada, 1).text()
         celular = self.table_historial.item(fila_seleccionada, 2).text()
-        self.open_dynamic_window(id_, name, celular, precio_reserva, resumen_servicio, id_servicio)
+        self.open_dynamic_window(id_, nombre, celular, precio_reserva, resumen_servicio, id_servicio)
     
-    def open_dynamic_window(self, id_, name, celular, precio_reserva, resumen_servicio, id_servicio):
+    def open_dynamic_window(self, id_, nombre, celular, precio_reserva, resumen_servicio, id_servicio):
         """Abre una nueva ventana dinámica con la información seleccionada."""
         if self.dynamic_window is not None:
             self.dynamic_window.close()  # Cierra cualquier ventana previa
@@ -182,7 +183,7 @@ class Ui_Form_Clientes(object):
 
         layout = QVBoxLayout(self.dynamic_window)
         layout.addWidget(QLabel(f"ID: {id_}"))
-        layout.addWidget(QLabel(f"Nombre: {name}"))
+        layout.addWidget(QLabel(f"Nombre: {nombre}"))
         layout.addWidget(QLabel(f"Celular: {celular}"))
         layout.addWidget(QLabel(f"Total de la reserva: {precio_reserva}"))
         layout.addWidget(QLabel("Resumen del servicio: "))
@@ -202,10 +203,65 @@ class Ui_Form_Clientes(object):
         layout.addWidget(QLabel(f"Total de los servicios solicitados: {total_servicio}"))
         
         total_estadia = float(precio_reserva) + float(total_servicio)
-        layout.addWidget(QLabel(f"Coste total: {total_estadia}"))            
+        layout.addWidget(QLabel(f"Coste total: {total_estadia}"))
         
+        # Crear el botón para generar el PDF
+        self.btn_generar_pdf = QPushButton("Generar PDF", self.dynamic_window)
+        self.btn_generar_pdf.clicked.connect(lambda: self.generar_pdf(id_, nombre, celular, precio_reserva, resumen_servicio, id_servicio))
+        layout.addWidget(self.btn_generar_pdf)
 
         self.dynamic_window.show()
+    
+    def generar_pdf(self, id_, nombre, celular, precio_reserva, resumen_servicio, id_servicio):
+        """Genera un PDF con la información de la ventana."""
+        pdf = FPDF()
+        pdf.set_auto_page_break(auto=True, margin=15)
+        pdf.add_page()
+        
+        pdf.set_font("Arial", size=12)
+
+        # Agregar título
+        pdf.set_font("Arial", "B", 16)
+        pdf.cell(200, 10, txt="Resumen de Gasto del Cliente", ln=True, align='C')
+        
+        # Agregar los detalles
+        pdf.ln(10)
+        pdf.set_font("Arial", size=12)
+        pdf.cell(100, 10, f"Nombre: {nombre}")
+        pdf.ln(10)
+        pdf.cell(100, 10, f"Celular: {celular}")
+        pdf.ln(10)
+        pdf.cell(100, 10, f"Total de la reserva: {precio_reserva}")
+        pdf.ln(10)
+
+        # Resumen de servicios
+        pdf.cell(100, 10, "Resumen de Servicios:", ln=True)
+        pdf.ln(5)
+        
+        i = 0
+        total_servicio = 0
+        for dato_servicio in resumen_servicio:
+            pdf.cell(100, 10, f"{dato_servicio[1]} - {dato_servicio[2]} - {dato_servicio[3]}", ln=True)
+            total_servicio += dato_servicio[3]
+            
+            # Detalles del servicio
+            detalles = Cliente.conseguir_total_detalle_servicio(id_servicio[i])
+            for detalle in detalles:
+                pdf.cell(100, 10, f"\t{detalle[0]} - {detalle[1]}", ln=True)
+        
+        pdf.ln(10)
+        pdf.cell(100, 10, f"Total de los servicios solicitados: {total_servicio}")
+        pdf.ln(10)
+        
+        # Total general (reserva + servicios)
+        total_estadia = float(precio_reserva) + float(total_servicio)
+        pdf.cell(100, 10, f"Coste total: {total_estadia}")
+        
+        # Guardar el archivo PDF
+        pdf_output_path = f"Resumen_Gasto_{nombre}.pdf"
+        pdf.output(pdf_output_path)
+        
+        QMessageBox.information(self.dynamic_window, "PDF Generado", f"El PDF ha sido generado y guardado en {pdf_output_path}")
 
 if __name__ == "__main__":
     import sys
