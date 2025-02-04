@@ -91,4 +91,4 @@ class Habitacion:
             # Cliente.connection.commit()  # Confirma los cambios
         except Exception as e:
             Cliente.connection.rollback()  # Revierte los cambios en caso de error
-            raise  # Relanza la excepción sin modificarla
+            raise ValueError(f'El programa lanzó este error: {e}')# Relanza la excepción sin modificarla

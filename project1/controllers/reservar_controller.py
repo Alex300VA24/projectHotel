@@ -55,6 +55,22 @@ class ReservarController:
             numero_habitacion = self.ui.box_numero_habitacion.currentText()
             fecha_ingreso_str = self.ui.txt_fecha_ingreso.text().strip()
             noches = int(self.ui.txt_noches.text().strip())
+            costo_total = self.ui.lbl_total.text().strip()
+
+            # Eliminar el prefijo "S/. " del costo total y convertir a float
+            if costo_total.startswith("S/."):
+                costo_total = costo_total[
+                    4:
+                ].strip()  # Elimina "S/. " (los primeros 4 caracteres)
+            
+            # Intentar convertir el costo a número
+            try:
+                costo_total = float(costo_total)
+            except ValueError:
+                QMessageBox.warning(
+                    self.ui, "Error", "El costo total debe ser un número válido."
+                )
+                return
 
             # Verificar disponibilidad de la habitacion
             estado_habitacion = Habitacion.estado_habitacion_numero(numero_habitacion)
@@ -90,6 +106,7 @@ class ReservarController:
                     fecha_ingreso_str,
                     fecha_salida_dt.strftime("%Y-%m-%d"),
                     estado="pendiente",
+                    costo=costo_total,
                 )
                 # Guardar reserva en la base de datos
                 reserva.save()

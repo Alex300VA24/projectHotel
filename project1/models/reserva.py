@@ -5,7 +5,7 @@ from .cliente import Cliente
 
 class Reserva:
     def __init__(
-        self, idReserva, idCliente, idHabitacion, fechaInicio, fechaFin, estado
+        self, idReserva, idCliente, idHabitacion, fechaInicio, fechaFin, estado, costo
     ):
         self.idReserva = idReserva
         self.idCliente = idCliente
@@ -13,6 +13,7 @@ class Reserva:
         self.fechaInicio = fechaInicio
         self.fechaFin = fechaFin
         self.estado = estado
+        self.costo = costo
 
     @staticmethod
     def all():
@@ -42,13 +43,14 @@ class Reserva:
         try:
             with Cliente.connection.cursor() as cursor:
                 cursor.execute(
-                    "INSERT INTO reserva (idCliente, idHabitacion, fechaInicio, fechaFin, estado) VALUES (%s, %s, %s, %s, %s)",
+                    "INSERT INTO reserva (idCliente, idHabitacion, fechaInicio, fechaFin, estado, total) VALUES (%s, %s, %s, %s, %s, %s)",
                     (
                         self.idCliente,
                         self.idHabitacion,
                         self.fechaInicio,
                         self.fechaFin,
                         self.estado,
+                        self.costo,
                     ),
                 )
             # Cliente.connection.commit()
