@@ -128,7 +128,7 @@ QPushButton:pressed {
     <number>14</number>
    </property>
    <property name="columnCount">
-    <number>7</number>
+    <number>8</number>
    </property>
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>true</bool>
@@ -167,6 +167,17 @@ QPushButton:pressed {
    <column>
     <property name="text">
      <string>Cliente</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tahoma</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Fecha de entrada</string>
     </property>
     <property name="font">
      <font>
