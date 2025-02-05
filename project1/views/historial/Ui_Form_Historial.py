@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'views/ui/historial_reservaciones.ui'
+# Form implementation generated from reading ui file 'historial_reservaciones.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -27,7 +27,7 @@ class Ui_Form_Historial(object):
         self.label = QtWidgets.QLabel(parent=Form)
         self.label.setGeometry(QtCore.QRect(350, 10, 91, 91))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("views/ui\\../../resources/images/logo.jpg"))
+        self.label.setPixmap(QtGui.QPixmap("../../resources/images/logo.jpg"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.btn_regresar = QtWidgets.QPushButton(parent=Form)
@@ -51,7 +51,7 @@ class Ui_Form_Historial(object):
 "")
         self.btn_regresar.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("views/ui\\../../resources/images/icons/boton-volver.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("../../resources/images/icons/boton-volver.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btn_regresar.setIcon(icon)
         self.btn_regresar.setIconSize(QtCore.QSize(24, 24))
         self.btn_regresar.setObjectName("btn_regresar")
@@ -124,13 +124,13 @@ class Ui_Form_Historial(object):
         item = self.table_historial_2.horizontalHeaderItem(1)
         item.setText(_translate("Form", "Cliente"))
         item = self.table_historial_2.horizontalHeaderItem(2)
-        item.setText(_translate("Form", "Fecha de reserva"))
+        item.setText(_translate("Form", "Fecha de salida"))
         item = self.table_historial_2.horizontalHeaderItem(3)
-        item.setText(_translate("Form", "N° de Habitación"))
-        item = self.table_historial_2.horizontalHeaderItem(4)
-        item.setText(_translate("Form", "Tipo de Habitación"))
-        item = self.table_historial_2.horizontalHeaderItem(5)
         item.setText(_translate("Form", "Estado"))
+        item = self.table_historial_2.horizontalHeaderItem(4)
+        item.setText(_translate("Form", "N° de Habitación"))
+        item = self.table_historial_2.horizontalHeaderItem(5)
+        item.setText(_translate("Form", "Tipo de Habitación"))
         item = self.table_historial_2.horizontalHeaderItem(6)
         item.setText(_translate("Form", "Monto"))
 
