@@ -9,7 +9,7 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form_Historial(object):
+class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(800, 600)
@@ -64,7 +64,7 @@ class Ui_Form_Historial(object):
         self.table_historial_2.setFont(font)
         self.table_historial_2.setStyleSheet("background-color: #F9F9F9; /* Fondo del encabezado */")
         self.table_historial_2.setRowCount(14)
-        self.table_historial_2.setColumnCount(8)
+        self.table_historial_2.setColumnCount(7)
         self.table_historial_2.setObjectName("table_historial_2")
         item = QtWidgets.QTableWidgetItem()
         font = QtGui.QFont()
@@ -108,12 +108,6 @@ class Ui_Form_Historial(object):
         font.setPointSize(10)
         item.setFont(font)
         self.table_historial_2.setHorizontalHeaderItem(6, item)
-        item = QtWidgets.QTableWidgetItem()
-        font = QtGui.QFont()
-        font.setFamily("Tahoma")
-        font.setPointSize(10)
-        item.setFont(font)
-        self.table_historial_2.setHorizontalHeaderItem(7, item)
         self.table_historial_2.horizontalHeader().setCascadingSectionResizes(True)
         self.table_historial_2.horizontalHeader().setDefaultSectionSize(117)
         self.table_historial_2.horizontalHeader().setStretchLastSection(True)
@@ -130,16 +124,14 @@ class Ui_Form_Historial(object):
         item = self.table_historial_2.horizontalHeaderItem(1)
         item.setText(_translate("Form", "Cliente"))
         item = self.table_historial_2.horizontalHeaderItem(2)
-        item.setText(_translate("Form", "Fecha de entrada"))
-        item = self.table_historial_2.horizontalHeaderItem(3)
         item.setText(_translate("Form", "Fecha de salida"))
-        item = self.table_historial_2.horizontalHeaderItem(4)
+        item = self.table_historial_2.horizontalHeaderItem(3)
         item.setText(_translate("Form", "Estado"))
-        item = self.table_historial_2.horizontalHeaderItem(5)
+        item = self.table_historial_2.horizontalHeaderItem(4)
         item.setText(_translate("Form", "N° de Habitación"))
-        item = self.table_historial_2.horizontalHeaderItem(6)
+        item = self.table_historial_2.horizontalHeaderItem(5)
         item.setText(_translate("Form", "Tipo de Habitación"))
-        item = self.table_historial_2.horizontalHeaderItem(7)
+        item = self.table_historial_2.horizontalHeaderItem(6)
         item.setText(_translate("Form", "Monto"))
 
 
@@ -147,7 +139,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form_Historial()
+    ui = Ui_Form()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec())
