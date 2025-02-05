@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'views/ui/servicio_habitacion.ui'
+# Form implementation generated from reading ui file 'servicio_habitacion.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -13,93 +13,91 @@ class Ui_Form_Servicio(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(800, 600)
-        Form.setStyleSheet("QWidget{\n    background-color: rgb(242, 242, 242);\n}")
+        Form.setStyleSheet("QWidget{\n"
+"    background-color: rgb(242, 242, 242);\n"
+"}")
         self.txt_nombre_cliente = QtWidgets.QLineEdit(parent=Form)
-        self.txt_nombre_cliente.setGeometry(QtCore.QRect(60, 190, 291, 31))
+        self.txt_nombre_cliente.setGeometry(QtCore.QRect(40, 180, 361, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
-        font.setPointSize(10)
+        font.setPointSize(9)
         self.txt_nombre_cliente.setFont(font)
         self.txt_nombre_cliente.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.txt_nombre_cliente.setFrame(False)
         self.txt_nombre_cliente.setObjectName("txt_nombre_cliente")
         self.label_3 = QtWidgets.QLabel(parent=Form)
-        self.label_3.setGeometry(QtCore.QRect(60, 170, 151, 16))
+        self.label_3.setGeometry(QtCore.QRect(40, 160, 151, 16))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(11)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(parent=Form)
-        self.label_4.setGeometry(QtCore.QRect(60, 240, 71, 16))
+        self.label_4.setGeometry(QtCore.QRect(40, 240, 71, 16))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(11)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.label_7 = QtWidgets.QLabel(parent=Form)
-        self.label_7.setGeometry(QtCore.QRect(450, 170, 111, 16))
+        self.label_7.setGeometry(QtCore.QRect(440, 160, 111, 16))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(11)
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
         self.label_8 = QtWidgets.QLabel(parent=Form)
-        self.label_8.setGeometry(QtCore.QRect(450, 390, 131, 16))
+        self.label_8.setGeometry(QtCore.QRect(440, 380, 131, 16))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(11)
         self.label_8.setFont(font)
         self.label_8.setObjectName("label_8")
         self.btn_guardar = QtWidgets.QPushButton(parent=Form)
-        self.btn_guardar.setGeometry(QtCore.QRect(520, 530, 101, 31))
+        self.btn_guardar.setGeometry(QtCore.QRect(480, 520, 101, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(11)
         font.setBold(True)
         self.btn_guardar.setFont(font)
-        self.btn_guardar.setStyleSheet(
-            "QPushButton {\n"
-            "    background-color: #EC4424; /* Rojo */\n"
-            "    color: #FFFFFF; /* Texto blanco */\n"
-            "    border-radius: 8px; /* Bordes redondeados opcionales */\n"
-            "    font-weight: bold; /* Negrita opcional */\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "    background-color: #FF5733; /* Rojo más claro en hover */\n"
-            "}"
-        )
+        self.btn_guardar.setStyleSheet("QPushButton {\n"
+"    background-color: #EC4424; /* Rojo */\n"
+"    color: #FFFFFF; /* Texto blanco */\n"
+"    border-radius: 8px; /* Bordes redondeados opcionales */\n"
+"    font-weight: bold; /* Negrita opcional */\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #FF5733; /* Rojo más claro en hover */\n"
+"}")
         self.btn_guardar.setObjectName("btn_guardar")
         self.btn_cancelar = QtWidgets.QPushButton(parent=Form)
-        self.btn_cancelar.setGeometry(QtCore.QRect(640, 530, 101, 31))
+        self.btn_cancelar.setGeometry(QtCore.QRect(610, 520, 101, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(11)
         font.setBold(True)
         self.btn_cancelar.setFont(font)
-        self.btn_cancelar.setStyleSheet(
-            "QPushButton {\n"
-            "    background-color: #A9A9A9; /* Gris medio */\n"
-            "    color: #FFFFFF; /* Texto blanco */\n"
-            "    border-radius: 8px; /* Bordes redondeados opcionales */\n"
-            "    font-weight: bold;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "    background-color: #808080; /* Gris oscuro en hover */\n"
-            "}"
-        )
+        self.btn_cancelar.setStyleSheet("QPushButton {\n"
+"    background-color: #A9A9A9; /* Gris medio */\n"
+"    color: #FFFFFF; /* Texto blanco */\n"
+"    border-radius: 8px; /* Bordes redondeados opcionales */\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #808080; /* Gris oscuro en hover */\n"
+"}")
         self.btn_cancelar.setObjectName("btn_cancelar")
         self.frame_2 = QtWidgets.QFrame(parent=Form)
-        self.frame_2.setGeometry(QtCore.QRect(60, 210, 291, 16))
+        self.frame_2.setGeometry(QtCore.QRect(40, 200, 361, 16))
         self.frame_2.setStyleSheet("background: transparent;")
         self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.frame_2.setLineWidth(1)
         self.frame_2.setObjectName("frame_2")
         self.frame_5 = QtWidgets.QFrame(parent=Form)
-        self.frame_5.setGeometry(QtCore.QRect(450, 440, 311, 16))
+        self.frame_5.setGeometry(QtCore.QRect(440, 430, 321, 16))
         self.frame_5.setStyleSheet("background: transparent;")
         self.frame_5.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.frame_5.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
@@ -108,9 +106,7 @@ class Ui_Form_Servicio(object):
         self.label_12 = QtWidgets.QLabel(parent=Form)
         self.label_12.setGeometry(QtCore.QRect(350, 20, 91, 91))
         self.label_12.setText("")
-        self.label_12.setPixmap(
-            QtGui.QPixmap("views/ui\\../../resources/images/logo.jpg")
-        )
+        self.label_12.setPixmap(QtGui.QPixmap("views/ui\\../../resources/images/logo.jpg"))
         self.label_12.setScaledContents(True)
         self.label_12.setObjectName("label_12")
         self.label_11 = QtWidgets.QLabel(parent=Form)
@@ -121,32 +117,28 @@ class Ui_Form_Servicio(object):
         font.setBold(True)
         self.label_11.setFont(font)
         self.label_11.setMouseTracking(False)
-        self.label_11.setStyleSheet(
-            "background-color: qlineargradient(spread:pad, x1:0.514, y1:0.0343182, x2:0.500554, y2:0.727, stop:0 rgba(242, 242, 242, 255), stop:1 rgba(255, 255, 255, 255));"
-        )
-        self.label_11.setAlignment(
-            QtCore.Qt.AlignmentFlag.AlignBottom | QtCore.Qt.AlignmentFlag.AlignHCenter
-        )
+        self.label_11.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.514, y1:0.0343182, x2:0.500554, y2:0.727, stop:0 rgba(242, 242, 242, 255), stop:1 rgba(255, 255, 255, 255));")
+        self.label_11.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom|QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.label_11.setObjectName("label_11")
         self.box_concepto = QtWidgets.QComboBox(parent=Form)
-        self.box_concepto.setGeometry(QtCore.QRect(60, 260, 291, 31))
+        self.box_concepto.setGeometry(QtCore.QRect(40, 260, 361, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
-        font.setPointSize(11)
+        font.setPointSize(9)
         self.box_concepto.setFont(font)
         self.box_concepto.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.box_concepto.setFrame(True)
         self.box_concepto.setObjectName("box_concepto")
         self.lbl_total = QtWidgets.QLabel(parent=Form)
-        self.lbl_total.setGeometry(QtCore.QRect(450, 410, 291, 31))
+        self.lbl_total.setGeometry(QtCore.QRect(440, 400, 291, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
-        font.setPointSize(16)
+        font.setPointSize(14)
         font.setBold(True)
         self.lbl_total.setFont(font)
         self.lbl_total.setObjectName("lbl_total")
         self.groupBox_lista = QtWidgets.QGroupBox(parent=Form)
-        self.groupBox_lista.setGeometry(QtCore.QRect(60, 340, 361, 221))
+        self.groupBox_lista.setGeometry(QtCore.QRect(40, 340, 361, 221))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(11)
@@ -158,12 +150,12 @@ class Ui_Form_Servicio(object):
         self.listWidget_servicio.setGeometry(QtCore.QRect(0, 0, 361, 221))
         self.listWidget_servicio.setObjectName("listWidget_servicio")
         self.txt_descripcion = QtWidgets.QPlainTextEdit(parent=Form)
-        self.txt_descripcion.setGeometry(QtCore.QRect(450, 190, 321, 181))
+        self.txt_descripcion.setGeometry(QtCore.QRect(440, 180, 321, 181))
         self.txt_descripcion.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.txt_descripcion.setPlainText("")
         self.txt_descripcion.setObjectName("txt_descripcion")
         self.label_9 = QtWidgets.QLabel(parent=Form)
-        self.label_9.setGeometry(QtCore.QRect(60, 310, 281, 16))
+        self.label_9.setGeometry(QtCore.QRect(40, 320, 281, 16))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(11)
@@ -200,14 +192,11 @@ class Ui_Form_Servicio(object):
         self.btn_cancelar.setText(_translate("Form", "Cancelar"))
         self.label_11.setText(_translate("Form", "Servicio a la Habitación"))
         self.lbl_total.setText(_translate("Form", "S/. 0.00"))
-        self.label_9.setText(
-            _translate("Form", "Lista de Productos y Servicios Disponibles")
-        )
+        self.label_9.setText(_translate("Form", "Lista de Productos y Servicios Disponibles"))
 
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form_Servicio()

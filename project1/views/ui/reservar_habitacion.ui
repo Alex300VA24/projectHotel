@@ -145,6 +145,11 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
@@ -237,6 +242,11 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
@@ -256,7 +266,7 @@
    <property name="font">
     <font>
      <family>Tahoma</family>
-     <pointsize>11</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -326,8 +336,8 @@
   <widget class="QPushButton" name="btn_guardar">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>560</y>
+     <x>470</x>
+     <y>550</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -358,8 +368,8 @@ QPushButton:hover {
   <widget class="QPushButton" name="btn_cancelar">
    <property name="geometry">
     <rect>
-     <x>590</x>
-     <y>560</y>
+     <x>600</x>
+     <y>550</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -447,7 +457,7 @@ QPushButton:hover {
    <property name="font">
     <font>
      <family>Tahoma</family>
-     <pointsize>11</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -511,7 +521,7 @@ QPushButton:hover {
    <property name="geometry">
     <rect>
      <x>440</x>
-     <y>440</y>
+     <y>460</y>
      <width>291</width>
      <height>16</height>
     </rect>
@@ -544,7 +554,7 @@ QPushButton:hover {
    <property name="font">
     <font>
      <family>Tahoma</family>
-     <pointsize>11</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -562,6 +572,11 @@ QPushButton:hover {
      <width>291</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
@@ -598,8 +613,8 @@ QPushButton:hover {
   <widget class="QLabel" name="lbl_total">
    <property name="geometry">
     <rect>
-     <x>450</x>
-     <y>470</y>
+     <x>440</x>
+     <y>430</y>
      <width>161</width>
      <height>31</height>
     </rect>
@@ -607,7 +622,7 @@ QPushButton:hover {
    <property name="font">
     <font>
      <family>Tahoma</family>
-     <pointsize>16</pointsize>
+     <pointsize>14</pointsize>
      <bold>true</bold>
     </font>
    </property>
@@ -646,7 +661,7 @@ QPushButton:hover {
    <property name="font">
     <font>
      <family>Tahoma</family>
-     <pointsize>11</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -674,6 +689,11 @@ QPushButton:hover {
      <width>291</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
@@ -725,6 +745,81 @@ QPushButton:hover {
    <property name="lineWidth">
     <number>1</number>
    </property>
+   <widget class="QFrame" name="frame_8">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>10</y>
+      <width>291</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: transparent;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::HLine</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_9">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>70</y>
+      <width>291</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: transparent;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::HLine</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <widget class="QFrame" name="frame_10">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>10</y>
+       <width>291</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::HLine</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="lineWidth">
+      <number>1</number>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QLabel" name="label_14">
    <property name="geometry">
@@ -742,7 +837,7 @@ QPushButton:hover {
     </font>
    </property>
    <property name="text">
-    <string>Nacionalidad</string>
+    <string>País</string>
    </property>
   </widget>
   <widget class="QFrame" name="frame_7">
@@ -779,6 +874,11 @@ QPushButton:hover {
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
@@ -786,6 +886,36 @@ QPushButton:hover {
     <bool>false</bool>
    </property>
   </widget>
+  <zorder>txt_nacionalidad</zorder>
+  <zorder>txt_nombre_cliente</zorder>
+  <zorder>label_3</zorder>
+  <zorder>label_4</zorder>
+  <zorder>label_5</zorder>
+  <zorder>label_6</zorder>
+  <zorder>txt_celular</zorder>
+  <zorder>box_tipo_habitacion</zorder>
+  <zorder>label_7</zorder>
+  <zorder>label_8</zorder>
+  <zorder>label_10</zorder>
+  <zorder>btn_guardar</zorder>
+  <zorder>btn_cancelar</zorder>
+  <zorder>label_11</zorder>
+  <zorder>label_12</zorder>
+  <zorder>box_numero_habitacion</zorder>
+  <zorder>frame_2</zorder>
+  <zorder>frame_3</zorder>
+  <zorder>frame_6</zorder>
+  <zorder>txt_fecha_ingreso</zorder>
+  <zorder>txt_noches</zorder>
+  <zorder>frame_4</zorder>
+  <zorder>lbl_total</zorder>
+  <zorder>label_9</zorder>
+  <zorder>box_documento</zorder>
+  <zorder>txt_numero_documento</zorder>
+  <zorder>label_13</zorder>
+  <zorder>frame_5</zorder>
+  <zorder>label_14</zorder>
+  <zorder>frame_7</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -35,7 +35,67 @@ class LoginController:
         except Exception as e:
             self.mostrar_error(f"Ocurrió un error: {e}")
 
+
+    
     def mostrar_ventana(self):
+        self.ventana_login.show()
+
+    def mostrar_error(self, mensaje):
+        msg_box = QMessageBox(self.ventana_login)
+        msg_box.setWindowTitle("Error")
+        msg_box.setText(mensaje)
+        msg_box.setIcon(QMessageBox.Icon.Critical)
+        msg_box.setStyleSheet("""
+            QMessageBox {
+                background-color: #F8D7DA;
+                color: #721C24;
+                font-family: 'Tahoma';
+                font-size: 11pt;
+            }
+            QPushButton {
+                background-color: #EC4424;
+                color: white;
+                border-radius: 5px;
+                padding: 5px;
+            }
+            QPushButton:hover {
+                background-color: #FF5733;
+            }
+        """)
+        msg_box.exec()
+
+    def mostrar_mensaje(self, mensaje):
+        msg_box = QMessageBox(self.ventana_login)
+        msg_box.setWindowTitle("Mensaje de Inicio de Sesión")
+        msg_box.setText(mensaje)
+        msg_box.setIcon(QMessageBox.Icon.Information)
+        msg_box.setStyleSheet("""
+            QMessageBox {
+                background-color: #D4EDDA;
+                color: #155724;
+                font-family: 'Tahoma';
+                font-size: 11pt;
+            }
+            QPushButton {
+                background-color: #28A745;
+                color: white;
+                border-radius: 5px;
+                padding: 5px;
+            }
+            QPushButton:hover {
+                background-color: #218838;
+            }
+        """)
+        msg_box.exec()
+
+        self.ventana_login.hide()  
+        self.abrir_ventana_principal()  
+
+    def abrir_ventana_principal(self):
+        if self.ventana_principal_controller:
+            self.ventana_principal_controller.mostrar_ventana()
+
+"""     def mostrar_ventana(self):
         self.ventana_login.show()
 
     def mostrar_error(self, mensaje):
@@ -46,8 +106,6 @@ class LoginController:
             self.ventana_login, "Mensaje de Inicio de Sesión", mensaje
         )
         self.ventana_login.hide()  # Cerramos la ventana de login
-        self.abrir_ventana_principal()  # Abrimos la ventana principal
+        self.abrir_ventana_principal()  # Abrimos la ventana principal """
 
-    def abrir_ventana_principal(self):
-        if self.ventana_principal_controller:
-            self.ventana_principal_controller.mostrar_ventana()
+    

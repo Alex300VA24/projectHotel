@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'views/ui/reservar_habitacion.ui'
+# Form implementation generated from reading ui file 'reservar_habitacion.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -16,68 +16,49 @@ class Ui_Form_Reservar_Habitacion(object):
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(
-            QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Button, brush
-        )
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Button, brush)
         brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(
-            QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Base, brush
-        )
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Base, brush)
         brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(
-            QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Window, brush
-        )
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(66, 66, 66))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(
-            QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Link, brush
-        )
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Link, brush)
         brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(
-            QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Button, brush
-        )
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Button, brush)
         brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(
-            QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Base, brush
-        )
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Base, brush)
         brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(
-            QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Window, brush
-        )
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(66, 66, 66))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(
-            QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Link, brush
-        )
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Link, brush)
         brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(
-            QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Button, brush
-        )
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Button, brush)
         brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(
-            QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Base, brush
-        )
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Base, brush)
         brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(
-            QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Window, brush
-        )
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(66, 66, 66))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(
-            QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Link, brush
-        )
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Link, brush)
         Form.setPalette(palette)
-        Form.setStyleSheet("QWidget{\n    background-color: rgb(242, 242, 242);\n}")
+        Form.setStyleSheet("QWidget{\n"
+"    background-color: rgb(242, 242, 242);\n"
+"}")
         self.txt_nombre_cliente = QtWidgets.QLineEdit(parent=Form)
         self.txt_nombre_cliente.setGeometry(QtCore.QRect(60, 180, 291, 31))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.txt_nombre_cliente.setFont(font)
         self.txt_nombre_cliente.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.txt_nombre_cliente.setFrame(False)
         self.txt_nombre_cliente.setObjectName("txt_nombre_cliente")
@@ -111,6 +92,9 @@ class Ui_Form_Reservar_Habitacion(object):
         self.label_6.setObjectName("label_6")
         self.txt_celular = QtWidgets.QLineEdit(parent=Form)
         self.txt_celular.setGeometry(QtCore.QRect(60, 470, 291, 31))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.txt_celular.setFont(font)
         self.txt_celular.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.txt_celular.setFrame(False)
         self.txt_celular.setObjectName("txt_celular")
@@ -118,7 +102,7 @@ class Ui_Form_Reservar_Habitacion(object):
         self.box_tipo_habitacion.setGeometry(QtCore.QRect(440, 260, 291, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
-        font.setPointSize(11)
+        font.setPointSize(10)
         self.box_tipo_habitacion.setFont(font)
         self.box_tipo_habitacion.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.box_tipo_habitacion.setFrame(True)
@@ -145,44 +129,40 @@ class Ui_Form_Reservar_Habitacion(object):
         self.label_10.setFont(font)
         self.label_10.setObjectName("label_10")
         self.btn_guardar = QtWidgets.QPushButton(parent=Form)
-        self.btn_guardar.setGeometry(QtCore.QRect(460, 560, 101, 31))
+        self.btn_guardar.setGeometry(QtCore.QRect(470, 550, 101, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(12)
         font.setBold(True)
         self.btn_guardar.setFont(font)
-        self.btn_guardar.setStyleSheet(
-            "QPushButton {\n"
-            "    background-color: #EC4424; /* Rojo */\n"
-            "    color: #FFFFFF; /* Texto blanco */\n"
-            "    border-radius: 8px; /* Bordes redondeados opcionales */\n"
-            "    font-weight: bold; /* Negrita opcional */\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "    background-color: #FF5733; /* Rojo más claro en hover */\n"
-            "}"
-        )
+        self.btn_guardar.setStyleSheet("QPushButton {\n"
+"    background-color: #EC4424; /* Rojo */\n"
+"    color: #FFFFFF; /* Texto blanco */\n"
+"    border-radius: 8px; /* Bordes redondeados opcionales */\n"
+"    font-weight: bold; /* Negrita opcional */\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #FF5733; /* Rojo más claro en hover */\n"
+"}")
         self.btn_guardar.setObjectName("btn_guardar")
         self.btn_cancelar = QtWidgets.QPushButton(parent=Form)
-        self.btn_cancelar.setGeometry(QtCore.QRect(590, 560, 101, 31))
+        self.btn_cancelar.setGeometry(QtCore.QRect(600, 550, 101, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(12)
         font.setBold(True)
         self.btn_cancelar.setFont(font)
-        self.btn_cancelar.setStyleSheet(
-            "QPushButton {\n"
-            "    background-color: #A9A9A9; /* Gris medio */\n"
-            "    color: #FFFFFF; /* Texto blanco */\n"
-            "    border-radius: 8px; /* Bordes redondeados opcionales */\n"
-            "    font-weight: bold;\n"
-            "}\n"
-            "\n"
-            "QPushButton:hover {\n"
-            "    background-color: #808080; /* Gris oscuro en hover */\n"
-            "}"
-        )
+        self.btn_cancelar.setStyleSheet("QPushButton {\n"
+"    background-color: #A9A9A9; /* Gris medio */\n"
+"    color: #FFFFFF; /* Texto blanco */\n"
+"    border-radius: 8px; /* Bordes redondeados opcionales */\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #808080; /* Gris oscuro en hover */\n"
+"}")
         self.btn_cancelar.setObjectName("btn_cancelar")
         self.label_11 = QtWidgets.QLabel(parent=Form)
         self.label_11.setGeometry(QtCore.QRect(0, -10, 801, 141))
@@ -192,30 +172,22 @@ class Ui_Form_Reservar_Habitacion(object):
         font.setBold(True)
         self.label_11.setFont(font)
         self.label_11.setMouseTracking(False)
-        self.label_11.setStyleSheet(
-            "background-color: qlineargradient(spread:pad, x1:0.514, y1:0.0343182, x2:0.500554, y2:0.727, stop:0 rgba(242, 242, 242, 255), stop:1 rgba(255, 255, 255, 255));"
-        )
-        self.label_11.setAlignment(
-            QtCore.Qt.AlignmentFlag.AlignBottom | QtCore.Qt.AlignmentFlag.AlignHCenter
-        )
+        self.label_11.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.514, y1:0.0343182, x2:0.500554, y2:0.727, stop:0 rgba(242, 242, 242, 255), stop:1 rgba(255, 255, 255, 255));")
+        self.label_11.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom|QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.label_11.setObjectName("label_11")
         self.label_12 = QtWidgets.QLabel(parent=Form)
         self.label_12.setGeometry(QtCore.QRect(350, 10, 91, 91))
         self.label_12.setText("")
-        self.label_12.setPixmap(
-            QtGui.QPixmap("views/ui\\../../resources/images/logo.jpg")
-        )
+        self.label_12.setPixmap(QtGui.QPixmap("views/ui\\../../resources/images/logo.jpg"))
         self.label_12.setScaledContents(True)
         self.label_12.setObjectName("label_12")
         self.box_numero_habitacion = QtWidgets.QComboBox(parent=Form)
         self.box_numero_habitacion.setGeometry(QtCore.QRect(440, 340, 291, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
-        font.setPointSize(11)
+        font.setPointSize(10)
         self.box_numero_habitacion.setFont(font)
-        self.box_numero_habitacion.setStyleSheet(
-            "background-color: rgb(255, 255, 255);"
-        )
+        self.box_numero_habitacion.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.box_numero_habitacion.setFrame(True)
         self.box_numero_habitacion.setObjectName("box_numero_habitacion")
         self.frame_2 = QtWidgets.QFrame(parent=Form)
@@ -235,7 +207,7 @@ class Ui_Form_Reservar_Habitacion(object):
         self.frame_3.setLineWidth(1)
         self.frame_3.setObjectName("frame_3")
         self.frame_6 = QtWidgets.QFrame(parent=Form)
-        self.frame_6.setGeometry(QtCore.QRect(440, 440, 291, 16))
+        self.frame_6.setGeometry(QtCore.QRect(440, 460, 291, 16))
         self.frame_6.setAutoFillBackground(False)
         self.frame_6.setStyleSheet("background: transparent;")
         self.frame_6.setFrameShape(QtWidgets.QFrame.Shape.HLine)
@@ -246,13 +218,16 @@ class Ui_Form_Reservar_Habitacion(object):
         self.txt_fecha_ingreso.setGeometry(QtCore.QRect(60, 550, 291, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
-        font.setPointSize(11)
+        font.setPointSize(10)
         self.txt_fecha_ingreso.setFont(font)
         self.txt_fecha_ingreso.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.txt_fecha_ingreso.setFrame(False)
         self.txt_fecha_ingreso.setObjectName("txt_fecha_ingreso")
         self.txt_noches = QtWidgets.QLineEdit(parent=Form)
         self.txt_noches.setGeometry(QtCore.QRect(440, 180, 291, 31))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.txt_noches.setFont(font)
         self.txt_noches.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.txt_noches.setFrame(False)
         self.txt_noches.setObjectName("txt_noches")
@@ -265,10 +240,10 @@ class Ui_Form_Reservar_Habitacion(object):
         self.frame_4.setLineWidth(1)
         self.frame_4.setObjectName("frame_4")
         self.lbl_total = QtWidgets.QLabel(parent=Form)
-        self.lbl_total.setGeometry(QtCore.QRect(450, 470, 161, 31))
+        self.lbl_total.setGeometry(QtCore.QRect(440, 430, 161, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
-        font.setPointSize(16)
+        font.setPointSize(14)
         font.setBold(True)
         self.lbl_total.setFont(font)
         self.lbl_total.setObjectName("lbl_total")
@@ -283,7 +258,7 @@ class Ui_Form_Reservar_Habitacion(object):
         self.box_documento.setGeometry(QtCore.QRect(60, 260, 291, 31))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
-        font.setPointSize(11)
+        font.setPointSize(10)
         self.box_documento.setFont(font)
         self.box_documento.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.box_documento.setFrame(True)
@@ -292,6 +267,9 @@ class Ui_Form_Reservar_Habitacion(object):
         self.box_documento.addItem("")
         self.txt_numero_documento = QtWidgets.QLineEdit(parent=Form)
         self.txt_numero_documento.setGeometry(QtCore.QRect(60, 330, 291, 31))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.txt_numero_documento.setFont(font)
         self.txt_numero_documento.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.txt_numero_documento.setFrame(False)
         self.txt_numero_documento.setObjectName("txt_numero_documento")
@@ -310,6 +288,30 @@ class Ui_Form_Reservar_Habitacion(object):
         self.frame_5.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.frame_5.setLineWidth(1)
         self.frame_5.setObjectName("frame_5")
+        self.frame_8 = QtWidgets.QFrame(parent=self.frame_5)
+        self.frame_8.setGeometry(QtCore.QRect(210, 10, 291, 16))
+        self.frame_8.setAutoFillBackground(False)
+        self.frame_8.setStyleSheet("background: transparent;")
+        self.frame_8.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.frame_8.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
+        self.frame_8.setLineWidth(1)
+        self.frame_8.setObjectName("frame_8")
+        self.frame_9 = QtWidgets.QFrame(parent=self.frame_5)
+        self.frame_9.setGeometry(QtCore.QRect(0, 70, 291, 16))
+        self.frame_9.setAutoFillBackground(False)
+        self.frame_9.setStyleSheet("background: transparent;")
+        self.frame_9.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.frame_9.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
+        self.frame_9.setLineWidth(1)
+        self.frame_9.setObjectName("frame_9")
+        self.frame_10 = QtWidgets.QFrame(parent=self.frame_9)
+        self.frame_10.setGeometry(QtCore.QRect(210, 10, 291, 16))
+        self.frame_10.setAutoFillBackground(False)
+        self.frame_10.setStyleSheet("background: transparent;")
+        self.frame_10.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.frame_10.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
+        self.frame_10.setLineWidth(1)
+        self.frame_10.setObjectName("frame_10")
         self.label_14 = QtWidgets.QLabel(parent=Form)
         self.label_14.setGeometry(QtCore.QRect(60, 380, 161, 16))
         font = QtGui.QFont()
@@ -327,9 +329,42 @@ class Ui_Form_Reservar_Habitacion(object):
         self.frame_7.setObjectName("frame_7")
         self.txt_nacionalidad = QtWidgets.QLineEdit(parent=Form)
         self.txt_nacionalidad.setGeometry(QtCore.QRect(60, 400, 291, 31))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.txt_nacionalidad.setFont(font)
         self.txt_nacionalidad.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.txt_nacionalidad.setFrame(False)
         self.txt_nacionalidad.setObjectName("txt_nacionalidad")
+        self.txt_nacionalidad.raise_()
+        self.txt_nombre_cliente.raise_()
+        self.label_3.raise_()
+        self.label_4.raise_()
+        self.label_5.raise_()
+        self.label_6.raise_()
+        self.txt_celular.raise_()
+        self.box_tipo_habitacion.raise_()
+        self.label_7.raise_()
+        self.label_8.raise_()
+        self.label_10.raise_()
+        self.btn_guardar.raise_()
+        self.btn_cancelar.raise_()
+        self.label_11.raise_()
+        self.label_12.raise_()
+        self.box_numero_habitacion.raise_()
+        self.frame_2.raise_()
+        self.frame_3.raise_()
+        self.frame_6.raise_()
+        self.txt_fecha_ingreso.raise_()
+        self.txt_noches.raise_()
+        self.frame_4.raise_()
+        self.lbl_total.raise_()
+        self.label_9.raise_()
+        self.box_documento.raise_()
+        self.txt_numero_documento.raise_()
+        self.label_13.raise_()
+        self.frame_5.raise_()
+        self.label_14.raise_()
+        self.frame_7.raise_()
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -352,12 +387,11 @@ class Ui_Form_Reservar_Habitacion(object):
         self.box_documento.setItemText(0, _translate("Form", "DNI"))
         self.box_documento.setItemText(1, _translate("Form", "Pasaporte"))
         self.label_13.setText(_translate("Form", "Número de documento"))
-        self.label_14.setText(_translate("Form", "Nacionalidad"))
+        self.label_14.setText(_translate("Form", "País"))
 
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form_Reservar_Habitacion()
