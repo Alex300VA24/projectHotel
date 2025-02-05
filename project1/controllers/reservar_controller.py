@@ -27,8 +27,8 @@ class ReservarController:
         
         # Conectar eventos para actualización de datos
         self.ui.box_tipo_habitacion.currentIndexChanged.connect(self.actualizar_numeros_habitacion)
-        self.ui.box_tipo_habitacion.currentIndexChanged.connect(self.calcular_precio_total)
-        self.ui.txt_noches.textChanged.connect(self.calcular_precio_total)
+        self.ui.box_tipo_habitacion.currentIndexChanged.connect(self.actualizar_precio_total)
+        self.ui.txt_noches.textChanged.connect(self.actualizar_precio_total)
         
         # Conectar eventos de botones
         self.ui.btn_cancelar.clicked.connect(self.regresar_ventana_prinicipal)
@@ -107,7 +107,7 @@ class ReservarController:
         except Exception as e:
             print(f"Error al actualizar los números de habitación: {e}")
 
-    def calcular_precio_total(self):
+    def actualizar_precio_total(self):
         index_tipo = self.ui.box_tipo_habitacion.currentIndex()
         if index_tipo == -1:
             return
