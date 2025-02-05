@@ -146,3 +146,8 @@ class ReservarController:
             except ValueError:
                 self.mostrar_error("El costo total debe ser un número válido.")
         return None
+    
+    # Llama al modelo para conseguir el coste total de la reserva
+    def conseguir_total_reserva(id_):
+        datos = Reserva.conseguir_total_reserva(id_)
+        return datos

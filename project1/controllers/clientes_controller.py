@@ -1,4 +1,5 @@
 from PyQt6.QtWidgets import QWidget  # type:ignore
+from services.generar_archivo import GenerarArchivo
 from views.clientes.Ui_Form_Clientes import Ui_Form_Clientes
 
 
@@ -22,3 +23,9 @@ class ClientesController:
     #La informacion lo reenvia al Form
     def clientes_registrados(self, data):
         self.ui.llenar_tabla(data)
+        
+    def generar_pdf(self, nombre, celular, precio_reserva, resumen_servicio, id_servicio):
+        """Llama al servicio para generar el PDF."""
+        # Aquí llamas al servicio GenerarArchivo para generar el PDF
+        generador = GenerarArchivo(self.dynamic_window)  # Instancia del servicio
+        generador.generar_pdf(nombre, celular, precio_reserva, resumen_servicio, id_servicio)

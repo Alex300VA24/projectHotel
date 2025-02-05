@@ -8,13 +8,11 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import (
-    QApplication, QMainWindow, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QPushButton, QWidget, QMessageBox, QLabel
+    QTableWidgetItem, QVBoxLayout, QPushButton, QWidget, QMessageBox, QLabel
 )
-from models.cliente import Cliente
-from models.reserva import Reserva
-from models.servicio import Servicio
-from fpdf import FPDF
+
+from controllers.reservar_controller import ReservarController
+from controllers.servicio_controller import ServicioController
 
 
 class Ui_Form_Clientes(object):
@@ -135,9 +133,7 @@ class Ui_Form_Clientes(object):
         self.btn_consultar.setText(_translate("Form", "Consultar Cliente"))
         
     #Método para llenar la tabla con la información que le manda el controlador clientes_controller
-    def llenar_tabla(self, data):
-        print(data)
-        
+    def llenar_tabla(self, data):        
         fila = 0
         self.table_historial.setRowCount(len(data))
         for item in data:
@@ -160,10 +156,10 @@ class Ui_Form_Clientes(object):
         id_ = self.table_historial.item(fila_seleccionada, 0).text()
         
         #Se consigue el precio de la reserva
-        precio_reserva = Reserva.conseguir_total_reserva(id_)
+        precio_reserva = ReservarController.conseguir_total_reserva(id_)
         
         #Se consigue los servicios
-        resumen_servicio = Servicio.conseguir_total_servicio(id_)
+        resumen_servicio = ServicioController.conseguir_total_servicio(id_)
         
         #Se consiguen las ids de los servicios
         id_servicio = []
@@ -186,9 +182,8 @@ class Ui_Form_Clientes(object):
         layout = QVBoxLayout(self.dynamic_window)
         layout.addWidget(QLabel(f"ID: {id_}"))
         layout.addWidget(QLabel(f"Nombre: {nombre}"))
-        layout.addWidget(QLabel(f"Celular: {celular}"))
-        layout.addWidget(QLabel(f"Total de la reserva: {precio_reserva}"))
-        layout.addWidget(QLabel("Resumen del servicio: "))
+        layout.addWidget(QLabel(f"Celular: {celular}"))        
+        layout.addWidget(QLabel("Resumen de los servicios: "))
         
         i = 0
         total_servicio = 0
@@ -198,72 +193,24 @@ class Ui_Form_Clientes(object):
             total_servicio += dato_servicio[3]
                         
             #Se consigue los detalle_servicio            
-            detalles = Servicio.conseguir_total_detalle_servicio(id_servicio[i])
+            detalles = ServicioController.conseguir_total_detalle_servicio(id_servicio[i])
             for detalle in detalles:
                 layout.addWidget(QLabel('\t' + '\t' +  str(detalle[0]) + ' - ' + str(detalle[1])))
-            i += 1            
+            i += 1
         layout.addWidget(QLabel(f"Total de los servicios solicitados: {total_servicio}"))
+        layout.addWidget(QLabel(f"Total de la reserva: {precio_reserva}"))
         
         total_estadia = float(precio_reserva) + float(total_servicio)
         layout.addWidget(QLabel(f"Coste total: {total_estadia}"))
         
+        
+        from controllers.clientes_controller import ClientesController
         # El botón para generar el PDF
         self.btn_generar_pdf = QPushButton("Generar PDF", self.dynamic_window)
-        self.btn_generar_pdf.clicked.connect(lambda: self.generar_pdf(id_, nombre, celular, precio_reserva, resumen_servicio, id_servicio))
+        self.btn_generar_pdf.clicked.connect(lambda: ClientesController.generar_pdf(self, nombre, celular, precio_reserva, resumen_servicio, id_servicio))
         layout.addWidget(self.btn_generar_pdf)
 
-        self.dynamic_window.show()
-    
-    def generar_pdf(self, id_, nombre, celular, precio_reserva, resumen_servicio, id_servicio):
-        """Genera un PDF con la información de la ventana."""
-        pdf = FPDF()
-        pdf.set_auto_page_break(auto=True, margin=15)
-        pdf.add_page()
-        
-        pdf.set_font("Arial", size=12)
-
-        # Se agrega el título
-        pdf.set_font("Arial", "B", 16)
-        pdf.cell(200, 10, txt="Resumen de Gasto del Cliente", ln=True, align='C')
-        
-        # Se agregan los detalles
-        pdf.ln(10)
-        pdf.set_font("Arial", size=12)
-        pdf.cell(100, 10, f"Nombre: {nombre}")
-        pdf.ln(10)
-        pdf.cell(100, 10, f"Celular: {celular}")
-        pdf.ln(10)
-        pdf.cell(100, 10, f"Total de la reserva: {precio_reserva}")
-        pdf.ln(10)
-
-        # Resumen de servicios
-        pdf.cell(100, 10, "Resumen de Servicios:", ln=True)
-        pdf.ln(5)
-        
-        i = 0
-        total_servicio = 0
-        for dato_servicio in resumen_servicio:
-            pdf.cell(100, 10, f"{dato_servicio[1]} - {dato_servicio[2]} - {dato_servicio[3]}", ln=True)
-            total_servicio += dato_servicio[3]
-            
-            # Detalles del servicio
-            detalles = Servicio.conseguir_total_detalle_servicio(id_servicio[i])
-            for detalle in detalles:
-                pdf.cell(100, 10, f"\t{detalle[0]} - {detalle[1]}", ln=True)
-        
-        pdf.ln(10)
-        pdf.cell(100, 10, f"Total de los servicios solicitados: {total_servicio}")
-        pdf.ln(10)
-        
-        # Total general (reserva + servicios)
-        total_estadia = float(precio_reserva) + float(total_servicio)
-        pdf.cell(100, 10, f"Coste total: {total_estadia}")
-        
-        # Guardar el archivo PDF
-        pdf_output_path = f"Resumen_Gasto_{nombre}.pdf"
-        pdf.output(pdf_output_path)
-        
-        QMessageBox.information(self.dynamic_window, "PDF Generado", f"El PDF ha sido generado y guardado en {pdf_output_path}")
+        self.dynamic_window.show()    
 
 if __name__ == "__main__":
     import sys

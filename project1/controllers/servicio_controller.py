@@ -192,3 +192,12 @@ class ServicioController:
 
     def mostrar_ventana(self):
         self.ventana_servicio.show()
+    
+    # Llama al modelo para conseguir el coste total de los servicios
+    def conseguir_total_servicio(id_):
+        datos = Servicio.conseguir_total_servicio(id_)
+        return datos
+    
+    def conseguir_total_detalle_servicio(id_):
+        datos = Servicio.conseguir_total_detalle_servicio(id_)
+        return datos
