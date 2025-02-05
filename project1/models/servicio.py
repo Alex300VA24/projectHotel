@@ -123,6 +123,29 @@ class Servicio:
                 db.disconnect()  # Cerrar la conexión
 
         return precios
+    
+    # Método para conseguir información del servicio según el id del cliente que se ingresa
+    @staticmethod
+    def conseguir_total_servicio(id):
+        conexion = DBConnection()
+        conexion.connect()
+        if conexion:
+            query = """
+                SELECT idServicio, concepto, descripcion, costoServicio FROM servicio WHERE idCliente = %s
+            """
+            resultado_servicio = conexion.query(query, (id,))
+            return resultado_servicio
+        
+    @staticmethod
+    def conseguir_total_detalle_servicio(id):
+        conexion = DBConnection()
+        conexion.connect()
+        if conexion:
+            query = """
+                SELECT detalle, precio FROM detalle_servicio WHERE idServicio = %s
+            """
+            resultado_detalle_servicio = conexion.query(query, (id,))
+            return resultado_detalle_servicio
 
     def save(self, nombre_cliente):
         """

@@ -24,6 +24,20 @@ class Reserva:
                     SET idCliente = %s, idHabitacion = %s, fechaInicio = %s, fechaFin = %s, estado = %s 
                     WHERE idReserva = %s"""
 
+    # Método para conseguir únicamente el total de una reserva según el id del cliente que se ingresa
+    @staticmethod
+    def conseguir_total_reserva(id):
+        conexion = DBConnection()
+        conexion.connect()
+        if conexion:
+            query = """
+                SELECT total FROM reserva WHERE idCliente = %s
+            """
+            resultado = conexion.query(query, (id,))
+            precio_reserva = resultado[0][0]
+            conexion.disconnect()
+            return precio_reserva
+    
     def save(self):
         try:
             with Cliente.connection.cursor() as cursor:

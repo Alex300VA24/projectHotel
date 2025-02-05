@@ -12,6 +12,8 @@ from PyQt6.QtWidgets import (
     QVBoxLayout, QPushButton, QWidget, QMessageBox, QLabel
 )
 from models.cliente import Cliente
+from models.reserva import Reserva
+from models.servicio import Servicio
 from fpdf import FPDF
 
 
@@ -158,10 +160,10 @@ class Ui_Form_Clientes(object):
         id_ = self.table_historial.item(fila_seleccionada, 0).text()
         
         #Se consigue el precio de la reserva
-        precio_reserva = Cliente.conseguir_total_reserva(id_)
+        precio_reserva = Reserva.conseguir_total_reserva(id_)
         
         #Se consigue los servicios
-        resumen_servicio = Cliente.conseguir_total_servicio(id_)
+        resumen_servicio = Servicio.conseguir_total_servicio(id_)
         
         #Se consiguen las ids de los servicios
         id_servicio = []
@@ -196,7 +198,7 @@ class Ui_Form_Clientes(object):
             total_servicio += dato_servicio[3]
                         
             #Se consigue los detalle_servicio            
-            detalles = Cliente.conseguir_total_detalle_servicio(id_servicio[i])
+            detalles = Servicio.conseguir_total_detalle_servicio(id_servicio[i])
             for detalle in detalles:
                 layout.addWidget(QLabel('\t' + '\t' +  str(detalle[0]) + ' - ' + str(detalle[1])))
             i += 1            
@@ -205,7 +207,7 @@ class Ui_Form_Clientes(object):
         total_estadia = float(precio_reserva) + float(total_servicio)
         layout.addWidget(QLabel(f"Coste total: {total_estadia}"))
         
-        # Crear el botón para generar el PDF
+        # El botón para generar el PDF
         self.btn_generar_pdf = QPushButton("Generar PDF", self.dynamic_window)
         self.btn_generar_pdf.clicked.connect(lambda: self.generar_pdf(id_, nombre, celular, precio_reserva, resumen_servicio, id_servicio))
         layout.addWidget(self.btn_generar_pdf)
@@ -220,11 +222,11 @@ class Ui_Form_Clientes(object):
         
         pdf.set_font("Arial", size=12)
 
-        # Agregar título
+        # Se agrega el título
         pdf.set_font("Arial", "B", 16)
         pdf.cell(200, 10, txt="Resumen de Gasto del Cliente", ln=True, align='C')
         
-        # Agregar los detalles
+        # Se agregan los detalles
         pdf.ln(10)
         pdf.set_font("Arial", size=12)
         pdf.cell(100, 10, f"Nombre: {nombre}")
@@ -245,7 +247,7 @@ class Ui_Form_Clientes(object):
             total_servicio += dato_servicio[3]
             
             # Detalles del servicio
-            detalles = Cliente.conseguir_total_detalle_servicio(id_servicio[i])
+            detalles = Servicio.conseguir_total_detalle_servicio(id_servicio[i])
             for detalle in detalles:
                 pdf.cell(100, 10, f"\t{detalle[0]} - {detalle[1]}", ln=True)
         
