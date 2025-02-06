@@ -36,14 +36,7 @@ class GenerarArchivo:
         for dato_servicio in resumen_servicio:
             pdf.cell(100, 10, f"{i + 1}. {dato_servicio[1]} - {dato_servicio[2]} - S/.{dato_servicio[3]}", ln=True)
             total_servicio += dato_servicio[3]
-            
-            # Detalles del servicio
-            detalles = ServicioController.conseguir_total_detalle_servicio(id_servicio[i])
-            for detalle in detalles:
-                pdf.cell(100, 10, f"|__{detalle[0]} - S/.{detalle[1]}", ln=True)
-            i += 1
-            pdf.ln(10)
-            
+            i += 1           
         
         pdf.cell(100, 10, f"Total de los servicios solicitados: S/.{total_servicio}")
         pdf.ln(10)
