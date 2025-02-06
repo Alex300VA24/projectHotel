@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import (  # type: ignore
     QMessageBox,
 )  # type:ignore
 from models.servicio import Servicio
+from models.reserva import Reserva
 from views.servicio.Ui_Form_Servicio import Ui_Form_Servicio
 from datetime import date
 
@@ -55,7 +56,6 @@ class ServicioController:
         # Lista de detalles según el servicio seleccionado
         detalles_servicio = Servicio.obtener_detalles(servicio_seleccionado)
         precios_servicios = Servicio.obtener_precios(servicio_seleccionado)
-        print(precios_servicios)
 
         # Función para actualizar el QTextEdit y QLabel
         def actualizar_descripcion():
@@ -135,7 +135,13 @@ class ServicioController:
 
         # Validar que los campos no estén vacíos
         if not nombre_cliente or not concepto or not costo_total:
-            QMessageBox.warning(self.ui, "Error", "Todos los campos son obligatorios.")
+            QMessageBox.warning(self.ventana_servicio, "Error", "Todos los campos son obligatorios.")
+        
+        # Verificar si el cliente tiene una reserva pagada
+        if not Reserva.reserva_pagada(nombre_cliente):
+            QMessageBox.warning(
+                self.ventana_servicio, "Error", "No se puede solicitar el servicio. La reserva no está pagada."
+            )
             return
 
         # Eliminar el prefijo "S/. " del costo total y convertir a float
@@ -149,9 +155,8 @@ class ServicioController:
             costo_total = float(costo_total)
         except ValueError:
             QMessageBox.warning(
-                self.ui, "Error", "El costo total debe ser un número válido."
+                self.ventana_servicio, "Error", "El costo total debe ser un número válido."
             )
-            return
         # Crear reserva
         servicio = Servicio(None, concepto, descripcion, costo_total, date.today())
         # Guardar el servicio en la base de datos
@@ -192,7 +197,7 @@ class ServicioController:
 
     def mostrar_ventana(self):
         self.ventana_servicio.show()
-    
+
     # Llama al modelo para conseguir el coste total de los servicios
     def conseguir_total_servicio(id_):
         datos = Servicio.conseguir_total_servicio(id_)

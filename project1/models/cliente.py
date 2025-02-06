@@ -1,4 +1,3 @@
-from sqlite3 import Cursor
 from .db import DBConnection
 import mysql.connector  # type: ignore
 from mysql.connector import Error  # type: ignore
@@ -99,10 +98,9 @@ class Cliente:
                 )
                 # Cliente.connection.commit()  # Confirmar los cambios en la base de datos
                 self._idCliente = cursor.lastrowid  # Obtener el ID generado
-                print("id del cliente generado: {}".format(self.get_idCliente()))
         except Exception as e:
             Cliente.connection.rollback()  # Revertir los cambios en caso de error
-            print(f"Error al guardar el cliente: {e}")
+            self.mensaje_error(f"Error al guardar el cliente: {e}")
         return self._idCliente
 
     def update(self):

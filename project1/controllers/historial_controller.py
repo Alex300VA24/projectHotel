@@ -33,7 +33,6 @@ class HistorialController:
         """Muestra una ventana de confirmación antes de actualizar el estado"""
         combo = self.ui.table_historial_2.cellWidget(fila, columna)
         nuevo_estado = combo.currentText()
-        print(nuevo_estado)
 
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Question)

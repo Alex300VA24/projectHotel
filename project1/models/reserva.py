@@ -116,6 +116,7 @@ class Reserva:
             resultado = conexion.query(query)
             conexion.disconnect()
             return resultado
+
     @staticmethod
     def actualizar_estado_reserva(id_reserva, nuevo_estado):
         conn = DBConnection().connect()
@@ -138,3 +139,28 @@ class Reserva:
             raise
         finally:
             conn.close()
+
+    @staticmethod
+    def reserva_pagada(nombre_cliente):
+        query = """
+        SELECT EXISTS (
+            SELECT 1 
+            FROM reserva r
+            JOIN cliente c ON r.idCliente = c.idCliente
+            WHERE CONCAT(c.nombres, ' ', c.apellidoPaterno) = %s
+            AND r.estado = 'pagada'
+        ) AS existe;
+        """
+        db = DBConnection()  # Instanciamos dentro del método
+        try:
+            db.connect()
+            cursor = db.connection.cursor()
+            cursor.execute(query, (nombre_cliente,))
+            resultado = cursor.fetchone()[0]  # Devuelve 1 si existe, 0 si no
+            cursor.close()
+            return bool(resultado)  # Convierte 1 o 0 en True o False
+        except Exception as e:
+            print(f"Error al verificar reserva: {e}")
+            return False
+        finally:
+            db.disconnect()

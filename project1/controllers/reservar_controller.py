@@ -97,7 +97,7 @@ class ReservarController:
             self.ui.box_tipo_habitacion.addItems([tipo.tipo for tipo in tipos])
             self.ui.box_tipo_habitacion.setCurrentIndex(-1)
         except Exception as e:
-            print(f"Error al cargar los tipos de habitaciones: {e}")
+            self.mostrar_mensaje(f"Error al cargar los tipos de habitaciones: {e}")
 
     def actualizar_numeros_habitacion(self):
         try:
@@ -105,7 +105,7 @@ class ReservarController:
             self.ui.box_numero_habitacion.clear()
             self.ui.box_numero_habitacion.addItems([str(numero) for numero in Habitacion.obtener_por_tipo(index_tipo + 1)])
         except Exception as e:
-            print(f"Error al actualizar los números de habitación: {e}")
+            self.mostrar_error(f"Error al actualizar los números de habitación: {e}")
 
     def actualizar_precio_total(self):
         index_tipo = self.ui.box_tipo_habitacion.currentIndex()
@@ -189,7 +189,7 @@ class ReservarController:
         msg_box.exec()
 
         self.ventana_reservar.hide()  
-        self.abrir_ventana_principal()
+        self.regresar_ventana_prinicipal()
     
     def _extraer_nombres(self, nombre_completo):
         partes = nombre_completo.split(" ")

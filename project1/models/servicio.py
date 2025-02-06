@@ -1,5 +1,4 @@
 from csv import Error
-from datetime import date
 from .db import DBConnection
 
 
@@ -48,7 +47,7 @@ class Servicio:
                 fila[0] for fila in resultados
             ]  # Asumiendo que fetchall() devuelve una lista de tuplas
         except Exception as e:
-            print(f"Error obteniendo servicios: {e}")
+            cls.mostrar_error(f"Error obteniendo servicios: {e}")
             servicios = []
         finally:
             conexion.disconnect()
@@ -73,7 +72,7 @@ class Servicio:
                 fila[0] for fila in resultados
             ]  # Asumiendo que fetchall() devuelve una lista de tuplas
         except Exception as e:
-            print(f"Error obteniendo detalles del servicio '{nombre_servicio}': {e}")
+            cls.mostrar_error(f"Error obteniendo detalles del servicio '{nombre_servicio}': {e}")
             detalles = []
         finally:
             conexion.disconnect()
@@ -99,7 +98,7 @@ class Servicio:
                 resultado_id = db.query(query_id, (nombre_servicio,))
 
                 if not resultado_id:
-                    print(f"No se encontró el servicio: {nombre_servicio}")
+                    cls.mostrar_mensaje(f"No se encontró el servicio: {nombre_servicio}")
                     return precios  # Retorna vacío si no encuentra el servicio
 
                 id_servicio = resultado_id[0][0]  # Extraer el ID del resultado
@@ -117,7 +116,7 @@ class Servicio:
                     precios[detalle] = precio
 
             except Exception as e:
-                print(f"Error al obtener los precios: {e}")
+                cls.mostrar_error(f"Error al obtener los precios: {e}")
 
             finally:
                 db.disconnect()  # Cerrar la conexión
@@ -164,7 +163,6 @@ class Servicio:
             if not cliente:
                 return "Error: Cliente no encontrado."
 
-            print(cliente)
             # Insertar el servicio
             query = """INSERT INTO servicio (idCliente, concepto, descripcion, costoServicio, fechaConsumo) 
                        VALUES (%s, %s, %s, %s, %s)"""
