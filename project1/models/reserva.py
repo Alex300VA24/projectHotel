@@ -1,24 +1,12 @@
+import logging
 from .db import DBConnection
+from .cliente import Cliente
 # import bcrypt
-
-"""
-La clas reserva se va basar de esta tabla:
-CREATE TABLE reserva (
-  idReserva BIGINT PRIMARY KEY AUTO_INCREMENT,
-  idCliente BIGINT NOT NULL,
-  idHabitacion BIGINT NOT NULL,
-  fechaInicio DATE NOT NULL,
-  fechaFin DATE NOT NULL,
-  estado ENUM('pagada', 'cancelada', 'pendiente') NOT NULL,
-  FOREIGN KEY (idCliente) REFERENCES cliente(idCliente),
-  FOREIGN KEY (idHabitacion) REFERENCES habitacion(idHabitacion)
-);
-"""
 
 
 class Reserva:
     def __init__(
-        self, idReserva, idCliente, idHabitacion, fechaInicio, fechaFin, estado
+        self, idReserva, idCliente, idHabitacion, fechaInicio, fechaFin, estado, costo
     ):
         self.idReserva = idReserva
         self.idCliente = idCliente
@@ -26,67 +14,127 @@ class Reserva:
         self.fechaInicio = fechaInicio
         self.fechaFin = fechaFin
         self.estado = estado
+        self.costo = costo
 
-    @staticmethod
-    def all():
-        conn = DBConnection()
-        cursor = conn.execute("SELECT * FROM reserva")
-        reservas = []
-        for row in cursor.fetchall():
-            reservas.append(Reserva(row[0], row[1], row[2], row[3], row[4], row[5]))
-        return reservas
+    INSERT_SQL = """INSERT INTO reserva 
+                    (idCliente, idHabitacion, fechaInicio, fechaFin, estado, total) 
+                    VALUES (%s, %s, %s, %s, %s, %s)"""
 
+    UPDATE_SQL = """UPDATE reserva 
+                    SET idCliente = %s, idHabitacion = %s, fechaInicio = %s, fechaFin = %s, estado = %s 
+                    WHERE idReserva = %s"""
+
+    # Método para conseguir únicamente el total de una reserva según el id del cliente que se ingresa
     @staticmethod
-    def find(idReserva):
-        conn = DBConnection()
-        cursor = conn.execute(
-            "SELECT * FROM reserva WHERE idReserva = %s", (idReserva,)
-        )
-        row = cursor.fetchone()
-        if row is None:
-            return None
-        return Reserva(row[0], row[1], row[2], row[3], row[4], row[5])
+    def conseguir_total_reserva(id):
+        conexion = DBConnection()
+        conexion.connect()
+        if conexion:
+            query = """
+                SELECT total FROM reserva WHERE idCliente = %s
+            """
+            resultado = conexion.query(query, (id,))
+            precio_reserva = resultado[0][0]
+            conexion.disconnect()
+            return precio_reserva
 
     def save(self):
-        conn = DBConnection()
-        cursor = conn.execute(
-            "INSERT INTO reserva (idCliente, idHabitacion, fechaInicio, fechaFin, estado) VALUES (%s, %s, %s, %s, %s)",
-            (
-                self.idCliente,
-                self.idHabitacion,
-                self.fechaInicio,
-                self.fechaFin,
-                self.estado,
-            ),
-        )
-        conn.commit()
-        self.idReserva = cursor.lastrowid
+        try:
+            with Cliente.connection.cursor() as cursor:
+                cursor.execute(
+                    self.INSERT_SQL,
+                    (
+                        self.idCliente,
+                        self.idHabitacion,
+                        self.fechaInicio,
+                        self.fechaFin,
+                        self.estado,
+                        self.costo,
+                    ),
+                )
+                self.idReserva = cursor.lastrowid
+            Cliente.connection.commit()
+        except Exception as e:
+            Cliente.connection.rollback()
+            logging.error(f"Error al guardar la reserva: {e}")
+            raise
 
     def update(self):
-        conn = DBConnection()
-        conn.execute(
-            "UPDATE reserva SET idCliente = %s, idHabitacion = %s, fechaInicio = %s, fechaFin = %s, estado = %s WHERE idReserva = %s",
-            (
-                self.idCliente,
-                self.idHabitacion,
-                self.fechaInicio,
-                self.fechaFin,
-                self.estado,
-                self.idReserva,
-            ),
-        )
-        conn.commit()
+        conn = DBConnection().connect()
+        if not conn:
+            raise ConnectionError(
+                "No se puede establecer conexión con la base de datos"
+            )
 
-    def delete(self):
-        conn = DBConnection()
-        conn.execute("DELETE FROM reserva WHERE idReserva = %s", (self.idReserva,))
-        conn.commit()
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute(
+                    self.UPDATE_SQL,
+                    (
+                        self.idCliente,
+                        self.idHabitacion,
+                        self.fechaInicio,
+                        self.fechaFin,
+                        self.estado,
+                        self.idReserva,
+                    ),
+                )
+            conn.commit()
+        except Exception as e:
+            conn.rollback()
+            logging.error(f"Error al actualizar la reserva: {e}")
+            raise
+        finally:
+            conn.close()
 
-    def cliente(self):
-        from .cliente import Cliente
+    @staticmethod
+    def obtener_historial_reservas():
+        conexion = DBConnection()
+        conexion.connect()
 
-        return Cliente.find(self.idCliente)
+        if not conexion:
+            raise ConnectionError(
+                "No se puede establecer conexión con la base de datos"
+            )
 
-    """def habitacion(self):
-        from .habitacion import Habitacion
-        return Habitacion.find(self.idHabitacion)"""
+        if conexion:
+            query = """
+                    SELECT 
+                        r.idReserva,
+                        CONCAT(c.nombres, ' ', c.apellidoPaterno, ' ', c.apellidoMaterno) AS nombre_completo,
+                        r.fechaInicio AS fecha_reserva,
+                        r.fechaFin AS fecha_salida,
+                        r.estado AS estado_reserva,
+                        h.numeroHabitacion AS numero_habitacion,
+                        th.tipo AS tipo_habitacion,
+                        r.total AS monto
+                    FROM reserva r
+                    JOIN cliente c ON r.idCliente = c.idCliente
+                    JOIN habitacion h ON r.idHabitacion = h.idHabitacion
+                    JOIN tipo_habitacion th ON h.idTipo_Habitacion = th.idTipoHabitacion;
+                    """
+            resultado = conexion.query(query)
+            conexion.disconnect()
+            return resultado
+    @staticmethod
+    def actualizar_estado_reserva(id_reserva, nuevo_estado):
+        conn = DBConnection().connect()
+        if not conn:
+            raise ConnectionError(
+                "No se puede establecer conexión con la base de datos"
+            )
+
+        try:
+            query = "UPDATE reserva SET estado = %s WHERE idReserva = %s"
+            with conn.cursor() as cursor:
+                cursor.execute(
+                    query,
+                    (nuevo_estado, id_reserva),
+                )
+            conn.commit()
+        except Exception as e:
+            conn.rollback()
+            logging.error(f"Error al actualizar estado de reserva: {e}")
+            raise
+        finally:
+            conn.close()

@@ -1,5 +1,7 @@
-from PyQt6.QtWidgets import QWidget, QMessageBox  # type:ignore
-from PyQt6.QtCore import QCoreApplication  # type:ignore
+from unittest import case
+from PyQt6.QtWidgets import QWidget, QMessageBox 
+from PyQt6.QtCore import QCoreApplication
+from datetime import datetime, timedelta
 
 # from project1.models import tipo_habitacion
 from views.reservar.Ui_Form_Reservar_Habitacion import Ui_Form_Reservar_Habitacion
@@ -15,119 +17,194 @@ class ReservarController:
         self.ui = Ui_Form_Reservar_Habitacion()
         self.ui.setupUi(self.ventana_reservar)
         self.ventana_principal_controller = None
-
-        # Inicializar los precios de las habitaciones
+        self.cliente = None
+        
+        # Inicializar estructura para precios de habitaciones
         self.precio_habitacion = {}
-
-        # Llenar el combo box con los tipos de habitaciones
+        
+        # Cargar tipos de habitaciones en el combo box
         self.cargar_tipo_habitaciones()
-
-        # Conectar el evento del combo box de tipo de habitación
-        self.ui.box_tipo_habitacion.currentIndexChanged.connect(
-            self.actualizar_numeros_habitacion
-        )
-
-        # Conectar eventos
-        self.ui.box_tipo_habitacion.currentIndexChanged.connect(
-            self.calcular_precio_total
-        )
-        self.ui.txt_noches.textChanged.connect(self.calcular_precio_total)
-
+        
+        # Conectar eventos para actualización de datos
+        self.ui.box_tipo_habitacion.currentIndexChanged.connect(self.actualizar_numeros_habitacion)
+        self.ui.box_tipo_habitacion.currentIndexChanged.connect(self.actualizar_precio_total)
+        self.ui.txt_noches.textChanged.connect(self.actualizar_precio_total)
+        
+        # Conectar eventos de botones
         self.ui.btn_cancelar.clicked.connect(self.regresar_ventana_prinicipal)
-        self.ui.btn_guardar.clicked.connect(self.guardar_reserva)
+        self.ui.btn_guardar.clicked.connect(self.registrar_reserva)
+
+    def registrar_reserva(self):
+        try:
+            # Obtener y validar datos de entrada
+            nombre_completo = self.ui.txt_nombre_cliente.text().strip()
+            if not nombre_completo or len(nombre_completo.split()) < 3:
+                return self.mostrar_error("El nombre completo debe incluir al menos tres palabras.")
+            
+            nombres, apellido_paterno, apellido_materno = self._extraer_nombres(nombre_completo)
+            tipo_documento = self.ui.box_documento.currentText()
+            numero_documento = self.ui.txt_numero_documento.text().strip()
+            nacionalidad = self.ui.txt_nacionalidad.text().strip()
+            celular = self.ui.txt_celular.text().strip()
+            numero_habitacion = self.ui.box_numero_habitacion.currentText()
+            fecha_ingreso_str = self.ui.txt_fecha_ingreso.text().strip()
+            
+            # Validar cantidad de noches
+            try:
+                noches = int(self.ui.txt_noches.text().strip())
+            except ValueError:
+                return self.mostrar_error("La cantidad de noches debe ser un número válido.")
+            
+            # Validar costo total
+            costo_total = self._obtener_costo_total()
+            if costo_total is None:
+                return
+            
+            # Verificar estado de la habitación
+            estado_habitacion = Habitacion.estado_habitacion_numero(numero_habitacion)
+            if estado_habitacion in ["pendiente", "ocupada", "mantenimiento"]:
+                return self.mostrar_error(f"La habitación está en estado {estado_habitacion}")
+            
+            # Iniciar transacción en la base de datos
+            Cliente.iniciar_transaccion()
+            
+            # Crear y guardar cliente
+            cliente = Cliente(None, nombres, apellido_paterno, apellido_materno, tipo_documento, numero_documento, nacionalidad, celular)
+            cliente_id = cliente.save()
+            
+            # Calcular fechas de ingreso y salida
+            fecha_ingreso_dt = datetime.strptime(fecha_ingreso_str, "%d/%m/%Y")
+            fecha_salida_dt = fecha_ingreso_dt + timedelta(days=noches)
+            
+            # Crear y guardar reserva
+            reserva = Reserva(None, int(cliente_id), Habitacion.consultar_idHabitacion(numero_habitacion), fecha_ingreso_dt.strftime("%Y-%m-%d"), fecha_salida_dt.strftime("%Y-%m-%d"), estado="pendiente", costo=costo_total)
+            reserva.save()
+            
+            # Actualizar estado de la habitación y confirmar transacción
+            Habitacion.actualizar_estado(numero_habitacion)
+            Cliente.commit_transaccion()
+            
+            self.mostrar_mensaje("Reserva guardada correctamente.")
+            self.ventana_reservar.hide()
+            self.regresar_ventana_prinicipal()
+        except Exception as e:
+            Cliente.rollback_transaccion()
+            self.mostrar_error(f"Error al registrar la reserva: {e}")
 
     def cargar_tipo_habitaciones(self):
-        """Llena el combo box con los tipos de habitaciones."""
         try:
-            tipos = TipoHabitacion.obtener_todos()  # Obtener los registros del modelo
-            lista_tipos = [
-                tipo_habitacion.tipo for tipo_habitacion in tipos
-            ]  # Crear lista de nombres
-            self.ui.box_tipo_habitacion.addItems(lista_tipos)  # Llenar el combo box
-            # Forzar que no haya selección inicial
+            tipos = TipoHabitacion.obtener_todos()
+            self.ui.box_tipo_habitacion.addItems([tipo.tipo for tipo in tipos])
             self.ui.box_tipo_habitacion.setCurrentIndex(-1)
         except Exception as e:
             print(f"Error al cargar los tipos de habitaciones: {e}")
 
     def actualizar_numeros_habitacion(self):
-        """Actualiza el combo box de número de habitación según el tipo seleccionado."""
         try:
-            # Obtener el ID del tipo seleccionado
             index_tipo = self.ui.box_tipo_habitacion.currentIndex()
-            print(index_tipo)
-
-            # Obtener los números de habitación disponibles para ese tipo
-            numeros_habitacion = Habitacion.obtener_por_tipo(index_tipo + 1)
-            print(numeros_habitacion)
-
-            # Limpiar y llenar el combo box de número de habitación
             self.ui.box_numero_habitacion.clear()
-            self.ui.box_numero_habitacion.addItems(
-                [str(numero) for numero in numeros_habitacion]
-            )
-
+            self.ui.box_numero_habitacion.addItems([str(numero) for numero in Habitacion.obtener_por_tipo(index_tipo + 1)])
         except Exception as e:
             print(f"Error al actualizar los números de habitación: {e}")
 
-    def calcular_precio_total(self):
-        # Obtener el índice del tipo de habitación seleccionado
+    def actualizar_precio_total(self):
         index_tipo = self.ui.box_tipo_habitacion.currentIndex()
-        if index_tipo == -1:  # Si no se ha seleccionado ningún tipo de habitación
+        if index_tipo == -1:
             return
-
-        precio_noche = TipoHabitacion.obtener_todos()
-        lista_precios = [precio.precio_noche for precio in precio_noche]
-        print(precio_noche)
-
-        # cantidad_noches = 0
-        # Obtener la cantidad de noches ingresada
+        
         try:
+            precio_noche = TipoHabitacion.obtener_todos()[index_tipo].precio_noche
             cantidad_noches = int(self.ui.txt_noches.text())
-        except ValueError:
-            cantidad_noches = 0  # Si no se ingresa un número válido, asignamos 0
-
-        # Calcular el precio total
-        precio_total = lista_precios[index_tipo] * cantidad_noches
-
-        # Actualizar el campo del precio total en la interfaz
-        self.ui.lbl_total.setText(f"S/. {precio_total}")
+        except (ValueError, IndexError):
+            cantidad_noches = 0
+        
+        self.ui.lbl_total.setText(f"S/. {precio_noche * cantidad_noches}")
 
     def regresar_ventana_prinicipal(self):
         self.ventana_reservar.hide()
         if self.ventana_principal_controller:
             self.ventana_principal_controller.mostrar_ventana()
-
+    
     def mostrar_ventana(self):
         self.ventana_reservar.show()
-
+    
     def mostrar_error(self, mensaje):
-        QMessageBox.critical(self.ventana_reservar, "Error", mensaje)
+        msg_box = QMessageBox(self.ventana_reservar)
+        msg_box.setWindowTitle("Error")
+        msg_box.setText(mensaje)
+        msg_box.setIcon(QMessageBox.Icon.Critical)
+        
+        msg_box.setStyleSheet("""
+                QMessageBox {
+                color: #333333; /* Gris oscuro para texto */
+                font-family: 'Segoe UI';
+                font-size: 12pt;
+                border-radius: 8px;
+                padding: 10px;
+            }
+            QPushButton {
+                background-color: #444444; /* Gris oscuro elegante */
+                color: white;
+                border-radius: 8px;
+                padding: 8px 15px;
+                font-size: 11pt;
+                font-weight: bold;
+                border: none;
+            }
+            QPushButton:hover {
+                background-color: #666666; /* Gris metálico */
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            }
+        """)
+        msg_box.exec()
 
     def mostrar_mensaje(self, mensaje):
-        QMessageBox.information(
-            self.ventana_reservar, "Mensaje de reserva realizada", mensaje
-        )
-        self.ventana_reservar.hide()  # Cerramos la ventana de login
-        self.regresar_ventana_prinicipal()  # Abrimos la ventana principal
+        msg_box = QMessageBox(self.ventana_reservar)
+        msg_box.setWindowTitle("Mensaje de Inicio de Sesión")
+        msg_box.setText(mensaje)
+        msg_box.setIcon(QMessageBox.Icon.Information)
+        msg_box.setStyleSheet("""
+            QMessageBox {
+                background-color: #D4EDDA; /* Verde claro */
+                color: #155724; /* Verde oscuro */
+                font-family: 'Segoe UI';
+                font-size: 12pt;
+                border-radius: 8px;
+                padding: 10px;
+            }
+            QPushButton {
+                background-color: #28A745; /* Verde */
+                color: white;
+                border-radius: 8px;
+                padding: 8px 15px;
+                font-size: 11pt;
+                font-weight: bold;
+                border: none;
+            }
+            QPushButton:hover {
+                background-color: #218838; /* Verde oscuro */
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            }
+        """)
+        msg_box.exec()
 
-    def guardar_reserva(self):
-        try:
-            # Obtener los datos de la interfaz
-            nombre = self.ui.txt_nombre_cliente.text().strip()
-            celular = self.ui.txt_celular.text().strip()
-            fecha_ingreso = self.ui.txt_fecha_ingreso.text().strip()
-            cantidad_noches = self.ui.txt_noches.text().strip()
-            tipo_habitacion = self.ui.box_tipo_habitacion.currentText()
-            numero_habitacion = self.ui.box_numero_habitacion.currentText()
-
-            print(
-                nombre,
-                celular,
-                fecha_ingreso,
-                cantidad_noches,
-                tipo_habitacion,
-                numero_habitacion,
-            )
-            self.mostrar_mensaje("Reserva guardada correctamente")
-        except Exception as e:
-            self.mostrar_error(f"Ocurrió un error: {e}")
+        self.ventana_reservar.hide()  
+        self.abrir_ventana_principal()
+    
+    def _extraer_nombres(self, nombre_completo):
+        partes = nombre_completo.split(" ")
+        return " ".join(partes[:-2]), partes[-2], partes[-1]
+    
+    def _obtener_costo_total(self):
+        costo_total = self.ui.lbl_total.text().strip()
+        if costo_total.startswith("S/."):
+            try:
+                return float(costo_total[4:].strip())
+            except ValueError:
+                self.mostrar_error("El costo total debe ser un número válido.")
+        return None
+    
+    # Llama al modelo para conseguir el coste total de la reserva
+    def conseguir_total_reserva(id_):
+        datos = Reserva.conseguir_total_reserva(id_)
+        return datos

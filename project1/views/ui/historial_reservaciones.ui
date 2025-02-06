@@ -128,7 +128,7 @@ QPushButton:pressed {
     <number>14</number>
    </property>
    <property name="columnCount">
-    <number>7</number>
+    <number>8</number>
    </property>
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>true</bool>
@@ -177,7 +177,29 @@ QPushButton:pressed {
    </column>
    <column>
     <property name="text">
-     <string>Fecha de reserva</string>
+     <string>Fecha de entrada</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tahoma</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Fecha de salida</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tahoma</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Estado</string>
     </property>
     <property name="font">
      <font>
@@ -200,17 +222,6 @@ QPushButton:pressed {
    <column>
     <property name="text">
      <string>Tipo de Habitación</string>
-    </property>
-    <property name="font">
-     <font>
-      <family>Tahoma</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Estado</string>
     </property>
     <property name="font">
      <font>
