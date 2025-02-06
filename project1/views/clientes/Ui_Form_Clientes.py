@@ -177,18 +177,12 @@ class Ui_Form_Clientes(object):
         layout.addWidget(QLabel(f"Celular: {celular}"))        
         layout.addWidget(QLabel("Resumen de los servicios: "))
         
-        i = 0
         total_servicio = 0
         for dato_servicio in resumen_servicio:
             layout.addWidget(QLabel('\t' + str(dato_servicio[1]) + ' - ' + str(dato_servicio[2]) + ' - S/.' + str(dato_servicio[3])))
             layout.addWidget(QLabel('\t' + "Detalles: "))
-            total_servicio += dato_servicio[3]
-                        
-            #Se consigue los detalle_servicio            
-            detalles = ServicioController.conseguir_total_detalle_servicio(id_servicio[i])
-            for detalle in detalles:
-                layout.addWidget(QLabel('\t' + '\t' +  str(detalle[0]) + ' - S/.' + str(detalle[1])))
-            i += 1
+            total_servicio += dato_servicio[3]                        
+            
         layout.addWidget(QLabel(f"Total de los servicios solicitados: S/.{total_servicio}"))
         layout.addWidget(QLabel(f"Total de la reserva: S/.{precio_reserva}"))
         

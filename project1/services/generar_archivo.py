@@ -44,11 +44,7 @@ class GenerarArchivo:
             fila_color = fila_par if i % 2 == 0 else fila_impar
             pdf.set_fill_color(*fila_color)
             pdf.cell(100, 10, f"{i + 1}. {dato_servicio[1]} - {dato_servicio[2]} - S/.{dato_servicio[3]}", ln=True, fill=True)
-            total_servicio += dato_servicio[3]
-            
-            detalles = ServicioController.conseguir_total_detalle_servicio(id_servicio[i])
-            for detalle in detalles:
-                pdf.cell(100, 10, f"|__{detalle[0]} - S/.{detalle[1]}", ln=True)
+            total_servicio += dato_servicio[3]            
             i += 1
             pdf.ln(5)
             
