@@ -62,6 +62,11 @@ class Ui_Form_Login(object):
         self.txt_contrasena.setFont(font)
         self.txt_contrasena.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.txt_contrasena.setFrame(False)
+        
+        
+        self.txt_contrasena.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
+        
+        
         self.txt_contrasena.setObjectName("txt_contrasena")
         self.frame_3 = QtWidgets.QFrame(parent=Form)
         self.frame_3.setGeometry(QtCore.QRect(450, 360, 291, 16))

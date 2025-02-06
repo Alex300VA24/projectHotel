@@ -62,6 +62,11 @@ class Ui_Form_Historial(object):
         font.setPointSize(10)
         font.setBold(True)
         self.table_historial_2.setFont(font)
+        
+        
+        self.table_historial_2.setAlternatingRowColors(True)
+
+
         self.table_historial_2.setStyleSheet("background-color: #F9F9F9; /* Fondo del encabezado */")
         self.table_historial_2.setRowCount(14)
         self.table_historial_2.setColumnCount(8)
