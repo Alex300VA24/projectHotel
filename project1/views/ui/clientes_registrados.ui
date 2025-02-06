@@ -22,9 +22,9 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>180</y>
+     <y>190</y>
      <width>761</width>
-     <height>371</height>
+     <height>391</height>
     </rect>
    </property>
    <property name="font">
@@ -112,7 +112,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>140</y>
+     <y>150</y>
      <width>31</width>
      <height>24</height>
     </rect>
@@ -203,11 +203,30 @@ QPushButton:pressed {
   <widget class="QPushButton" name="btn_consultar">
    <property name="geometry">
     <rect>
-     <x>684</x>
-     <y>560</y>
-     <width>101</width>
+     <x>660</x>
+     <y>150</y>
+     <width>121</width>
      <height>24</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #EC4424; /* Rojo */
+    color: #FFFFFF; /* Texto blanco */
+    border-radius: 8px; /* Bordes redondeados opcionales */
+    font-weight: bold; /* Negrita opcional */
+}
+
+QPushButton:hover {
+    background-color: #FF5733; /* Rojo más claro en hover */
+}
+</string>
    </property>
    <property name="text">
     <string>Consultar Cliente</string>

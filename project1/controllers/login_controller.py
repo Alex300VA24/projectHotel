@@ -45,24 +45,32 @@ class LoginController:
         msg_box.setWindowTitle("Error")
         msg_box.setText(mensaje)
         msg_box.setIcon(QMessageBox.Icon.Critical)
+
         msg_box.setStyleSheet("""
-            QMessageBox {
-                background-color: #F8D7DA;
-                color: #721C24;
-                font-family: 'Tahoma';
-                font-size: 11pt;
+                QMessageBox {
+                color: #333333; /* Gris oscuro para texto */
+                font-family: 'Segoe UI';
+                font-size: 12pt;
+                border-radius: 8px;
+                padding: 10px;
             }
             QPushButton {
-                background-color: #EC4424;
+                background-color: #444444; /* Gris oscuro elegante */
                 color: white;
-                border-radius: 5px;
-                padding: 5px;
+                border-radius: 8px;
+                padding: 8px 15px;
+                font-size: 11pt;
+                font-weight: bold;
+                border: none;
             }
             QPushButton:hover {
-                background-color: #FF5733;
+                background-color: #666666; /* Gris metálico */
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
             }
         """)
+
         msg_box.exec()
+
 
     def mostrar_mensaje(self, mensaje):
         msg_box = QMessageBox(self.ventana_login)
@@ -71,25 +79,32 @@ class LoginController:
         msg_box.setIcon(QMessageBox.Icon.Information)
         msg_box.setStyleSheet("""
             QMessageBox {
-                background-color: #D4EDDA;
-                color: #155724;
-                font-family: 'Tahoma';
-                font-size: 11pt;
+                background-color: #D4EDDA; /* Verde claro */
+                color: #155724; /* Verde oscuro */
+                font-family: 'Segoe UI';
+                font-size: 12pt;
+                border-radius: 8px;
+                padding: 10px;
             }
             QPushButton {
-                background-color: #28A745;
+                background-color: #28A745; /* Verde */
                 color: white;
-                border-radius: 5px;
-                padding: 5px;
+                border-radius: 8px;
+                padding: 8px 15px;
+                font-size: 11pt;
+                font-weight: bold;
+                border: none;
             }
             QPushButton:hover {
-                background-color: #218838;
+                background-color: #218838; /* Verde oscuro */
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
             }
         """)
         msg_box.exec()
 
-        self.ventana_login.hide()  
-        self.abrir_ventana_principal()  
+        self.ventana_login.hide()
+        self.abrir_ventana_principal()
+
 
     def abrir_ventana_principal(self):
         if self.ventana_principal_controller:

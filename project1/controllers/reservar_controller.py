@@ -129,10 +129,67 @@ class ReservarController:
         self.ventana_reservar.show()
     
     def mostrar_error(self, mensaje):
-        QMessageBox.critical(self.ventana_reservar, "Error", mensaje)
-    
+        msg_box = QMessageBox(self.ventana_reservar)
+        msg_box.setWindowTitle("Error")
+        msg_box.setText(mensaje)
+        msg_box.setIcon(QMessageBox.Icon.Critical)
+        
+        msg_box.setStyleSheet("""
+                QMessageBox {
+                color: #333333; /* Gris oscuro para texto */
+                font-family: 'Segoe UI';
+                font-size: 12pt;
+                border-radius: 8px;
+                padding: 10px;
+            }
+            QPushButton {
+                background-color: #444444; /* Gris oscuro elegante */
+                color: white;
+                border-radius: 8px;
+                padding: 8px 15px;
+                font-size: 11pt;
+                font-weight: bold;
+                border: none;
+            }
+            QPushButton:hover {
+                background-color: #666666; /* Gris metálico */
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            }
+        """)
+        msg_box.exec()
+
     def mostrar_mensaje(self, mensaje):
-        QMessageBox.information(self.ventana_reservar, "Mensaje de reserva", mensaje)
+        msg_box = QMessageBox(self.ventana_reservar)
+        msg_box.setWindowTitle("Mensaje de Inicio de Sesión")
+        msg_box.setText(mensaje)
+        msg_box.setIcon(QMessageBox.Icon.Information)
+        msg_box.setStyleSheet("""
+            QMessageBox {
+                background-color: #D4EDDA; /* Verde claro */
+                color: #155724; /* Verde oscuro */
+                font-family: 'Segoe UI';
+                font-size: 12pt;
+                border-radius: 8px;
+                padding: 10px;
+            }
+            QPushButton {
+                background-color: #28A745; /* Verde */
+                color: white;
+                border-radius: 8px;
+                padding: 8px 15px;
+                font-size: 11pt;
+                font-weight: bold;
+                border: none;
+            }
+            QPushButton:hover {
+                background-color: #218838; /* Verde oscuro */
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            }
+        """)
+        msg_box.exec()
+
+        self.ventana_reservar.hide()  
+        self.abrir_ventana_principal()
     
     def _extraer_nombres(self, nombre_completo):
         partes = nombre_completo.split(" ")
