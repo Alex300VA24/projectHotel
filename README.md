@@ -37,7 +37,7 @@ Aquí se muestra el menú principal del programa:
 1. **Clona el repositorio**:
 
    ```bash
-   git clone https://github.com/tu-usuario/HotelDesk.git
+   git clone https://github.com/Alex300VA24/projectHotel.git
    cd HotelDesk
 
 2. **Instala dependencias**:
