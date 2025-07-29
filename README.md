@@ -1,4 +1,4 @@
-# 🏨 HotelDesk - Sistema de Gestión Hotelera
+<img width="992" height="781" alt="image" src="https://github.com/user-attachments/assets/8df2e78d-2196-46de-8ccb-defdb90863ef" /># 🏨 HotelDesk - Sistema de Gestión Hotelera
 
 **HotelDesk** es una aplicación de escritorio desarrollada en Python con PyQt6 que permite a los hoteles gestionar de manera eficiente sus operaciones. El sistema implementa la arquitectura **MVC (Modelo-Vista-Controlador)**, asegurando una separación clara entre lógica, interfaz y control de datos.
 
@@ -28,7 +28,8 @@ Este proyecto está estructurado siguiendo el patrón de diseño **MVC**:
 
 Aquí se muestra el menú principal del programa:
 
-> `![Menú Principal](project1/assets/menu.png)`
+<img width="992" height="781" alt="image" src="https://github.com/user-attachments/assets/5b056464-6f25-4fe1-b0e3-a613ae2a9803" />
+
 
 
 ---
