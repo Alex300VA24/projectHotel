@@ -24,57 +24,49 @@ Este proyecto está estructurado siguiendo el patrón de diseño **MVC**:
 
 ---
 
-## 📷 Menú Principal
+## Menu Principal
 
 Aquí se muestra el menú principal del programa:
 
-<img width="992" height="781" alt="Menú Principal" src="https://github.com/user-attachments/assets/5b056464-6f25-4fe1-b0e3-a613ae2a9803" />
+<img width="992" height="781" alt="image" src="https://github.com/user-attachments/assets/5b056464-6f25-4fe1-b0e3-a613ae2a9803" />
+
 
 ---
 
 ## 🚀 Instalación
 
-Sigue los siguientes pasos para ejecutar la aplicación correctamente:
-
-1. **Clona el repositorio:**
+1. **Clona el repositorio**:
 
    ```bash
    git clone https://github.com/Alex300VA24/projectHotel.git
    cd HotelDesk
-Instala las dependencias:
+
+2. **Instala dependencias**:
+
+   ```bash
+   pip install -r requirements.txt
+
+3. **Para ejecutar la aplicación:**:
+
+    ```bash
+    python main.py
+
+4. **Genera la Base de Datos**:
+
+    Este proyecto usa una base de datos MySQL.
+
+    Opción 1: MySQL / MariaDB
+    Abre tu cliente de MySQL (por ejemplo, MySQL Workbench o consola).
+
+    Ejecuta el archivo db_hotel.sql ubicado en resources/db/.. :
+
+        SOURCE ruta/al/archivo/db_hotel.sql;
+
+    Opcion 2: En consola
 
 
-pip install -r requirements.txt
-Ejecuta la aplicación:
+        mysql -u tu_usuario -p < db_hotel.sql
+        
 
 
-python main.py
-🛠️ Generar la Base de Datos
-Este proyecto utiliza una base de datos MySQL.
 
-Opción 1: Usando un cliente MySQL (Workbench, consola, DBeaver)
-Abre tu cliente de base de datos.
-
-Ejecuta el script db_hotel.sql ubicado en resources/db/:
-
-
-SOURCE resources/db/db_hotel.sql;
-Opción 2: Desde la línea de comandos (terminal)
-
-mysql -u tu_usuario -p < resources/db/db_hotel.sql
-🔐 Asegúrate de que las credenciales (usuario, contraseña, base de datos) coincidan con tu archivo de configuración o conexión.
-
-📁 Estructura del Proyecto
-
-HotelDesk/
-│
-├── controllers/           # Lógica del controlador
-├── models/                # Gestión de datos y lógica de negocio
-├── views/                 # Interfaces gráficas en PyQt6
-├── resources/
-│   └── db/
-│       └── db_hotel.sql   # Script SQL para crear la base de datos
-├── assets/                # Imágenes, íconos, etc.
-├── main.py                # Punto de entrada principal
-├── requirements.txt       # Dependencias del proyecto
-└── README.md              # Documentación
