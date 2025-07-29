@@ -60,15 +60,13 @@ Abre tu cliente de MySQL (por ejemplo, MySQL Workbench o consola).
 
 Ejecuta el archivo db_hotel.sql ubicado en resources/db/.. :
 
-```bash
+    ```bash
     SOURCE ruta/al/archivo/db_hotel.sql;
-```
 
 Opcion 2: En consola
 
-```bash
-mysql -u tu_usuario -p < db_hotel.sql
-```
+    ```bash
+    mysql -u tu_usuario -p < db_hotel.sql
 
 Asegúrate de que las credenciales de conexión (usuario, contraseña y nombre de la base de datos) sean correctas.
 
