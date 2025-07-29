@@ -72,3 +72,5 @@ Opcion 2: En consola
 
 Asegúrate de que las credenciales de conexión (usuario, contraseña y nombre de la base de datos) sean correctas.
 
+___
+
