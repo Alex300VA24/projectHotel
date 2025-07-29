@@ -28,7 +28,8 @@ Este proyecto está estructurado siguiendo el patrón de diseño **MVC**:
 
 Aquí se muestra el menú principal del programa:
 
-> `![Menú Principal](assets/menu.png)`
+> `![Menú Principal](project1/assets/menu.png)`
+
 
 ---
 
