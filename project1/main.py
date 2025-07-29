@@ -1,5 +1,5 @@
 import sys
-from PyQt6.QtWidgets import QApplication  # type: ignore
+from PyQt6.QtWidgets import QApplication
 
 from controllers.login_controller import LoginController  # Importa el controlador
 from controllers.ventana_principal_controller import VentanaPrincipalController
